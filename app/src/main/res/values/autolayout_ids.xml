@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<item type="id" name="hierarchy"></item>
+	<item type="id" name="isexpand"></item>
+
+	<!--autolayout start-->
+
+	<item name="id_tag_autolayout_size" type="id"></item>
+	<item name="id_tag_autolayout_padding" type="id"></item>
+	<item name="id_tag_autolayout_margin" type="id"></item>
+	<!--autolayout end-->
+
+	<item type="id" name="first"></item>
+	<item type="id" name="second"></item>
+</resources>
