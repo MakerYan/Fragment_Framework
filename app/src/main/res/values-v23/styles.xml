@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- Base application theme. -->
+	<style name="AppTheme" parent="AppTheme.Base">
+		<!-- Customize your theme here. -->
+	</style>
+
+	<style name="MainTheme" parent="AppTheme">
+		<item name="android:windowIsTranslucent">false</item>
+	</style>
+
+	<style name="RippleTheme" parent="AppTheme">
+		<item name="android:background">@drawable/ripple</item>
+	</style>
+</resources>

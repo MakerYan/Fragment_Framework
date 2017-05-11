@@ -1,0 +1,52 @@
+<resources>
+
+	<!-- Base application theme. -->
+	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+		<!-- Customize your theme here. -->
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+	</style>
+
+	<style name="AppTheme.NoActionBar">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+
+	<style name="AppTheme.AppBarOverlay"
+	       parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+	<style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+		<!--if you don't set this the background will be black when you slide.-->
+		<item name="android:windowIsTranslucent">true</item>
+		<!--set the right in/out animation of Activity,you can change this to yours-->
+		<item name="android:windowAnimationStyle">@style/SlideRightAnimation
+		</item>
+		<item name="android:clickable">true</item>
+	</style>
+
+	<!--滑动关闭动画-->
+	<style name="SlideRightAnimation" parent="@android:style/Animation.Activity">
+		<item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+		<item name="android:activityOpenExitAnimation">@anim/slide_out_right</item>
+		<item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>
+		<item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+		<item name="android:taskOpenEnterAnimation">@anim/slide_in_right</item>
+		<item name="android:taskOpenExitAnimation">@anim/slide_out_right</item>
+		<item name="android:taskCloseEnterAnimation">@anim/slide_in_right</item>
+		<item name="android:taskCloseExitAnimation">@anim/slide_out_right</item>
+		<item name="android:taskToFrontEnterAnimation">@anim/slide_in_right</item>
+		<item name="android:taskToFrontExitAnimation">@anim/slide_out_right</item>
+		<item name="android:taskToBackEnterAnimation">@anim/slide_in_right</item>
+		<item name="android:taskToBackExitAnimation">@anim/slide_out_right</item>
+	</style>
+
+
+</resources>
