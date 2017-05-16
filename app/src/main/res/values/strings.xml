@@ -23,4 +23,11 @@
 		<item>RotateDown</item>
 		<item>Accordion</item>
 	</string-array>
+
+
+	<string name="done_holder">完成(%1$d/%2$d)</string>
+	<string name="message">消息</string>
+	<string name="mine">我的</string>
+	<string name="me">我</string>
+	<string name="contacts">通讯录</string>
 </resources>

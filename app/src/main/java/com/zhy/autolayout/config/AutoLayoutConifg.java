@@ -15,7 +15,7 @@ public class AutoLayoutConifg {
 	private static AutoLayoutConifg sIntance = new AutoLayoutConifg();
 
 
-	private static final String KEY_DESIGN_WIDTH  = "design_width";
+	private static final String KEY_DESIGN_WIDTH = "design_width";
 
 	private static final String KEY_DESIGN_HEIGHT = "design_height";
 

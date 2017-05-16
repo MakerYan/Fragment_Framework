@@ -20,7 +20,8 @@ import com.zhy.autolayout.utils.AutoUtils;
 
 public class ClearEditText
 		extends EditText
-		implements OnFocusChangeListener, TextWatcher {
+		implements OnFocusChangeListener,
+				   TextWatcher {
 
 	/**
 	 * 删除按钮的引用

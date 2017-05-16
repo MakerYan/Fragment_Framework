@@ -17,7 +17,7 @@ public class StackViewTouchListener
 
 	private boolean isClickState;
 
-	private int     clickLimitValue;
+	private int clickLimitValue;
 
 	public StackViewTouchListener(View stackView, int clickLimitValue) {
 

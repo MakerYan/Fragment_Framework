@@ -13,9 +13,10 @@ import com.zhy.autolayout.utils.AutoUtils;
 
 
 /**
- * Created by Maker on 16/11/2.
+ * @author MakerYan
+ * @email light.yan@qq.com
+ * @time 2017/5/15 下午9:43
  */
-
 public class BaseDialog {
 
 	protected Dialog mDialog;

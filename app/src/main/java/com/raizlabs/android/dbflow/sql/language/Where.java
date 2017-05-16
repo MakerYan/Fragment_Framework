@@ -26,7 +26,8 @@ import java.util.List;
 public class Where<TModel extends Model>
 		extends BaseModelQueriable<TModel>
 		implements Query,
-				   ModelQueriable<TModel>, Transformable<TModel> {
+				   ModelQueriable<TModel>,
+				   Transformable<TModel> {
 
 	private static final int VALUE_UNSET = -1;
 

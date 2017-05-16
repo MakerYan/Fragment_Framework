@@ -7,9 +7,10 @@ import android.util.AttributeSet;
 
 import com.makeryan.lib.R;
 
-
 /**
- * Created by wcy .
+ * @author MakerYan
+ * @email light.yan@qq.com
+ * @time 2017/5/15 下午9:43
  */
 public class CustomShapeImageView
 		extends BaseImageView {

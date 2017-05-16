@@ -14,7 +14,7 @@ public class AutoLayoutWidgetActivity
 
 	private static final String ACTION_MENU_ITEM_VIEW = "android.support.v7.view.menu.ActionMenuItemView";
 
-	private static final String TAB_LAYOUT            = "android.support.design.widget.TabLayout";
+	private static final String TAB_LAYOUT = "android.support.design.widget.TabLayout";
 
 	@Override
 	public View onCreateView(String name, Context context, AttributeSet attrs) {

@@ -13,7 +13,8 @@ import java.util.List;
  */
 public class ConditionGroup
 		extends BaseCondition
-		implements Query, Iterable<SQLCondition> {
+		implements Query,
+				   Iterable<SQLCondition> {
 
 	/**
 	 * @return Starts an arbitrary clause of conditions to use.

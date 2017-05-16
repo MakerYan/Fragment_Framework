@@ -19,7 +19,9 @@ import android.widget.ImageView;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by wcy.
+ * @author MakerYan
+ * @email light.yan@qq.com
+ * @time 2017/5/15 下午9:43
  */
 public abstract class BaseImageView
 		extends ImageView {

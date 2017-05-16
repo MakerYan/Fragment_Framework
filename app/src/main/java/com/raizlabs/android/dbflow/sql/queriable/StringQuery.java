@@ -15,7 +15,8 @@ import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
  */
 public class StringQuery<TModel extends Model>
 		extends BaseModelQueriable<TModel>
-		implements Query, ModelQueriable<TModel> {
+		implements Query,
+				   ModelQueriable<TModel> {
 
 	/**
 	 * The full SQLite query to use

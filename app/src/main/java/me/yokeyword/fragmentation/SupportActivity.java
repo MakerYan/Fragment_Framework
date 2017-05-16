@@ -38,7 +38,8 @@ import static me.yokeyword.fragmentation.SupportFragment.STANDARD;
 
 public class SupportActivity
 		extends AutoLayoutActivity
-		implements ISupport, SensorEventListener {
+		implements ISupport,
+				   SensorEventListener {
 
 	private static final long SHOW_SPACE = 200L;
 
@@ -786,6 +787,11 @@ public class SupportActivity
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+	}
+
+	public boolean canSwipe() {
+
+		return true;
 	}
 
     /*--------------------Fragment专用方法start---------------------------*/

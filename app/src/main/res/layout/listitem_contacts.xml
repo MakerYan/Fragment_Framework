@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	>
+
+	<data>
+
+		<variable
+			name="item"
+			type="String"
+			/>
+
+		<variable
+			name="adapter"
+			type="com.makeryan.lib.util.adapter.CommonRecyclerViewAdapter"
+			/>
+
+		<variable
+			name="holder"
+			type="com.jcodecraeer.xrecyclerview.SimpleViewHolder"
+			/>
+
+		<variable
+			name="position"
+			type="int"
+			/>
+
+		<variable
+			name="listener"
+			type="com.makeryan.lib.util.adapter.CommonRecyclerViewAdapter.OnRecyclerViewItemClickListener"
+			/>
+
+		<import type="android.view.View"/>
+	</data>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		>
+
+		<ImageView
+			android:id="@+id/ivPhoto"
+			android:layout_width="match_parent"
+			android:layout_height="265px"
+			android:layout_gravity="center"
+			android:adjustViewBounds="true"
+			android:background="@drawable/__picker_photo_bg"
+			android:onClick="@{v -> listener.onItemClick(v, adapter, holder, position, item)}"
+			android:padding="2px"
+			android:scaleType="centerCrop"
+			app:src="@{item}"
+			/>
+
+
+	</FrameLayout>
+</layout>

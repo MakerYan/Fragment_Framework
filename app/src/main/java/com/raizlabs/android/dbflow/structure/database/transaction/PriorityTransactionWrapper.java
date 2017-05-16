@@ -9,7 +9,8 @@ import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
  * Description: Provides transaction with priority. Meant to be used in a {@link PriorityTransactionQueue}.
  */
 public class PriorityTransactionWrapper
-		implements ITransaction, Comparable<PriorityTransactionWrapper> {
+		implements ITransaction,
+				   Comparable<PriorityTransactionWrapper> {
 
 	@IntDef({
 			PRIORITY_LOW,

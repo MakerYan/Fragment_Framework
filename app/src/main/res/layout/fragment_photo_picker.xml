@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<data>
+
+		<variable
+			name="maxCount"
+			type="int"
+			/>
+
+		<variable
+			name="selectCount"
+			type="int"
+			/>
+
+		<variable
+			name="listener"
+			type="android.view.View.OnClickListener"
+			/>
+
+
+		<import type="android.view.View"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		>
+
+		<com.makeryan.lib.widget.Toolbar
+			style="@style/ToolbarStyle"
+			>
+
+			<TextView
+				style="@style/ToolbarCenterTitle"
+				android:text="选择图片"
+				/>
+
+			<TextView
+				android:id="@+id/tvDone"
+				style="@style/ToolbarRightText"
+				android:enabled="@{selectCount > 0}"
+				android:onClick="@{v -> listener.onClick(v)}"
+				android:text="@{@string/done_holder(selectCount, maxCount)}"
+				/>
+		</com.makeryan.lib.widget.Toolbar>
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/RVPhotos"
+			android:layout_width="match_parent"
+			android:layout_height="0dip"
+			android:layout_weight="1"
+			android:gravity="center"
+			/>
+
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/colorPrimary"
+			android:onClick="@{v -> button.performClick()}"
+			android:visibility="gone"
+			>
+
+			<Button
+				android:id="@+id/button"
+				style="@style/Widget.AppCompat.ActionButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:onClick="@{v -> listener.onClick(v)}"
+				android:text="@string/__picker_all_image"
+				/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+</layout>

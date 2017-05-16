@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -44,7 +46,6 @@ public abstract class BaseFragment
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		EventBus.getDefault()
@@ -98,6 +99,7 @@ public abstract class BaseFragment
 				view,
 				savedInstanceState
 						   );
+		//这里已经做了返回键的处理
 		Toolbar toolbar = getToolbar(view);
 		if (toolbar != null) {
 			toolbar.setTitle("");
@@ -178,8 +180,67 @@ public abstract class BaseFragment
 	}
 
 	@Override
-	public void pop() {
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
+		BasePresenter presenter = getPresenter();
+		if (presenter != null) {
+			presenter.onRequestPermissionsResult(
+					requestCode,
+					permissions,
+					grantResults
+												);
+		}
+		super.onRequestPermissionsResult(
+				requestCode,
+				permissions,
+				grantResults
+										);
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+
+		super.onSaveInstanceState(savedInstanceState);
+
+		SupportFragment topFragment = getTopFragment();
+		if (topFragment != null && topFragment != this) {
+			topFragment.onSaveInstanceState(savedInstanceState);
+		}
+
+		SupportFragment topChildFragment = getTopChildFragment();
+		if (topChildFragment != null && topChildFragment != this) {
+			topChildFragment.onSaveInstanceState(savedInstanceState);
+		}
+
+		BasePresenter presenter = getPresenter();
+		if (presenter != null) {
+			presenter.onSaveInstanceState(savedInstanceState);
+		}
+	}
+
+	@Override
+	public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+
+		super.onViewStateRestored(savedInstanceState);
+
+		SupportFragment topFragment = getTopFragment();
+		if (topFragment != null && topFragment != this) {
+			topFragment.onViewStateRestored(savedInstanceState);
+		}
+
+		SupportFragment topChildFragment = getTopChildFragment();
+		if (topChildFragment != null && topChildFragment != this) {
+			topChildFragment.onViewStateRestored(savedInstanceState);
+		}
+		BasePresenter presenter = getPresenter();
+		if (presenter != null) {
+			presenter.onViewStateRestored(savedInstanceState);
+		}
+	}
+
+
+	@Override
+	public void pop() {
 		BasePresenter presenter = getPresenter();
 		if (presenter != null) {
 			presenter.setFragmentResult();
@@ -297,6 +358,7 @@ public abstract class BaseFragment
 	/**
 	 * 加载布局之前调用
 	 */
+
 	protected void beforeSetContentView() {
 
 	}
@@ -319,6 +381,14 @@ public abstract class BaseFragment
 	 * @return 布局Id
 	 */
 	protected abstract int getLayoutResID();
+
+	protected void processonCreateViewSavedInstanceState(Bundle savedInstanceState) {
+
+		BasePresenter presenter = getPresenter();
+		if (presenter != null) {
+			presenter.processonCreateViewSavedInstanceState(savedInstanceState);
+		}
+	}
 
 	/**
 	 * 初始化DataBinding

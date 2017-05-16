@@ -24,15 +24,18 @@ public class AutoCollapsingToolbarLayout
 
 	public AutoCollapsingToolbarLayout(Context context) {
 
-		this(context,
-			 null);
+		this(
+				context,
+				null
+			);
 	}
 
 	public AutoCollapsingToolbarLayout(Context context, AttributeSet attrs) {
 
-		this(context,
-			 attrs,
-			 0
+		this(
+				context,
+				attrs,
+				0
 			);
 	}
 

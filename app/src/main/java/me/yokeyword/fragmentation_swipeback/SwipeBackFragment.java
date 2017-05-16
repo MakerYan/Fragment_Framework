@@ -12,6 +12,10 @@ import me.yokeyword.fragmentation.SwipeBackLayout;
 
 /**
  * SwipeBackFragment
+ *
+ * @author MakerYan
+ * @email light.yan@qq.com
+ * @time 2017/5/15 下午8:56
  */
 public class SwipeBackFragment
 		extends SupportFragment {
@@ -22,7 +26,9 @@ public class SwipeBackFragment
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		onFragmentCreate();
+		if (canSwipe()) {
+			onFragmentCreate();
+		}
 	}
 
 	private void onFragmentCreate() {
@@ -49,7 +55,7 @@ public class SwipeBackFragment
 	public void onHiddenChanged(boolean hidden) {
 
 		super.onHiddenChanged(hidden);
-		if (hidden && mSwipeBackLayout != null) {
+		if (hidden && mSwipeBackLayout != null && canSwipe()) {
 			mSwipeBackLayout.hiddenFragment();
 		}
 	}

@@ -45,10 +45,11 @@ public class AutoActionMenuItemView
 				defStyle
 			 );
 		TypedArray a = context.getTheme()
-							  .obtainStyledAttributes(attrs,
-													  R.styleable.AppCompatTheme,
-													  defStyle,
-													  R.style.ThemeOverlay_AppCompat
+							  .obtainStyledAttributes(
+									  attrs,
+									  R.styleable.AppCompatTheme,
+									  defStyle,
+									  R.style.ThemeOverlay_AppCompat
 													 );
 		int menuTextAppearance = a.getResourceId(
 				R.styleable.AppCompatTheme_actionBarTheme,

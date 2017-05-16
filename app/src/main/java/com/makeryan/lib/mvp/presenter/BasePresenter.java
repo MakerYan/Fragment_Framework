@@ -42,7 +42,9 @@ import rx.subscriptions.CompositeSubscription;
  * Email: light.yan@qq.com
  */
 public abstract class BasePresenter<V extends ISupport>
-		implements IBasePresenter<V>, View.OnClickListener, XRecyclerView.LoadingListener {
+		implements IBasePresenter<V>,
+				   View.OnClickListener,
+				   XRecyclerView.LoadingListener {
 
 	public String TAG;
 
@@ -180,6 +182,26 @@ public abstract class BasePresenter<V extends ISupport>
 		if (requestCode == PermissionsFragment.REQUEST_CODE && data != null && data.getInt(PermissionsFragment.EXTRA_PERMISSIONS) == PermissionsFragment.PERMISSIONS_DENIED) {
 			getView().pop();
 		}
+	}
+
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+	}
+
+	public void processonCreateViewSavedInstanceState(Bundle savedInstanceState) {
+
+	}
+
+	public void onViewStateRestored(Bundle savedInstanceState) {
+
+	}
+
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+
+	}
+
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+
 	}
 
 	public boolean pop() {

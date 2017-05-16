@@ -14,34 +14,34 @@ public class LifecycleHelper {
 
 	public static final int LIFECYLCE_ONENTERANIMATIONEND = 1;
 
-	public static final int LIFECYLCE_ONLAZYINITVIEW      = 2;
+	public static final int LIFECYLCE_ONLAZYINITVIEW = 2;
 
-	public static final int LIFECYLCE_ONSUPPORTVISIBLE    = 3;
+	public static final int LIFECYLCE_ONSUPPORTVISIBLE = 3;
 
-	public static final int LIFECYLCE_ONSUPPORTINVISIBLE  = 4;
+	public static final int LIFECYLCE_ONSUPPORTINVISIBLE = 4;
 
-	public static final int LIFECYLCE_ONATTACH            = 5;
+	public static final int LIFECYLCE_ONATTACH = 5;
 
-	public static final int LIFECYLCE_ONCREATE            = 6;
+	public static final int LIFECYLCE_ONCREATE = 6;
 
 	//    public static final int LIFECYLCE_ONCREATEVIEW = 7;
-	public static final int LIFECYLCE_ONVIEWCREATED       = 8;
+	public static final int LIFECYLCE_ONVIEWCREATED = 8;
 
-	public static final int LIFECYLCE_ONACTIVITYCREATED   = 9;
+	public static final int LIFECYLCE_ONACTIVITYCREATED = 9;
 
-	public static final int LIFECYLCE_ONSTART             = 10;
+	public static final int LIFECYLCE_ONSTART = 10;
 
-	public static final int LIFECYLCE_ONRESUME            = 11;
+	public static final int LIFECYLCE_ONRESUME = 11;
 
-	public static final int LIFECYLCE_ONPAUSE             = 12;
+	public static final int LIFECYLCE_ONPAUSE = 12;
 
-	public static final int LIFECYLCE_ONSTOP              = 13;
+	public static final int LIFECYLCE_ONSTOP = 13;
 
-	public static final int LIFECYLCE_ONDESTROYVIEW       = 14;
+	public static final int LIFECYLCE_ONDESTROYVIEW = 14;
 
-	public static final int LIFECYLCE_ONDESTROY           = 15;
+	public static final int LIFECYLCE_ONDESTROY = 15;
 
-	public static final int LIFECYLCE_ONDETACH            = 16;
+	public static final int LIFECYLCE_ONDETACH = 16;
 
 	private ArrayList<FragmentLifecycleCallbacks> mFragmentLifecycleCallbacks;
 

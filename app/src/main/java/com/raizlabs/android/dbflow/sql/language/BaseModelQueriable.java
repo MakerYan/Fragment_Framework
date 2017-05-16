@@ -24,7 +24,8 @@ import java.util.List;
  */
 public abstract class BaseModelQueriable<TModel extends Model>
 		extends BaseQueriable<TModel>
-		implements ModelQueriable<TModel>, Query {
+		implements ModelQueriable<TModel>,
+				   Query {
 
 	private InstanceAdapter<?, TModel> retrievalAdapter;
 

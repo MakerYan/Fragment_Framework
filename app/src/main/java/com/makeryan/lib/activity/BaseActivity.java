@@ -15,6 +15,7 @@ import com.makeryan.lib.R;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.util.StatusBarUtil;
+import com.socks.library.KLog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -22,6 +23,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation.helper.FragmentLifecycleCallbacks;
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
 /**
@@ -30,7 +32,7 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
  */
 public abstract class BaseActivity
 		extends SwipeBackActivity
-		implements View.OnClickListener{
+		implements View.OnClickListener {
 
 	protected Bundle mExtras;
 
@@ -66,206 +68,206 @@ public abstract class BaseActivity
 		enqueueAction(() -> {
 			doAction();
 		});
-		//		registerFragmentLifecycleCallbacks(new FragmentLifecycleCallbacks() {
-		//
-		//			/**
-		//			 * Called when the Fragment is called onSaveInstanceState().
-		//			 *
-		//			 * @param fragment
-		//			 * @param outState
-		//			 */
-		//			@Override
-		//			public void onFragmentSaveInstanceState(SupportFragment fragment, Bundle outState) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onSaveInstanceState()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onEnterAnimationEnd().
-		//			 *
-		//			 * @param fragment
-		//			 * @param savedInstanceState
-		//			 */
-		//			@Override
-		//			public void onFragmentEnterAnimationEnd(SupportFragment fragment, Bundle savedInstanceState) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onEnterAnimationEnd()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onLazyInitView().
-		//			 *
-		//			 * @param fragment
-		//			 * @param savedInstanceState
-		//			 */
-		//			@Override
-		//			public void onFragmentLazyInitView(SupportFragment fragment, Bundle savedInstanceState) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onLazyInitView()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onSupportVisible().
-		//			 *
-		//			 * @param fragment
-		//			 */
-		//			@Override
-		//			public void onFragmentSupportVisible(SupportFragment fragment) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onSupportVisible()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onSupportInvisible().
-		//			 *
-		//			 * @param fragment
-		//			 */
-		//			@Override
-		//			public void onFragmentSupportInvisible(SupportFragment fragment) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onSupportInvisible()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onAttach().
-		//			 *
-		//			 * @param fragment
-		//			 */
-		//			@Override
-		//			public void onFragmentAttached(SupportFragment fragment) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onAttach()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onCreate().
-		//			 *
-		//			 * @param fragment
-		//			 * @param savedInstanceState
-		//			 */
-		//			@Override
-		//			public void onFragmentCreated(SupportFragment fragment, Bundle savedInstanceState) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onCreate()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called ViewCreated().
-		//			 *
-		//			 * @param fragment
-		//			 * @param savedInstanceState
-		//			 */
-		//			@Override
-		//			public void onFragmentViewCreated(SupportFragment fragment, Bundle savedInstanceState) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called ViewCreated()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onActivityCreated().
-		//			 *
-		//			 * @param fragment
-		//			 * @param savedInstanceState
-		//			 */
-		//			@Override
-		//			public void onFragmentActivityCreated(SupportFragment fragment, Bundle savedInstanceState) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onActivityCreated()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onStart().
-		//			 *
-		//			 * @param fragment
-		//			 */
-		//			@Override
-		//			public void onFragmentStarted(SupportFragment fragment) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onStart()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onResume().
-		//			 *
-		//			 * @param fragment
-		//			 */
-		//			@Override
-		//			public void onFragmentResumed(SupportFragment fragment) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onResume()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onPause().
-		//			 *
-		//			 * @param fragment
-		//			 */
-		//			@Override
-		//			public void onFragmentPaused(SupportFragment fragment) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onPause()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onStop().
-		//			 *
-		//			 * @param fragment
-		//			 */
-		//			@Override
-		//			public void onFragmentStopped(SupportFragment fragment) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onStop()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onDestroyView().
-		//			 *
-		//			 * @param fragment
-		//			 */
-		//			@Override
-		//			public void onFragmentDestroyView(SupportFragment fragment) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onDestroyView()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onDestroy().
-		//			 *
-		//			 * @param fragment
-		//			 */
-		//			@Override
-		//			public void onFragmentDestroyed(SupportFragment fragment) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onDestroy()");
-		//			}
-		//
-		//			/**
-		//			 * Called when the Fragment is called onDetach().
-		//			 *
-		//			 * @param fragment
-		//			 */
-		//			@Override
-		//			public void onFragmentDetached(SupportFragment fragment) {
-		//
-		//				KLog.d(fragment.getClass()
-		//							   .getSimpleName() + "called onDetach()");
-		//			}
-		//		});
+		registerFragmentLifecycleCallbacks(new FragmentLifecycleCallbacks() {
+
+			/**
+			 * Called when the Fragment is called onSaveInstanceState().
+			 *
+			 * @param fragment
+			 * @param outState
+			 */
+			@Override
+			public void onFragmentSaveInstanceState(SupportFragment fragment, Bundle outState) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onSaveInstanceState()");
+			}
+
+			/**
+			 * Called when the Fragment is called onEnterAnimationEnd().
+			 *
+			 * @param fragment
+			 * @param savedInstanceState
+			 */
+			@Override
+			public void onFragmentEnterAnimationEnd(SupportFragment fragment, Bundle savedInstanceState) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onEnterAnimationEnd()");
+			}
+
+			/**
+			 * Called when the Fragment is called onLazyInitView().
+			 *
+			 * @param fragment
+			 * @param savedInstanceState
+			 */
+			@Override
+			public void onFragmentLazyInitView(SupportFragment fragment, Bundle savedInstanceState) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onLazyInitView()");
+			}
+
+			/**
+			 * Called when the Fragment is called onSupportVisible().
+			 *
+			 * @param fragment
+			 */
+			@Override
+			public void onFragmentSupportVisible(SupportFragment fragment) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onSupportVisible()");
+			}
+
+			/**
+			 * Called when the Fragment is called onSupportInvisible().
+			 *
+			 * @param fragment
+			 */
+			@Override
+			public void onFragmentSupportInvisible(SupportFragment fragment) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onSupportInvisible()");
+			}
+
+			/**
+			 * Called when the Fragment is called onAttach().
+			 *
+			 * @param fragment
+			 */
+			@Override
+			public void onFragmentAttached(SupportFragment fragment) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onAttach()");
+			}
+
+			/**
+			 * Called when the Fragment is called onCreate().
+			 *
+			 * @param fragment
+			 * @param savedInstanceState
+			 */
+			@Override
+			public void onFragmentCreated(SupportFragment fragment, Bundle savedInstanceState) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onCreate()");
+			}
+
+			/**
+			 * Called when the Fragment is called ViewCreated().
+			 *
+			 * @param fragment
+			 * @param savedInstanceState
+			 */
+			@Override
+			public void onFragmentViewCreated(SupportFragment fragment, Bundle savedInstanceState) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called ViewCreated()");
+			}
+
+			/**
+			 * Called when the Fragment is called onActivityCreated().
+			 *
+			 * @param fragment
+			 * @param savedInstanceState
+			 */
+			@Override
+			public void onFragmentActivityCreated(SupportFragment fragment, Bundle savedInstanceState) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onActivityCreated()");
+			}
+
+			/**
+			 * Called when the Fragment is called onStart().
+			 *
+			 * @param fragment
+			 */
+			@Override
+			public void onFragmentStarted(SupportFragment fragment) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onStart()");
+			}
+
+			/**
+			 * Called when the Fragment is called onResume().
+			 *
+			 * @param fragment
+			 */
+			@Override
+			public void onFragmentResumed(SupportFragment fragment) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onResume()");
+			}
+
+			/**
+			 * Called when the Fragment is called onPause().
+			 *
+			 * @param fragment
+			 */
+			@Override
+			public void onFragmentPaused(SupportFragment fragment) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onPause()");
+			}
+
+			/**
+			 * Called when the Fragment is called onStop().
+			 *
+			 * @param fragment
+			 */
+			@Override
+			public void onFragmentStopped(SupportFragment fragment) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onStop()");
+			}
+
+			/**
+			 * Called when the Fragment is called onDestroyView().
+			 *
+			 * @param fragment
+			 */
+			@Override
+			public void onFragmentDestroyView(SupportFragment fragment) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onDestroyView()");
+			}
+
+			/**
+			 * Called when the Fragment is called onDestroy().
+			 *
+			 * @param fragment
+			 */
+			@Override
+			public void onFragmentDestroyed(SupportFragment fragment) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onDestroy()");
+			}
+
+			/**
+			 * Called when the Fragment is called onDetach().
+			 *
+			 * @param fragment
+			 */
+			@Override
+			public void onFragmentDetached(SupportFragment fragment) {
+
+				KLog.d(fragment.getClass()
+							   .getSimpleName() + "called onDetach()");
+			}
+		});
 	}
 
 	@Override

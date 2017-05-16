@@ -14,9 +14,9 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
  */
 public class HttpUtil {
 
-	protected static OkHttpClient.Builder mOkHttpBuilder;
+	//	protected static OkHttpClient.Builder okHttpClient;
 
-	protected static BasicParamsInterceptor.Builder mInterceptorBuilder;
+	//	protected static BasicParamsInterceptor.Builder interceptorBuilder;
 
 	private HttpUtil() {
 
@@ -24,23 +24,19 @@ public class HttpUtil {
 
 	public static ApiService getApiService() {
 
-		if (mOkHttpBuilder == null) {
-			mOkHttpBuilder = new OkHttpClient.Builder();
-		}
+		OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
 
-		if (mInterceptorBuilder == null) {
-			mInterceptorBuilder = new BasicParamsInterceptor.Builder();
-		}
+		BasicParamsInterceptor.Builder interceptorBuilder = new BasicParamsInterceptor.Builder();
 
-		mInterceptorBuilder.addHeaderParam(
+		interceptorBuilder.addHeaderParam(
 				"token",
 				""
-										  );
-		BasicParamsInterceptor build = mInterceptorBuilder.build();
+										 );
+		BasicParamsInterceptor build = interceptorBuilder.build();
 
-		mOkHttpBuilder.addInterceptor(build);
+		okHttpClient.addInterceptor(build);
 
-		OkHttpClient client = mOkHttpBuilder.build();
+		OkHttpClient client = okHttpClient.build();
 
 		Retrofit retrofit = new Retrofit.Builder().baseUrl(API.BASE_URL)
 												  .addConverterFactory(JsonConverterFactory.create()) // 自定义加密
@@ -55,22 +51,17 @@ public class HttpUtil {
 
 	public static <T> T getApiService(Class<T> clazz) {
 
-		if (mOkHttpBuilder == null) {
-			mOkHttpBuilder = new OkHttpClient.Builder();
-		}
+		OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
 
-		if (mInterceptorBuilder == null) {
-			mInterceptorBuilder = new BasicParamsInterceptor.Builder();
-		}
+		BasicParamsInterceptor.Builder interceptorBuilder = new BasicParamsInterceptor.Builder();
+		//		interceptorBuilder.addHeaderParam("token","fdjkslafjdslk");
+		//		interceptorBuilder.addHeaderParam("userid","dsafsad");
 
-		//		mInterceptorBuilder.addHeaderParam("token","fdjkslafjdslk");
-		//		mInterceptorBuilder.addHeaderParam("userid","dsafsad");
+		BasicParamsInterceptor build = interceptorBuilder.build();
 
-		BasicParamsInterceptor build = mInterceptorBuilder.build();
+		okHttpClient.addInterceptor(build);
 
-		mOkHttpBuilder.addInterceptor(build);
-
-		OkHttpClient client = mOkHttpBuilder.build();
+		OkHttpClient client = okHttpClient.build();
 
 		Retrofit retrofit = new Retrofit.Builder().baseUrl(API.BASE_URL)
 												  .addConverterFactory(JsonConverterFactory.create()) // 自定义加密

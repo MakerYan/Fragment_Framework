@@ -11,7 +11,8 @@
 		<!--阴影  -->
 		<item name="android:windowIsTranslucent">true</item><!--半透明-->
 		<!-- 进入和退出的动画 -->
-		<item name="android:windowAnimationStyle">@style/BaseDialogAnimation</item>
+		<item name="android:windowAnimationStyle">@style/BaseDialogAnimation
+		</item>
 
 		<!-- 点外边可以消失  -->
 		<item name="android:windowCloseOnTouchOutside">true</item>
@@ -20,9 +21,12 @@
 
 	<style name="BaseDialogAnimation">
 		<!--进入 -->
-		<item name="android:windowEnterAnimation">@anim/dialog_from_bottom_enter</item>
+		<item name="android:windowEnterAnimation">
+			@anim/dialog_from_bottom_enter
+		</item>
 		<!--退出-->
-		<item name="android:windowExitAnimation">@anim/dialog_to_bottom_exit</item>
+		<item name="android:windowExitAnimation">@anim/dialog_to_bottom_exit
+		</item>
 	</style>
 	<!--basedialog end-->
 </resources>

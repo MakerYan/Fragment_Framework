@@ -64,15 +64,15 @@ public class SwipeBackLayout
 	 */
 	public static final int STATE_SETTLING = ViewDragHelper.STATE_SETTLING;
 
-	private static final int   DEFAULT_SCRIM_COLOR      = 0x99000000;
+	private static final int DEFAULT_SCRIM_COLOR = 0x99000000;
 
-	private static final float DEFAULT_PARALLAX         = 0.33f;
+	private static final float DEFAULT_PARALLAX = 0.33f;
 
-	private static final int   FULL_ALPHA               = 255;
+	private static final int FULL_ALPHA = 255;
 
 	private static final float DEFAULT_SCROLL_THRESHOLD = 0.4f;
 
-	private static final int   OVERSCROLL_DISTANCE      = 10;
+	private static final int OVERSCROLL_DISTANCE = 10;
 
 	private float mScrollFinishThreshold = DEFAULT_SCROLL_THRESHOLD;
 
@@ -84,9 +84,9 @@ public class SwipeBackLayout
 
 	private FragmentActivity mActivity;
 
-	private View             mContentView;
+	private View mContentView;
 
-	private SupportFragment  mFragment;
+	private SupportFragment mFragment;
 
 	private Fragment mPreFragment;
 
@@ -292,11 +292,11 @@ public class SwipeBackLayout
 	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
 
 		boolean isDrawView = child == mContentView;
-		boolean drawChild  = super.drawChild(
+		boolean drawChild = super.drawChild(
 				canvas,
 				child,
 				drawingTime
-											);
+										   );
 		if (isDrawView && mScrimOpacity > 0 && mHelper.getViewDragState() != ViewDragHelper.STATE_IDLE) {
 			drawShadow(
 					canvas,
@@ -406,8 +406,8 @@ public class SwipeBackLayout
 										);
 		a.recycle();
 
-		ViewGroup decor      = (ViewGroup) activity.getWindow()
-												   .getDecorView();
+		ViewGroup decor = (ViewGroup) activity.getWindow()
+											  .getDecorView();
 		ViewGroup decorChild = (ViewGroup) decor.getChildAt(0);
 		decorChild.setBackgroundResource(background);
 		decor.removeView(decorChild);

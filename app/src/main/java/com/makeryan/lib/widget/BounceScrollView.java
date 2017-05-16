@@ -9,7 +9,9 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ScrollView;
 
 /**
- * Created by luoliuqing on 16/9/27.
+ * @author MakerYan
+ * @email light.yan@qq.com
+ * @time 2017/5/15 下午9:43
  */
 public class BounceScrollView
 		extends ScrollView {

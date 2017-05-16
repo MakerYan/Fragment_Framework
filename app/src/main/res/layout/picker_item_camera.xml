@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	>
+
+	<data>
+
+		<variable
+			name="listener"
+			type="android.view.View.OnClickListener"
+			/>
+
+		<import type="android.view.View"/>
+	</data>
+
+	<com.makeryan.lib.photopicker.widget.SquareItemLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		>
+		<ImageView
+			android:id="@+id/ivCamera"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_gravity="center"
+			android:adjustViewBounds="true"
+			android:background="@drawable/__picker_photo_bg"
+			android:onClick="@{v -> listener.onClick(v)}"
+			android:padding="2px"
+			android:scaleType="centerInside"
+			android:src="@drawable/camera_192"
+			/>
+	</com.makeryan.lib.photopicker.widget.SquareItemLayout>
+</layout>

@@ -12,7 +12,8 @@ import com.makeryan.lib.R;
 
 
 public class ListHolder
-		implements HolderAdapter, AdapterView.OnItemClickListener {
+		implements HolderAdapter,
+				   AdapterView.OnItemClickListener {
 
 	private int backgroundResource;
 

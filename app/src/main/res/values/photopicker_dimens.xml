@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<dimen name="__picker_iwf_actionBarSize">96px</dimen>
+	<dimen name="__picker_item_photo_size">160px</dimen>
+	<dimen name="__picker_item_camera_size">160px</dimen>
+	<dimen name="__picker_item_directory_height">160px</dimen>
+
+</resources>

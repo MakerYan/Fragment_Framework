@@ -9,19 +9,19 @@ import java.util.ArrayList;
  */
 public final class TransactionRecord {
 
-	public String                   tag;
+	public String tag;
 
-	public Integer                  requestCode;
+	public Integer requestCode;
 
-	public Integer                  launchMode;
+	public Integer launchMode;
 
-	public Boolean                  withPop;
+	public Boolean withPop;
 
 	public ArrayList<SharedElement> sharedElementList;
 
 	public static class SharedElement {
 
-		public View   sharedElement;
+		public View sharedElement;
 
 		public String sharedName;
 

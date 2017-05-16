@@ -30,17 +30,17 @@ class FragmentationDelegate {
 
 	static final String TAG = "Fragmentation";
 
-	static final String FRAGMENTATION_ARG_RESULT_RECORD     = "fragment_arg_result_record";
+	static final String FRAGMENTATION_ARG_RESULT_RECORD = "fragment_arg_result_record";
 
-	static final String FRAGMENTATION_ARG_IS_ROOT           = "fragmentation_arg_is_root";
+	static final String FRAGMENTATION_ARG_IS_ROOT = "fragmentation_arg_is_root";
 
 	static final String FRAGMENTATION_ARG_IS_SHARED_ELEMENT = "fragmentation_arg_is_shared_element";
 
-	static final String FRAGMENTATION_ARG_CONTAINER         = "fragmentation_arg_container";
+	static final String FRAGMENTATION_ARG_CONTAINER = "fragmentation_arg_container";
 
-	static final String FRAGMENTATION_STATE_SAVE_ANIMATOR                = "fragmentation_state_save_animator";
+	static final String FRAGMENTATION_STATE_SAVE_ANIMATOR = "fragmentation_state_save_animator";
 
-	static final String FRAGMENTATION_STATE_SAVE_IS_HIDDEN               = "fragmentation_state_save_status";
+	static final String FRAGMENTATION_STATE_SAVE_IS_HIDDEN = "fragmentation_state_save_status";
 
 	static final String FRAGMENTATION_STATE_SAVE_IS_INVISIBLE_WHEN_LEAVE = "fragmentation_state_save_invisible_when_leave";
 
@@ -48,15 +48,15 @@ class FragmentationDelegate {
 
 	private static final long BUFFER_TIME = 50L;
 
-	static final int TYPE_ADD          = 0;
+	static final int TYPE_ADD = 0;
 
 	static final int TYPE_ADD_WITH_POP = 1;
 
-	static final int TYPE_ADD_RESULT   = 2;
+	static final int TYPE_ADD_RESULT = 2;
 
 	private SupportActivity mActivity;
 
-	private Handler         mHandler;
+	private Handler mHandler;
 
 	private FragmentManager mPopToTempFragmentManager;
 
@@ -204,8 +204,8 @@ class FragmentationDelegate {
 		}
 
 		// process SupportTransaction
-		String            toFragmentTag     = to.getClass()
-												.getName();
+		String toFragmentTag = to.getClass()
+								 .getName();
 		TransactionRecord transactionRecord = to.getTransactionRecord();
 		if (transactionRecord != null) {
 			if (transactionRecord.tag != null) {
@@ -472,9 +472,10 @@ class FragmentationDelegate {
 
 		FragmentTransaction ft = fragmentManager.beginTransaction()
 												.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-												.add(from.getContainerId(),
-													 to,
-													 toFragmentTag
+												.add(
+														from.getContainerId(),
+														to,
+														toFragmentTag
 													)
 												.addToBackStack(toFragmentTag);
 

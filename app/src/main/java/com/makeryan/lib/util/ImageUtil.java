@@ -52,6 +52,11 @@ public class ImageUtil {
 		sRequestManager = null;
 	}
 
+	public static RequestManager getRequestManager() {
+
+		return sRequestManager;
+	}
+
 	public enum DrawableDirection {
 		LEFT,
 		TOP,
@@ -61,7 +66,16 @@ public class ImageUtil {
 
 	public static DrawableRequestBuilder<String> getDrawableRequestBuilder(String url) {
 
+		return getDrawableRequestBuilder(
+				url,
+				0.3f
+										);
+	}
+
+	public static DrawableRequestBuilder<String> getDrawableRequestBuilder(String url, float thumbnail) {
+
 		return sRequestManager.load(url)
+							  .thumbnail(thumbnail)
 							  .skipMemoryCache(false)
 							  .diskCacheStrategy(DiskCacheStrategy.RESULT)
 							  .crossFade()
@@ -70,8 +84,17 @@ public class ImageUtil {
 
 	public static BitmapRequestBuilder<String, Bitmap> getBitmapRequestBuilder(String url) {
 
+		return getBitmapRequestBuilder(
+				url,
+				0.3f
+									  );
+	}
+
+	public static BitmapRequestBuilder<String, Bitmap> getBitmapRequestBuilder(String url, float thumbnail) {
+
 		return sRequestManager.load(url)
 							  .asBitmap()
+							  .thumbnail(thumbnail)
 							  .skipMemoryCache(false)
 							  .diskCacheStrategy(DiskCacheStrategy.RESULT)
 							  .centerCrop();
@@ -79,24 +102,55 @@ public class ImageUtil {
 
 	public static DrawableRequestBuilder<String> load(String url) {
 
+		return load(
+				url,
+				0.3f
+				   );
+	}
+
+	public static DrawableRequestBuilder<String> load(String url, float thumbnail) {
+
 		return sRequestManager.load(url)
 							  .skipMemoryCache(false)
+							  .thumbnail(thumbnail)
 							  .diskCacheStrategy(DiskCacheStrategy.RESULT)
 							  .crossFade();
 	}
 
 	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView) {
 
+		return loadAsBitmap(
+				url,
+				imageView,
+				0.3f
+						   );
+	}
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, float thumbnail) {
+
 		return sRequestManager.load(url)
 							  .asBitmap()
+							  .thumbnail(thumbnail)
 							  .centerCrop()
 							  .into(imageView);
 	}
 
 	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, int defaulImgId) {
 
+		return loadAsBitmap(
+				url,
+				imageView,
+				defaulImgId,
+				0.3f
+						   );
+
+	}
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, int defaulImgId, float thumbnail) {
+
 		return sRequestManager.load(url)
 							  .asBitmap()
+							  .thumbnail(thumbnail)
 							  .error(defaulImgId)
 							  .placeholder(defaulImgId)
 							  .centerCrop()
@@ -106,49 +160,109 @@ public class ImageUtil {
 
 	public static com.bumptech.glide.request.target.Target loadAsBitmap(byte[] b, ImageView imageView) {
 
+		return loadAsBitmap(
+				b,
+				imageView,
+				0.3f
+						   );
+	}
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(byte[] b, ImageView imageView, float thumbnail) {
+
 		return sRequestManager.load(b)
 							  .asBitmap()
 							  .centerCrop()
+							  .thumbnail(thumbnail)
 							  .into(imageView);
 	}
 
 	public static com.bumptech.glide.request.target.Target loadAsBitmap(File file, ImageView imageView) {
 
+		return loadAsBitmap(
+				file,
+				imageView,
+				0.3f
+						   );
+	}
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(File file, ImageView imageView, float thumbnail) {
+
 		return sRequestManager.load(file)
 							  .asBitmap()
 							  .centerCrop()
+							  .thumbnail(thumbnail)
 							  .into(imageView);
 	}
 
 	public static com.bumptech.glide.request.target.Target loadAsBitmap(Integer integer, ImageView imageView) {
 
+		return loadAsBitmap(
+				integer,
+				imageView,
+				0.3f
+						   );
+	}
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(Integer integer, ImageView imageView, float thumbnail) {
+
 		return sRequestManager.load(integer)
 							  .asBitmap()
 							  .centerCrop()
+							  .thumbnail(thumbnail)
 							  .into(imageView);
 	}
 
 	public static com.bumptech.glide.request.target.Target loadAsBitmap(Uri uri, ImageView imageView) {
 
+		return loadAsBitmap(
+				uri,
+				imageView,
+				0.3f
+						   );
+	}
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(Uri uri, ImageView imageView, float thumbnail) {
+
 		return sRequestManager.load(uri)
 							  .asBitmap()
 							  .centerCrop()
+							  .thumbnail(thumbnail)
 							  .into(imageView);
 	}
 
 	public static com.bumptech.glide.request.target.Target loadAsBitmap(URL url, ImageView imageView) {
 
+		return loadAsBitmap(
+				url,
+				imageView,
+				0.3f
+						   );
+	}
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(URL url, ImageView imageView, float thumbnail) {
+
 		return sRequestManager.load(url)
 							  .asBitmap()
 							  .centerCrop()
+							  .thumbnail(thumbnail)
 							  .into(imageView);
 	}
 
 	public static <T> com.bumptech.glide.request.target.Target loadAsBitmap(T model, ImageView imageView) {
 
+		return loadAsBitmap(
+				model,
+				imageView,
+				0.3f
+						   );
+	}
+
+	public static <T> com.bumptech.glide.request.target.Target loadAsBitmap(T model, ImageView imageView, float thumbnail) {
+
 		return sRequestManager.load(model)
 							  .asBitmap()
 							  .centerCrop()
+							  .thumbnail(thumbnail)
 							  .into(imageView);
 	}
 

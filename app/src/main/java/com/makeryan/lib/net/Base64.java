@@ -695,7 +695,7 @@ public class Base64 {
 			-9
 			// Decimal 123 - 126
 	  /*,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 127 - 139
-      -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 140 - 152
+	  -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 140 - 152
       -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 153 - 165
       -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 166 - 178
       -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 179 - 191
@@ -2663,7 +2663,8 @@ public class Base64 {
 						int b = 0;
 						do {
 							b = in.read();
-						} while (b >= 0 && decodabet[b & 0x7f] <= WHITE_SPACE_ENC);
+						}
+						while (b >= 0 && decodabet[b & 0x7f] <= WHITE_SPACE_ENC);
 
 						if (b < 0) {
 							break; // Reads a -1 if end of stream

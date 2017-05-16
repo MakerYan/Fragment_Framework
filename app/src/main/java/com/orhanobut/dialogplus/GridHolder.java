@@ -12,7 +12,8 @@ import com.makeryan.lib.R;
 
 
 public class GridHolder
-		implements HolderAdapter, AdapterView.OnItemClickListener {
+		implements HolderAdapter,
+				   AdapterView.OnItemClickListener {
 
 	private final int columnNumber;
 

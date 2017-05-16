@@ -19,9 +19,10 @@ public class ScreenUtils {
 		int result = 0;
 		try {
 			int resourceId = context.getResources()
-									.getIdentifier("status_bar_height",
-												   "dimen",
-												   "android"
+									.getIdentifier(
+											"status_bar_height",
+											"dimen",
+											"android"
 												  );
 			if (resourceId > 0) {
 				result = context.getResources()

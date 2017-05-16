@@ -15,7 +15,9 @@ import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
  */
 public class Set<TModel extends Model>
 		extends BaseQueriable<TModel>
-		implements WhereBase<TModel>, Queriable, Transformable<TModel> {
+		implements WhereBase<TModel>,
+				   Queriable,
+				   Transformable<TModel> {
 
 	private ConditionGroup conditionGroup;
 

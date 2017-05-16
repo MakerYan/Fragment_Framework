@@ -16,7 +16,8 @@ import java.util.Iterator;
  * Description: The base class that all ModelContainers should extend.
  */
 public abstract class BaseModelContainer<TModel extends Model, DataClass>
-		implements ModelContainer<TModel, DataClass>, Model {
+		implements ModelContainer<TModel, DataClass>,
+				   Model {
 
 	/**
 	 * The {@link TModel} that the json corresponds to. Use {@link #toModel()} to retrieve this value.

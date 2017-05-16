@@ -54,10 +54,11 @@ public class AutoTabLayout
 				attrs
 							 );
 
-		TypedArray a = context.obtainStyledAttributes(attrs,
-													  R.styleable.TabLayout,
-													  defStyleAttr,
-													  R.style.Widget_Design_TabLayout
+		TypedArray a = context.obtainStyledAttributes(
+				attrs,
+				R.styleable.TabLayout,
+				defStyleAttr,
+				R.style.Widget_Design_TabLayout
 													 );
 		int tabTextAppearance = a.getResourceId(
 				R.styleable.TabLayout_tabTextAppearance,
@@ -128,9 +129,9 @@ public class AutoTabLayout
 			return;
 		}
 
-		ViewGroup tabGroup = (ViewGroup) getChildAt(0);
+		ViewGroup tabGroup     = (ViewGroup) getChildAt(0);
 		ViewGroup tabContainer = (ViewGroup) tabGroup.getChildAt(tab.getPosition());
-		TextView  textView = (TextView) tabContainer.getChildAt(1);
+		TextView  textView     = (TextView) tabContainer.getChildAt(1);
 
 
 		if (AutoUtils.autoed(textView)) {

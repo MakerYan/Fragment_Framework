@@ -21,7 +21,8 @@ import java.util.List;
 public class From<TModel extends Model>
 		extends BaseModelQueriable<TModel>
 		implements WhereBase<TModel>,
-				   ModelQueriable<TModel>, Transformable<TModel> {
+				   ModelQueriable<TModel>,
+				   Transformable<TModel> {
 
 	/**
 	 * The base such as {@link Delete}, {@link Select} and more!

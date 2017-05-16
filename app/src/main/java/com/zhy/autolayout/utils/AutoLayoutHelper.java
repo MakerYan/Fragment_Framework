@@ -85,39 +85,39 @@ public class AutoLayoutHelper {
 
 	};
 
-	private static final int INDEX_TEXT_SIZE      = 0;
+	private static final int INDEX_TEXT_SIZE = 0;
 
-	private static final int INDEX_PADDING        = 1;
+	private static final int INDEX_PADDING = 1;
 
-	private static final int INDEX_PADDING_LEFT   = 2;
+	private static final int INDEX_PADDING_LEFT = 2;
 
-	private static final int INDEX_PADDING_TOP    = 3;
+	private static final int INDEX_PADDING_TOP = 3;
 
-	private static final int INDEX_PADDING_RIGHT  = 4;
+	private static final int INDEX_PADDING_RIGHT = 4;
 
 	private static final int INDEX_PADDING_BOTTOM = 5;
 
-	private static final int INDEX_WIDTH          = 6;
+	private static final int INDEX_WIDTH = 6;
 
-	private static final int INDEX_HEIGHT         = 7;
+	private static final int INDEX_HEIGHT = 7;
 
-	private static final int INDEX_MARGIN         = 8;
+	private static final int INDEX_MARGIN = 8;
 
-	private static final int INDEX_MARGIN_LEFT    = 9;
+	private static final int INDEX_MARGIN_LEFT = 9;
 
-	private static final int INDEX_MARGIN_TOP     = 10;
+	private static final int INDEX_MARGIN_TOP = 10;
 
-	private static final int INDEX_MARGIN_RIGHT   = 11;
+	private static final int INDEX_MARGIN_RIGHT = 11;
 
-	private static final int INDEX_MARGIN_BOTTOM  = 12;
+	private static final int INDEX_MARGIN_BOTTOM = 12;
 
-	private static final int INDEX_MAX_WIDTH      = 13;
+	private static final int INDEX_MAX_WIDTH = 13;
 
-	private static final int INDEX_MAX_HEIGHT     = 14;
+	private static final int INDEX_MAX_HEIGHT = 14;
 
-	private static final int INDEX_MIN_WIDTH      = 15;
+	private static final int INDEX_MIN_WIDTH = 15;
 
-	private static final int INDEX_MIN_HEIGHT     = 16;
+	private static final int INDEX_MIN_HEIGHT = 16;
 
 
 	/**
@@ -165,18 +165,18 @@ public class AutoLayoutHelper {
 
 		AutoLayoutInfo info = new AutoLayoutInfo();
 
-		TypedArray a          = context.obtainStyledAttributes(
+		TypedArray a = context.obtainStyledAttributes(
 				attrs,
 				R.styleable.AutoLayout_Layout
-															  );
-		int        baseWidth  = a.getInt(
+													 );
+		int baseWidth = a.getInt(
 				R.styleable.AutoLayout_Layout_layout_auto_basewidth,
 				0
-										);
-		int        baseHeight = a.getInt(
+								);
+		int baseHeight = a.getInt(
 				R.styleable.AutoLayout_Layout_layout_auto_baseheight,
 				0
-										);
+								 );
 		a.recycle();
 
 		TypedArray array = context.obtainStyledAttributes(

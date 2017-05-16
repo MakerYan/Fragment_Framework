@@ -2,7 +2,6 @@ package com.makeryan.lib.util.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.databinding.ObservableBoolean;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,23 +24,48 @@ import java.util.List;
 public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 		extends RecyclerView.Adapter<SimpleViewHolder> {
 
-
 	public static final int GROUP_TYPE = 801;
 
-	public static final int CHILD_TYPE = 802;
+	public static final int FC_TYPE = 802;
+
+	public static final int CHILD_TYPE = 803;
 
 	protected OnRecyclerViewItemClickListener<T> mItemClickListener;
 
-	protected int mResId = 0;
-
-	protected List<T> mDataList = new ArrayList<T>();
-
-	protected ObservableBoolean mFunctionButtonVisibility = new ObservableBoolean(true);
+	protected ArrayList<T> mDataList = new ArrayList<T>();
 
 	/**
 	 * item 最大数量
 	 */
 	protected int mMaxCount = Integer.MAX_VALUE;
+
+	protected boolean mIsFcButton = false;
+
+	protected boolean mIsFcButtonStart = false;
+
+	protected int mSelectedPosition = -1;
+
+	protected View.OnClickListener mFunctionClickListener;
+
+	public boolean isFcButton() {
+
+		return mIsFcButton;
+	}
+
+	public void setFcButton(boolean fcButton) {
+
+		mIsFcButton = fcButton;
+	}
+
+	public boolean isFcButtonStart() {
+
+		return mIsFcButtonStart;
+	}
+
+	public void setFcButtonStart(boolean fcButtonStart) {
+
+		mIsFcButtonStart = fcButtonStart;
+	}
 
 	public CommonRecyclerViewAdapter() {
 
@@ -50,6 +74,40 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	public CommonRecyclerViewAdapter(OnRecyclerViewItemClickListener itemClickListener) {
 
 		this.mItemClickListener = itemClickListener;
+	}
+
+	public CommonRecyclerViewAdapter(OnRecyclerViewItemClickListener itemClickListener, boolean hasFcButton) {
+
+		this.mItemClickListener = itemClickListener;
+		this.mIsFcButton = hasFcButton;
+	}
+
+	public CommonRecyclerViewAdapter(OnRecyclerViewItemClickListener itemClickListener, boolean hasFcButton, int maxCount) {
+
+		this.mItemClickListener = itemClickListener;
+		this.mIsFcButton = hasFcButton;
+		this.mMaxCount = maxCount;
+	}
+
+	public CommonRecyclerViewAdapter(OnRecyclerViewItemClickListener itemClickListener, View.OnClickListener functionClickListener) {
+
+		this.mItemClickListener = itemClickListener;
+		this.mFunctionClickListener = functionClickListener;
+	}
+
+	public CommonRecyclerViewAdapter(OnRecyclerViewItemClickListener itemClickListener, View.OnClickListener functionClickListener, boolean hasFcButton) {
+
+		this.mItemClickListener = itemClickListener;
+		this.mFunctionClickListener = functionClickListener;
+		this.mIsFcButton = hasFcButton;
+	}
+
+	public CommonRecyclerViewAdapter(OnRecyclerViewItemClickListener itemClickListener, View.OnClickListener functionClickListener, boolean hasFcButton, int maxCount) {
+
+		this.mItemClickListener = itemClickListener;
+		this.mFunctionClickListener = functionClickListener;
+		this.mIsFcButton = hasFcButton;
+		this.mMaxCount = maxCount;
 	}
 
 	public void addItem(T item) {
@@ -89,7 +147,7 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 		}
 	}
 
-	public List<T> getDataList() {
+	public ArrayList<T> getDataList() {
 
 		return mDataList;
 	}
@@ -192,45 +250,105 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	@Override
 	public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-		Context context     = parent.getContext();
-		int     layoutResID = getLayoutResID();
-		int layoutId = mResId != 0 ?
-				mResId :
-				layoutResID;
-		View convertView = LayoutInflater.from(context)
-										 .inflate(
-												 layoutId,
-												 parent,
-												 false
-												 );
-		D binding = DataBindingUtil.bind(convertView);
-		SimpleViewHolder<T, D> holder = new SimpleViewHolder<T, D>(
-				binding.getRoot(),
-				binding
-		);
-		setRecursiveClick(binding.getRoot());
+		SimpleViewHolder<T, D> holder  = null;
+		Context                context = parent.getContext();
+		if (viewType == FC_TYPE) {
+			int layoutResID = getFunctionLayoutResId();
+			View convertView = LayoutInflater.from(context)
+											 .inflate(
+													 layoutResID,
+													 parent,
+													 false
+													 );
+			D binding = DataBindingUtil.bind(convertView);
+			holder = new SimpleViewHolder<T, D>(
+					binding.getRoot(),
+					binding
+			);
+			setRecursiveClick(binding.getRoot());
+		} else if (viewType == CHILD_TYPE) {
+
+			int layoutResID = getLayoutResID();
+			View convertView = LayoutInflater.from(context)
+											 .inflate(
+													 layoutResID,
+													 parent,
+													 false
+													 );
+			D binding = DataBindingUtil.bind(convertView);
+			holder = new SimpleViewHolder<T, D>(
+					binding.getRoot(),
+					binding
+			);
+			setRecursiveClick(binding.getRoot());
+		} else if (viewType == GROUP_TYPE) {
+			int layoutResID = getLayoutResID();
+			View convertView = LayoutInflater.from(context)
+											 .inflate(
+													 layoutResID,
+													 parent,
+													 false
+													 );
+			D binding = DataBindingUtil.bind(convertView);
+			holder = new SimpleViewHolder<T, D>(
+					binding.getRoot(),
+					binding
+			);
+			setRecursiveClick(binding.getRoot());
+		}
 		return holder;
 	}
 
 	@Override
 	public void onBindViewHolder(SimpleViewHolder holder, int position) {
 
-		D binding = (D) holder.getBinding();
-		holder.itemView.setTag(position);
-		T data = getItem(position);
-		holder.setDataObj(data);
-		processingViewHolder(
-				holder,
-				binding,
-				position,
-				data
+		D   binding      = (D) holder.getBinding();
+		int itemViewType = getItemViewType(position);
+		if (itemViewType == FC_TYPE) {
+			bindFunctionData(
+					position,
+					holder,
+					binding
 							);
-		bindData(
-				position,
-				holder,
-				binding,
-				data
-				);
+		} else if (itemViewType == GROUP_TYPE) {
+			T data;
+			if (isFcButton() && isFcButtonStart()) {
+				holder.itemView.setTag(position - 1);
+				data = getItem(position - 1);
+			} else {
+				data = getItem(position);
+				holder.itemView.setTag(position);
+			}
+			holder.setDataObj(data);
+			bindGroupData(
+					position,
+					holder,
+					binding,
+					data
+						 );
+		} else if (itemViewType == CHILD_TYPE) {
+			T data;
+			if (isFcButton() && isFcButtonStart()) {
+				holder.itemView.setTag(position - 1);
+				data = getItem(position - 1);
+			} else {
+				holder.itemView.setTag(position);
+				data = getItem(position);
+			}
+			holder.setDataObj(data);
+			processingViewHolder(
+					holder,
+					binding,
+					position,
+					data
+								);
+			bindData(
+					position,
+					holder,
+					binding,
+					data
+					);
+		}
 		binding.executePendingBindings();
 	}
 
@@ -253,7 +371,20 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	public int getItemCount() {
 
 		if (mDataList == null) {
-			return 0;
+			if (mIsFcButton) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
+
+		if (mIsFcButton) {
+
+			int count = mDataList.size() + 1;
+			if (count > mMaxCount) {
+				count = mMaxCount;
+			}
+			return count;
 		}
 
 		if (mDataList.size() > mMaxCount) {
@@ -263,12 +394,68 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 		}
 	}
 
+	@Override
+	public int getItemViewType(int position) {
+
+		if (mDataList == null) {
+			if (mIsFcButton) {
+				return FC_TYPE;
+			} else {
+				return CHILD_TYPE;
+			}
+		}
+
+		if (mIsFcButton) {
+			if (mIsFcButtonStart) {
+				return position == 0 ?
+						FC_TYPE :
+						CHILD_TYPE;
+			} else {
+				return (position == mDataList.size() && position != mMaxCount) ?
+						FC_TYPE :
+						CHILD_TYPE;
+			}
+
+		}
+		return CHILD_TYPE;
+	}
+
 	/**
-	 * 返回布局ID
+	 * 设置选中Item
 	 *
-	 * @return
+	 * @param position
+	 */
+	public void setSelected(int position) {
+
+		this.mSelectedPosition = position;
+		notifyDataSetChanged();
+	}
+
+	public boolean isSelected(int position) {
+
+		return mSelectedPosition == position;
+	}
+
+	/**
+	 * @return Group layout resource id
+	 */
+	public int getGroupLayoutResId() {
+
+		return 0;
+	}
+
+	/**
+	 * @return item layout resource id
 	 */
 	public abstract int getLayoutResID();
+
+	/**
+	 * @return function layout resource id
+	 */
+	public int getFunctionLayoutResId() {
+
+		return 0;
+	}
 
 	/**
 	 * 在bindData前执行
@@ -293,13 +480,29 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	 */
 	public abstract void bindData(int position, SimpleViewHolder holder, D binding, T data);
 
+	/**
+	 * bind group data
+	 *
+	 * @param position
+	 * @param holder
+	 * @param binding
+	 * @param data
+	 */
+	public void bindGroupData(int position, SimpleViewHolder holder, D binding, T data) {
 
-	@Override
-	public int getItemViewType(int position) {
-
-		return super.getItemViewType(position);
-		//		return getItemType(position);
 	}
+
+	/**
+	 * bind function data
+	 *
+	 * @param position
+	 * @param holder
+	 * @param binding
+	 */
+	public void bindFunctionData(int position, SimpleViewHolder holder, D binding) {
+
+	}
+
 
 	@Override
 	public void onAttachedToRecyclerView(RecyclerView recyclerView) {

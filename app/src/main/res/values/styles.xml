@@ -27,10 +27,60 @@
 		<!--if you don't set this the background will be black when you slide.-->
 		<item name="android:windowIsTranslucent">true</item>
 		<!--set the right in/out animation of Activity,you can change this to yours-->
-		<item name="android:windowAnimationStyle">@style/SlideRightAnimation
-		</item>
+		<item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
 		<item name="android:clickable">true</item>
 	</style>
+
+
+	<style name="ToolbarStyle">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">120px</item>
+		<item name="android:background">@color/colorPrimary</item>
+		<item name="navigationIcon">@drawable/navigationbar_back</item>
+		<item name="maxButtonHeight">120px</item>
+		<item name="title">" "</item>
+		<item name="android:title">" "</item>
+		<item name="android:id">@+id/toolbar</item>
+		<item name="layout_auto_basewidth">height</item>
+	</style>
+	<!--Toolbar 中间title-->
+	<style name="ToolbarCenterTitle">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:textSize">34px</item>
+		<item name="android:textColor">@color/cl_313133</item>
+		<item name="android:gravity">center</item>
+		<item name="android:id">@+id/tv_center_title</item>
+		<item name="android:textStyle">normal</item>
+		<item name="android:layout_gravity">center</item>
+	</style>
+
+	<!--toolbar 右侧文字style-->
+	<style name="ToolbarRightText">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:minWidth">88px</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:layout_gravity">right</item>
+		<item name="android:gravity">center</item>
+		<item name="android:paddingLeft">24px</item>
+		<item name="android:paddingRight">24px</item>
+		<item name="android:textColor">@color/color_4d000000</item>
+		<item name="android:textSize">30px</item>
+	</style>
+
+	<!--toolbar 右侧文字style-->
+	<style name="ToolbarRightImageView" parent="ToolbarRightText">
+		<item name="android:layout_width">88px</item>
+		<item name="android:paddingLeft">24px</item>
+		<item name="android:paddingRight">24px</item>
+		<item name="android:scaleType">centerInside</item>
+	</style>
+
+	<!--我  页面中  好友印象  style-->
+	<style name="MyStyle_" parent="MyStyle_B">
+		<item name="android:drawableRight">@drawable/view_detail_normal</item>
+	</style>
+
 
 	<!--滑动关闭动画-->
 	<style name="SlideRightAnimation" parent="@android:style/Animation.Activity">
@@ -48,5 +98,104 @@
 		<item name="android:taskToBackExitAnimation">@anim/slide_out_right</item>
 	</style>
 
+
+	<style name="ListItemStyle">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">140px</item>
+		<item name="style">@style/RippleTheme</item>
+		<item name="android:paddingLeft">40px</item>
+		<item name="android:paddingRight">40px</item>
+	</style>
+
+	<!--我和好友 页面中的ITEM-->
+	<style name="Style__">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">120px</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:paddingLeft">80px</item>
+		<item name="android:paddingRight">80px</item>
+		<item name="android:textColor">@color/color_80313133_selector</item>
+		<item name="android:textSize">30px</item>
+		<item name="android:drawableRight">@drawable/view_detail_normal</item>
+	</style>
+
+	<!--隐私和通知 checkbox-->
+	<style name="Style_A">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">120px</item>
+		<item name="android:button">@null</item>
+		<item name="android:drawableRight">@drawable/switch_selector</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:paddingLeft">60px</item>
+		<item name="android:paddingRight">60px</item>
+		<item name="android:textColor">@color/cl_313133</item>
+		<item name="android:textSize">30px</item>
+	</style>
+
+
+	<!--隐私和通知 TextView-->
+	<style name="MyStyle_B">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">120px</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:paddingLeft">60px</item>
+		<item name="android:paddingRight">60px</item>
+		<item name="android:textSize">30px</item>
+		<item name="android:textColor">@color/color_4d313133</item>
+	</style>
+
+
+	<style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
+		<item name="android:background">@drawable/background_tablayout</item>
+		<item name="tabIndicatorColor">@color/cl_07a9fa</item>
+		<item name="tabMode">fixed</item>
+		<item name="tabSelectedTextColor">@color/cl_07a9fa</item>
+		<item name="tabTextColor">@color/cl_534741</item>
+		<item name="tabIndicatorHeight">9px</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">100px</item>
+		<item name="android:maxHeight">100px</item>
+
+		<!--<item name="tabMaxWidth">@dimen/tab_max_width</item>-->
+		<item name="tabPaddingStart">12dp</item>
+		<item name="tabPaddingEnd">12dp</item>
+		<item name="tabBackground">?attr/selectableItemBackground</item>
+		<item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+	</style>
+
+
+	<style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">?android:textColorSecondary</item>
+		<item name="textAllCaps">false</item>
+	</style>
+
+	<style name="TabLayoutStyle.Blue">
+		<item name="textAllCaps">false</item>
+		<item name="tabIndicatorColor">@color/cl_ffffffff</item>
+		<item name="android:background">@color/cl_07a9fa</item>
+		<item name="tabSelectedTextColor">@color/cl_ffffffff</item>
+		<item name="tabTextColor">@color/cl_534741</item>
+	</style>
+
+	<!--个人操作-->
+	<style name="PersonalOperationStyle">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">0dp</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:textColor">@color/color_80313133_selector</item>
+		<item name="android:background">@drawable/ripple</item>
+		<item name="android:textSize">30px</item>
+		<item name="android:gravity">center</item>
+	</style>
+
+	<!-- gif动画 -->
+	<declare-styleable name="GifView">
+		<attr name="gif" format="reference"/>
+		<attr name="paused" format="boolean"/>
+	</declare-styleable>
+	<declare-styleable name="CustomTheme">
+		<attr name="gifViewStyle" format="reference"/>
+	</declare-styleable>
 
 </resources>

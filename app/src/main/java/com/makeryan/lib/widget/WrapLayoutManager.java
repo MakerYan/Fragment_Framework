@@ -8,7 +8,10 @@ import com.jcodecraeer.xrecyclerview.LoadingMoreFooter;
 
 /**
  * 自动换行布局管理
- * Created by chengxiakuan on 2016/10/14.
+ *
+ * @author MakerYan
+ * @email light.yan@qq.com
+ * @time 2017/5/15 下午8:43
  */
 public class WrapLayoutManager
 		extends RecyclerView.LayoutManager {

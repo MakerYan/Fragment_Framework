@@ -38,7 +38,8 @@ import java.util.ListIterator;
  */
 public class FlowQueryList<TModel extends Model>
 		extends FlowContentObserver
-		implements List<TModel>, Closeable,
+		implements List<TModel>,
+				   Closeable,
 				   IFlowCursorIterator<TModel> {
 
 	private static final Handler REFRESH_HANDLER = new Handler(Looper.myLooper());

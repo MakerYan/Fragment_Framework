@@ -13,12 +13,12 @@ public class Fragmentation {
 	/**
 	 * Dont display stack view.
 	 */
-	public static final int NONE   = 0;
+	public static final int NONE = 0;
 
 	/**
 	 * Shake it to display stack view.
 	 */
-	public static final int SHAKE  = 1;
+	public static final int SHAKE = 1;
 
 	/**
 	 * As a bubble display stack view.
@@ -27,9 +27,9 @@ public class Fragmentation {
 
 	static volatile Fragmentation INSTANCE;
 
-	private boolean          debug;
+	private boolean debug;
 
-	private int              mode;
+	private int mode;
 
 	private ExceptionHandler handler;
 
@@ -99,9 +99,9 @@ public class Fragmentation {
 
 	public static class FragmentationBuilder {
 
-		private boolean          debug;
+		private boolean debug;
 
-		private int              mode;
+		private int mode;
 
 		private ExceptionHandler handler;
 

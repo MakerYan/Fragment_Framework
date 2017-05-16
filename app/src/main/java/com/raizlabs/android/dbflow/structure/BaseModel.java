@@ -15,7 +15,8 @@ import java.io.Serializable;
  */
 public class BaseModel
 		extends BaseObservable
-		implements Model, Serializable {
+		implements Model,
+				   Serializable {
 
 	/**
 	 * Specifies the Action that was taken when data changes

@@ -23,7 +23,8 @@ import java.util.List;
  * Description: A non-modifiable, cursor-backed list that you can use in {@link ListView} or other data sources.
  */
 public class FlowCursorList<TModel extends Model>
-		implements Iterable<TModel>, Closeable,
+		implements Iterable<TModel>,
+				   Closeable,
 				   IFlowCursorIterator<TModel> {
 
 	/**

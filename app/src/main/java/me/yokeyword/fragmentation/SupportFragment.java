@@ -750,63 +750,51 @@ public class SupportFragment
 	@Override
 	public void start(final SupportFragment toFragment, @LaunchMode final int launchMode) {
 
-		enqueueAction(() -> {
-
-			mFragmentationDelegate.dispatchStartTransaction(
-					getFragmentManager(),
-					this,
-					toFragment,
-					0,
-					launchMode,
-					FragmentationDelegate.TYPE_ADD
-														   );
-		});
+		mFragmentationDelegate.dispatchStartTransaction(
+				getFragmentManager(),
+				this,
+				toFragment,
+				0,
+				launchMode,
+				FragmentationDelegate.TYPE_ADD
+													   );
 	}
 
 	@Override
 	public void startForResult(SupportFragment toFragment, int requestCode) {
 
-		enqueueAction(() -> {
-
-			mFragmentationDelegate.dispatchStartTransaction(
-					getFragmentManager(),
-					this,
-					toFragment,
-					requestCode,
-					STANDARD,
-					FragmentationDelegate.TYPE_ADD_RESULT
-														   );
-		});
+		mFragmentationDelegate.dispatchStartTransaction(
+				getFragmentManager(),
+				this,
+				toFragment,
+				requestCode,
+				STANDARD,
+				FragmentationDelegate.TYPE_ADD_RESULT
+													   );
 	}
 
 	@Override
 	public void startWithPop(SupportFragment toFragment) {
 
-		enqueueAction(() -> {
-
-			hideSoftInput();
-			mFragmentationDelegate.dispatchStartTransaction(
-					getFragmentManager(),
-					this,
-					toFragment,
-					0,
-					STANDARD,
-					FragmentationDelegate.TYPE_ADD_WITH_POP
-														   );
-		});
+		hideSoftInput();
+		mFragmentationDelegate.dispatchStartTransaction(
+				getFragmentManager(),
+				this,
+				toFragment,
+				0,
+				STANDARD,
+				FragmentationDelegate.TYPE_ADD_WITH_POP
+													   );
 	}
 
 	@Override
 	public void replaceFragment(SupportFragment toFragment, boolean addToBack) {
 
-		enqueueAction(() -> {
-
-			mFragmentationDelegate.replaceTransaction(
-					this,
-					toFragment,
-					addToBack
-													 );
-		});
+		mFragmentationDelegate.replaceTransaction(
+				this,
+				toFragment,
+				addToBack
+												 );
 	}
 
 	/**
@@ -1246,5 +1234,10 @@ public class SupportFragment
 				bundle,
 				visible
 											);
+	}
+
+	public boolean canSwipe() {
+
+		return true;
 	}
 }

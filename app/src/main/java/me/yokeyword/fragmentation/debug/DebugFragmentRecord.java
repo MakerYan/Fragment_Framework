@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class DebugFragmentRecord {
 
-	public String                    fragmentName;
+	public String fragmentName;
 
 	public List<DebugFragmentRecord> childFragmentRecord;
 

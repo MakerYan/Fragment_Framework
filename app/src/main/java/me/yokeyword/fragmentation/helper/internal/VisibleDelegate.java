@@ -28,7 +28,7 @@ public class VisibleDelegate {
 
 	private boolean mFixStatePagerAdapter;
 
-	private Bundle  mSaveInstanceState;
+	private Bundle mSaveInstanceState;
 
 	private SupportFragment mSupportFragment;
 
