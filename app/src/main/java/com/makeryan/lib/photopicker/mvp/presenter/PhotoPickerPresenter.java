@@ -18,6 +18,9 @@ import com.makeryan.lib.R;
 import com.makeryan.lib.databinding.FragmentPhotoPickerBinding;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.event.EventType;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
+import com.makeryan.lib.fragment.fragmentation.SupportActivity;
+import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.photopicker.adapter.PhotoGridBindingAdapter;
 import com.makeryan.lib.photopicker.adapter.PopupDirectoryListAdapter;
@@ -37,10 +40,6 @@ import org.greenrobot.eventbus.EventBus;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import me.yokeyword.fragmentation.ISupport;
-import me.yokeyword.fragmentation.SupportActivity;
-import me.yokeyword.fragmentation.SupportFragment;
 
 import static android.app.Activity.RESULT_OK;
 import static android.speech.RecognizerIntent.EXTRA_ORIGIN;

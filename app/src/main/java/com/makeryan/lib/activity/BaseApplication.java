@@ -15,8 +15,8 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 import com.socks.library.KLog;
 import com.zhy.autolayout.config.AutoLayoutConifg;
 
-import me.yokeyword.fragmentation.Fragmentation;
-import me.yokeyword.fragmentation.helper.ExceptionHandler;
+import com.makeryan.lib.fragment.fragmentation.Fragmentation;
+import com.makeryan.lib.fragment.fragmentation.helper.ExceptionHandler;
 
 
 /**
@@ -95,7 +95,7 @@ public class BaseApplication
 		mApplication = this;
 		Fragmentation.builder()
 					 // 设置 栈视图 模式为 悬浮球模式   SHAKE: 摇一摇唤出   NONE：隐藏
-					 .stackViewMode(Fragmentation.BUBBLE)
+					 .stackViewMode(Fragmentation.NONE)
 					 // ture时，遇到异常："Can not perform this action after onSaveInstanceState!"时，会抛出
 					 // false时，不会抛出，会捕获，可以在handleException()里监听到
 					 .debug(BuildConfig.DEBUG)

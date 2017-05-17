@@ -1,7 +1,7 @@
 package com.makeryan.lib.mvp.presenter;//package com.xiaoxixi8.shiguangji.mvp.presenter;
 
 
-import me.yokeyword.fragmentation.ISupport;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
 import rx.functions.Action0;
 import rx.functions.Action1;
 

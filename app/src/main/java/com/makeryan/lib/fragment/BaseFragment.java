@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 
 import com.makeryan.lib.R;
 import com.makeryan.lib.event.EventBean;
+import com.makeryan.lib.fragment.fragmentation.SupportFragment;
+import com.makeryan.lib.fragment.fragmentation_swipeback.SwipeBackFragment;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.util.GlobUtils;
 import com.makeryan.lib.util.StatusBarUtil;
@@ -23,9 +25,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Field;
-
-import me.yokeyword.fragmentation.SupportFragment;
-import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 
 /**
@@ -93,12 +92,24 @@ public abstract class BaseFragment
 	}
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
+	public void onResume() {
 
-		super.onViewCreated(
-				view,
-				savedInstanceState
-						   );
+		super.onResume();
+		if (getStatusColor() != 0) {
+			StatusBarUtil.setColor(
+					_mActivity,
+					_mActivity.getResources()
+							  .getColor(getStatusColor()),
+					getStatusAlpha()
+								  );
+		}
+	}
+
+	@Override
+	public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+
+		super.onLazyInitView(savedInstanceState);
+		View view = getView();
 		//这里已经做了返回键的处理
 		Toolbar toolbar = getToolbar(view);
 		if (toolbar != null) {
@@ -117,26 +128,6 @@ public abstract class BaseFragment
 		assignViews(view);
 		registerListeners();
 		doAction();
-	}
-
-	@Override
-	public void onStart() {
-
-		super.onStart();
-	}
-
-	@Override
-	public void onResume() {
-
-		super.onResume();
-		if (getStatusColor() != 0) {
-			StatusBarUtil.setColor(
-					_mActivity,
-					_mActivity.getResources()
-							  .getColor(getStatusColor()),
-					getStatusAlpha()
-								  );
-		}
 	}
 
 	@Override

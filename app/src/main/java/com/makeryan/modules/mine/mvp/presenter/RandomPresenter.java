@@ -9,7 +9,7 @@ import com.makeryan.modules.mine.ui.fragment.RandomFragment;
 
 import java.util.Random;
 
-import me.yokeyword.fragmentation.ISupport;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
 
 
 /**

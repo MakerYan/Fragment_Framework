@@ -12,7 +12,7 @@ import com.makeryan.lib.event.EventType;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.modules.main.ui.fragment.MainFragment;
 
-import me.yokeyword.fragmentation.SupportFragment;
+import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 
 public class ContainerActivity
 		extends BaseActivity {

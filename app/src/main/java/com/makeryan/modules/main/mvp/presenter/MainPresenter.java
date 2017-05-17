@@ -3,7 +3,7 @@ package com.makeryan.modules.main.mvp.presenter;
 import com.makeryan.lib.databinding.FragmentMainBinding;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 
-import me.yokeyword.fragmentation.ISupport;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
 
 
 /**

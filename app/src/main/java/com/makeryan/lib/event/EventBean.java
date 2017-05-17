@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-import me.yokeyword.fragmentation.SupportFragment;
+import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 
 /**
  * Created by MakerYan on 16/9/20 14:08.

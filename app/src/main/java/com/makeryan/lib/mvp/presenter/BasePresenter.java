@@ -30,9 +30,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import me.yokeyword.fragmentation.ISupport;
-import me.yokeyword.fragmentation.SupportActivity;
-import me.yokeyword.fragmentation.SupportFragment;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
+import com.makeryan.lib.fragment.fragmentation.SupportActivity;
+import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;

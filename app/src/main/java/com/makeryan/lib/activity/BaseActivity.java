@@ -4,15 +4,17 @@ import android.content.Intent;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.makeryan.lib.R;
 import com.makeryan.lib.event.EventBean;
+import com.makeryan.lib.fragment.fragmentation.SupportActivity;
+import com.makeryan.lib.fragment.fragmentation.SupportFragment;
+import com.makeryan.lib.fragment.fragmentation.helper.FragmentLifecycleCallbacks;
+import com.makeryan.lib.fragment.fragmentation_swipeback.SwipeBackActivity;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.util.StatusBarUtil;
 import com.socks.library.KLog;
@@ -20,11 +22,6 @@ import com.socks.library.KLog;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import me.yokeyword.fragmentation.SupportActivity;
-import me.yokeyword.fragmentation.SupportFragment;
-import me.yokeyword.fragmentation.helper.FragmentLifecycleCallbacks;
-import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
 /**
  * Created by MakerYan on 16/3/31 16:55.
@@ -80,7 +77,7 @@ public abstract class BaseActivity
 			public void onFragmentSaveInstanceState(SupportFragment fragment, Bundle outState) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onSaveInstanceState()");
+							   .getSimpleName() + " called onSaveInstanceState()");
 			}
 
 			/**
@@ -93,7 +90,7 @@ public abstract class BaseActivity
 			public void onFragmentEnterAnimationEnd(SupportFragment fragment, Bundle savedInstanceState) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onEnterAnimationEnd()");
+							   .getSimpleName() + " called onEnterAnimationEnd()");
 			}
 
 			/**
@@ -106,7 +103,7 @@ public abstract class BaseActivity
 			public void onFragmentLazyInitView(SupportFragment fragment, Bundle savedInstanceState) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onLazyInitView()");
+							   .getSimpleName() + " called onLazyInitView()");
 			}
 
 			/**
@@ -118,7 +115,7 @@ public abstract class BaseActivity
 			public void onFragmentSupportVisible(SupportFragment fragment) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onSupportVisible()");
+							   .getSimpleName() + " called onSupportVisible()");
 			}
 
 			/**
@@ -130,7 +127,7 @@ public abstract class BaseActivity
 			public void onFragmentSupportInvisible(SupportFragment fragment) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onSupportInvisible()");
+							   .getSimpleName() + " called onSupportInvisible()");
 			}
 
 			/**
@@ -142,7 +139,7 @@ public abstract class BaseActivity
 			public void onFragmentAttached(SupportFragment fragment) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onAttach()");
+							   .getSimpleName() + " called onAttach()");
 			}
 
 			/**
@@ -155,7 +152,7 @@ public abstract class BaseActivity
 			public void onFragmentCreated(SupportFragment fragment, Bundle savedInstanceState) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onCreate()");
+							   .getSimpleName() + " called onCreate()");
 			}
 
 			/**
@@ -168,7 +165,7 @@ public abstract class BaseActivity
 			public void onFragmentViewCreated(SupportFragment fragment, Bundle savedInstanceState) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called ViewCreated()");
+							   .getSimpleName() + " called ViewCreated()");
 			}
 
 			/**
@@ -181,7 +178,7 @@ public abstract class BaseActivity
 			public void onFragmentActivityCreated(SupportFragment fragment, Bundle savedInstanceState) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onActivityCreated()");
+							   .getSimpleName() + " called onActivityCreated()");
 			}
 
 			/**
@@ -193,7 +190,7 @@ public abstract class BaseActivity
 			public void onFragmentStarted(SupportFragment fragment) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onStart()");
+							   .getSimpleName() + " called onStart()");
 			}
 
 			/**
@@ -205,7 +202,7 @@ public abstract class BaseActivity
 			public void onFragmentResumed(SupportFragment fragment) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onResume()");
+							   .getSimpleName() + " called onResume()");
 			}
 
 			/**
@@ -217,7 +214,7 @@ public abstract class BaseActivity
 			public void onFragmentPaused(SupportFragment fragment) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onPause()");
+							   .getSimpleName() + " called onPause()");
 			}
 
 			/**
@@ -229,7 +226,7 @@ public abstract class BaseActivity
 			public void onFragmentStopped(SupportFragment fragment) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onStop()");
+							   .getSimpleName() + " called onStop()");
 			}
 
 			/**
@@ -241,7 +238,7 @@ public abstract class BaseActivity
 			public void onFragmentDestroyView(SupportFragment fragment) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onDestroyView()");
+							   .getSimpleName() + " called onDestroyView()");
 			}
 
 			/**
@@ -253,7 +250,7 @@ public abstract class BaseActivity
 			public void onFragmentDestroyed(SupportFragment fragment) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onDestroy()");
+							   .getSimpleName() + " called onDestroy()");
 			}
 
 			/**
@@ -265,7 +262,7 @@ public abstract class BaseActivity
 			public void onFragmentDetached(SupportFragment fragment) {
 
 				KLog.d(fragment.getClass()
-							   .getSimpleName() + "called onDetach()");
+							   .getSimpleName() + " called onDetach()");
 			}
 		});
 	}
@@ -317,19 +314,6 @@ public abstract class BaseActivity
 	}
 
 	@Override
-	protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-
-		super.onPostCreate(savedInstanceState);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		return super.onCreateOptionsMenu(menu);
-	}
-
-
-	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 
 		if (getToolbar() != null) {
@@ -347,13 +331,6 @@ public abstract class BaseActivity
 
 		return super.onOptionsItemSelected(item);
 	}
-
-	@Override
-	public boolean isFinishing() {
-
-		return super.isFinishing();
-	}
-
 	@Override
 	public void finish() {
 
@@ -361,12 +338,6 @@ public abstract class BaseActivity
 			getPresenter().finish();
 		}
 		super.finish();
-	}
-
-	@Override
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-
-		return super.dispatchTouchEvent(ev);
 	}
 
 	/**

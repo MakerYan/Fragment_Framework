@@ -9,7 +9,7 @@ import com.makeryan.lib.photopicker.fragment.ImagePagerFragment;
 
 import java.util.ArrayList;
 
-import me.yokeyword.fragmentation.ISupport;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
 
 /**
  * Created by Donglua on 16/6/25.

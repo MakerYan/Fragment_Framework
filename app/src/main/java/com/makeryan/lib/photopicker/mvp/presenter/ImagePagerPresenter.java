@@ -17,7 +17,7 @@ import com.nineoldandroids.view.ViewPropertyAnimator;
 
 import java.util.ArrayList;
 
-import me.yokeyword.fragmentation.ISupport;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
 
 import static com.makeryan.lib.photopicker.PhotoPreview.ARG_CURRENT_ITEM;
 import static com.makeryan.lib.photopicker.PhotoPreview.ARG_HAS_ANIM;
