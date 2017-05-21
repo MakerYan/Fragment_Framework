@@ -21,12 +21,14 @@ public class MessageVO
 
 	public String content2;
 
+	public String content3;
+
 	private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
 
 	@Override
 	public String toString() {
 
-		return "MessageVO{" + "content1='" + content1 + '\'' + ", content2='" + content2 + '\'' + "} " + super.toString();
+		return "MessageVO{" + "content1='" + content1 + '\'' + ", content2='" + content2 + '\'' + ", content3='" + content3 + '\'' + "} " + super.toString();
 	}
 
 	@Bindable
@@ -51,6 +53,18 @@ public class MessageVO
 
 		this.content2 = content2;
 		notifyChange(BR.content2);
+	}
+
+	@Bindable
+	public String getContent3() {
+
+		return content3;
+	}
+
+	public void setContent3(String content3) {
+
+		this.content3 = content3;
+		notifyChange(BR.content3);
 	}
 
 	private void notifyChange(int propertyId) {

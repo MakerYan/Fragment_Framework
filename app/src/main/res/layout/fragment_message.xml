@@ -34,34 +34,60 @@
 				/>
 		</com.zhy.autolayout.widget.AutoToolbar>
 
-		<TextView
+		<com.makeryan.lib.widget.NestedScrollView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center"
-			android:gravity="center"
-			android:padding="30px"
-			android:text="Message Fragment Page"
-			/>
+			>
 
-		<Button
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:onClick="@{v -> listener.startSibling()}"
-			android:text="启动一个同级页面"
-			/>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical"
+				>
 
-		<Button
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:onClick="@{v -> listener.startSibling(bean)}"
-			android:text="启动一个同级页面并实时刷新主页面数据"
-			/>
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:gravity="center"
+					android:padding="30px"
+					android:text="Message Fragment Page"
+					/>
 
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:padding="50px"
-			android:text="@{bean.content1}"
-			/>
+				<Button
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:onClick="@{v -> listener.startSibling()}"
+					android:text="启动一个同级页面"
+					/>
+
+				<Button
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:onClick="@{v -> listener.startSibling(bean)}"
+					android:text="启动一个同级页面并实时刷新主页面数据"
+					/>
+
+				<Button
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@{bean.content2}"
+					/>
+
+				<Button
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@{bean.content3}"
+					/>
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="50px"
+					android:text="@{bean.content1}"
+					/>
+			</LinearLayout>
+		</com.makeryan.lib.widget.NestedScrollView>
+
 	</LinearLayout>
 </layout>

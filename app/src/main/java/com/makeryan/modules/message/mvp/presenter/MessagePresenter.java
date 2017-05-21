@@ -4,14 +4,14 @@ import com.makeryan.lib.BR;
 import com.makeryan.lib.databinding.FragmentMessageBinding;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.event.EventType;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
+import com.makeryan.modules.MyNdk;
 import com.makeryan.modules.message.listeners.MessageListener;
 import com.makeryan.modules.message.ui.fragment.SiblingFragment;
 import com.makeryan.modules.message.vo.MessageVO;
 
 import org.greenrobot.eventbus.EventBus;
-
-import com.makeryan.lib.fragment.fragmentation.ISupport;
 
 
 /**
@@ -50,9 +50,13 @@ public class MessagePresenter
 	public void init(FragmentMessageBinding binding) {
 
 		mBinding = binding;
+		MyNdk     myNdk     = new MyNdk();
+		MessageVO messageVO = new MessageVO();
+		messageVO.setContent2(MyNdk.getStaticMessage());
+		messageVO.setContent3(myNdk.getMessage());
 		binding.setVariable(
 				BR.bean,
-				new MessageVO()
+				messageVO
 						   );
 		binding.setVariable(
 				BR.listener,

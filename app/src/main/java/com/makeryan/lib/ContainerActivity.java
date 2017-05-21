@@ -9,13 +9,16 @@ import com.makeryan.lib.activity.BaseActivity;
 import com.makeryan.lib.constants.RequestCodeConstants;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.event.EventType;
+import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.modules.main.ui.fragment.MainFragment;
 
-import com.makeryan.lib.fragment.fragmentation.SupportFragment;
-
 public class ContainerActivity
 		extends BaseActivity {
+
+	static {
+		System.loadLibrary("MyNdk");
+	}
 
 	/**
 	 * 页面KEY
