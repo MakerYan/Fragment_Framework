@@ -16,10 +16,6 @@ import com.makeryan.modules.main.ui.fragment.MainFragment;
 public class ContainerActivity
 		extends BaseActivity {
 
-	static {
-		System.loadLibrary("MyNdk");
-	}
-
 	/**
 	 * 页面KEY
 	 */
@@ -70,10 +66,12 @@ public class ContainerActivity
 					PAGE,
 					""
 										   );
+
 			SupportFragment fragment = findFragmentByReflect(
 					name,
 					null
 															);
+
 			if (fragment == null) {
 
 				loadRootFragment(
@@ -82,10 +80,14 @@ public class ContainerActivity
 								);
 			} else {
 				fragment.setArguments(mExtras);
-				loadRootFragment(
-						R.id.container,
-						fragment
-								);
+				if (findFragment(fragment.getClass()) != null) {
+					showHideFragment(fragment);
+				} else {
+					loadRootFragment(
+							R.id.container,
+							fragment
+									);
+				}
 			}
 		}
 	}

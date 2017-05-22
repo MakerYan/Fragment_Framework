@@ -6,7 +6,7 @@ import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.event.EventType;
 import com.makeryan.lib.fragment.fragmentation.ISupport;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
-import com.makeryan.modules.MyNdk;
+import com.makeryan.modules.jnis.Mk;
 import com.makeryan.modules.message.listeners.MessageListener;
 import com.makeryan.modules.message.ui.fragment.SiblingFragment;
 import com.makeryan.modules.message.vo.MessageVO;
@@ -50,9 +50,9 @@ public class MessagePresenter
 	public void init(FragmentMessageBinding binding) {
 
 		mBinding = binding;
-		MyNdk     myNdk     = new MyNdk();
+		Mk     myNdk     = new Mk();
 		MessageVO messageVO = new MessageVO();
-		messageVO.setContent2(MyNdk.getStaticMessage());
+		messageVO.setContent2(Mk.getStaticMessage());
 		messageVO.setContent3(myNdk.getMessage());
 		binding.setVariable(
 				BR.bean,

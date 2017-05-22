@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context="com.makeryan.anotherapp.MainActivity"
+	>
+
+	<LinearLayout
+		android:layout_width="344dp"
+		android:layout_height="495dp"
+		android:orientation="vertical"
+		tools:layout_editor_absoluteX="8dp"
+		tools:layout_editor_absoluteY="8dp"
+		>
+		<!--
+		<Button
+			android:id="@+id/btnStartService"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="启动Fragment FrameWork服务"
+			/>
+
+		<Button
+			android:id="@+id/btnStopService"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="停止Fragment FrameWork服务"
+			/>
+		-->
+
+		<Button
+			android:id="@+id/btnStartExternalService"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="启动外部服务"
+			/>
+
+		<Button
+			android:id="@+id/btnStopExternalService"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="停止外部服务"
+			/>
+
+		<Button
+			android:id="@+id/btnBindExternalService"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="绑定外部服务"
+			/>
+
+		<Button
+			android:id="@+id/btnUnbindExternalService"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="解除绑定外部服务"
+			/>
+
+		<EditText
+			android:id="@+id/editText"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="默认传过去的数据"
+			/>
+
+		<Button
+			android:id="@+id/btnSync"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="同步数据到外部服务"
+			/>
+	</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

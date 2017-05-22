@@ -48,6 +48,11 @@
 				android:resource="@xml/__picker_provider_paths"/>
 		</provider>
 
+		<service
+			android:name=".services.MkService"
+			android:enabled="true"
+			android:exported="true">
+		</service>
 	</application>
 
 </manifest>
