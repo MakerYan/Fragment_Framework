@@ -1,4 +1,4 @@
-Fragment 框架: 
+Fragment 框架: \n
 全局只使用一个Activity, 所有的页面跳转全部使用Fragment;
 包含5.0+ 权限检查及权限请求跳转, 使用EventBus解耦(喜欢使用RxBus的朋友可自行更改);
 网络请求框架使用 RxJava+Retrofti2;
