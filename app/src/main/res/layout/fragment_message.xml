@@ -68,6 +68,14 @@
 					android:text="启动一个同级页面并实时刷新主页面数据"
 					/>
 
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="50px"
+					android:text="@{bean.content1}"
+					/>
+
 				<Button
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -80,11 +88,11 @@
 					android:text="@{bean.content3}"
 					/>
 
-				<TextView
+				<Button
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="50px"
-					android:text="@{bean.content1}"
+					android:onClick="@{v -> listener.showNotification()}"
+					android:text="显示notification通知"
 					/>
 			</LinearLayout>
 		</com.makeryan.lib.widget.NestedScrollView>

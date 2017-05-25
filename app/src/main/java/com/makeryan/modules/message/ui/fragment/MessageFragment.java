@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.makeryan.lib.R;
 import com.makeryan.lib.databinding.FragmentMessageBinding;
 import com.makeryan.lib.fragment.BaseFragment;
+import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.modules.message.mvp.presenter.MessagePresenter;
 
 
@@ -43,7 +44,7 @@ public class MessageFragment
 	 * @return 初始化并返回当前Presenter
 	 */
 	@Override
-	protected MessagePresenter getPresenter() {
+	public BasePresenter getPresenter() {
 
 		return mPresenter == null ?
 				mPresenter = new MessagePresenter(this) :
@@ -84,11 +85,5 @@ public class MessageFragment
 	protected void doAction() {
 
 		mPresenter.init(mBinding);
-	}
-
-	@Override
-	public void pop() {
-
-		getActivity().finish();
 	}
 }

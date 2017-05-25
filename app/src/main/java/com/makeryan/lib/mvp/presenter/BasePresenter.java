@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ArrayRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,9 @@ import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.fragment.PermissionsFragment;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
+import com.makeryan.lib.fragment.fragmentation.SupportActivity;
+import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 import com.makeryan.lib.net.Response;
 import com.makeryan.lib.util.ToastUtil;
 import com.makeryan.lib.util.adapter.CommonRecyclerViewAdapter;
@@ -30,9 +34,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.makeryan.lib.fragment.fragmentation.ISupport;
-import com.makeryan.lib.fragment.fragmentation.SupportActivity;
-import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
@@ -376,6 +377,11 @@ public abstract class BasePresenter<V extends ISupport>
 
 	}
 
+	public Object getSystemService(@NonNull String name) {
+
+		return getSupportActivity().getSystemService(name);
+	}
+
 	public void startActivity(Intent intent) {
 
 		getView().getSupportActivity()
@@ -394,7 +400,7 @@ public abstract class BasePresenter<V extends ISupport>
 
 	}
 
-	public boolean onBackPressed() {
+	public boolean onBackPressedSupport() {
 
 		return false;
 	}

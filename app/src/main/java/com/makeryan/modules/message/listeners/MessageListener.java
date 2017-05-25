@@ -16,7 +16,13 @@ public interface MessageListener<T> {
 
 	/**
 	 * 启动一个同级Fragment并实时刷新数据
+	 *
 	 * @param params
 	 */
 	void startSibling(T params);
+
+	/**
+	 * 显示一个消息推送
+	 */
+	void showNotification();
 }

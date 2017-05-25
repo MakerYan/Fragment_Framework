@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.makeryan.lib.R;
 import com.makeryan.lib.databinding.FragmentMainBinding;
 import com.makeryan.lib.fragment.BaseFragment;
+import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.pojo.TabBody;
 import com.makeryan.lib.widget.tablayout.listener.ITabBody;
@@ -19,8 +20,6 @@ import com.makeryan.modules.message.ui.fragment.MessageFragment;
 import com.makeryan.modules.mine.ui.fragment.MineFragment;
 
 import java.util.ArrayList;
-
-import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 
 
 /**
@@ -117,7 +116,7 @@ public class MainFragment
 	 * @return 初始化并返回当前Presenter
 	 */
 	@Override
-	protected BasePresenter getPresenter() {
+	public BasePresenter getPresenter() {
 
 		return mPresenter == null ?
 				mPresenter = new MainPresenter(this) :

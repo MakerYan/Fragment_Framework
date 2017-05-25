@@ -1,10 +1,9 @@
 package com.makeryan.lib.event;
 
 import com.google.gson.annotations.SerializedName;
+import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 
 import java.io.Serializable;
-
-import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 
 /**
  * Created by MakerYan on 16/9/20 14:08.
@@ -22,6 +21,9 @@ public class EventBean<T>
 	@SerializedName("targetFragment")
 	public SupportFragment targetFragment;
 
+	@SerializedName("targetFragmentByName")
+	public String targetFragmentByName;
+
 	public EventBean() {
 
 	}
@@ -30,6 +32,12 @@ public class EventBean<T>
 
 		this.tag = tag;
 		this.targetFragment = targetFragment;
+	}
+
+	public EventBean(int tag, String targetFragmentByName) {
+
+		this.tag = tag;
+		this.targetFragmentByName = targetFragmentByName;
 	}
 
 	public EventBean(int tag) {

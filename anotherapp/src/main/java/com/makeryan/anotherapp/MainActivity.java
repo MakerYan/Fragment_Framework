@@ -29,18 +29,18 @@ public class MainActivity
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		// 构建ServiceIntent对象
 		intentService = new Intent();
+		// 设置要启动/绑定的远程服务
 		intentService.setComponent(new ComponentName(
 				"com.makeryan.lib",
 				"com.makeryan.lib.services.MkService"
 		));
-
+		// 通过Intent传给远程Service的数据
 		intentService.putExtra(
 				"page",
 				"com.makeryan.modules.mine.ui.fragment.RandomFragment"
 							  );
-		//		findViewById(R.id.btnStartService).setOnClickListener(this);
-		//		findViewById(R.id.btnStopService).setOnClickListener(this);
 		findViewById(R.id.btnStartExternalService).setOnClickListener(this);
 		findViewById(R.id.btnStopExternalService).setOnClickListener(this);
 		findViewById(R.id.btnBindExternalService).setOnClickListener(this);
@@ -65,16 +65,18 @@ public class MainActivity
 			stopService(intentService);
 		} else*/
 		if (id == R.id.btnStartExternalService) {
-			startService(intentService);
+			startService(intentService); // 启动服务
 		} else if (id == R.id.btnStopExternalService) {
-			stopService(intentService);
+			stopService(intentService); // 停止服务
 		} else if (id == R.id.btnBindExternalService) {
+			// 绑定服务
 			bindService(
 					intentService,
 					this,
 					Context.BIND_AUTO_CREATE
 					   );
 		} else if (id == R.id.btnUnbindExternalService) {
+			// 解除绑定服务
 			unbindService(this);
 			mRemoteBinder = null; // 解除绑定将Binder置空
 		} else if (id == R.id.btnSync) {

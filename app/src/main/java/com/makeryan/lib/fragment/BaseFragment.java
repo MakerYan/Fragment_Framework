@@ -45,6 +45,7 @@ public abstract class BaseFragment
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		EventBus.getDefault()
@@ -115,13 +116,16 @@ public abstract class BaseFragment
 		if (toolbar != null) {
 			toolbar.setTitle("");
 			toolbar.setNavigationOnClickListener(v -> {
-				BasePresenter presenter = getPresenter();
-				if (presenter != null) {
-					if (!presenter.pop()) {
-						pop();
+				SupportFragment topFragment = getTopFragment();
+				if (topFragment != null) {
+					BasePresenter presenter = topFragment.getPresenter();
+					if (presenter != null && presenter.onBackPressedSupport()) {
+						getSupportActivity().onBackPressed();
+					} else {
+						getSupportActivity().onBackPressed();
 					}
 				} else {
-					pop();
+					getSupportActivity().onBackPressed();
 				}
 			});
 		}
@@ -153,11 +157,6 @@ public abstract class BaseFragment
 	@Override
 	public boolean onBackPressedSupport() {
 
-		BasePresenter presenter = getPresenter();
-		if (presenter != null) {
-			presenter.setFragmentResult();
-			return presenter.onBackPressed();
-		}
 		return super.onBackPressedSupport();
 	}
 
@@ -232,6 +231,7 @@ public abstract class BaseFragment
 
 	@Override
 	public void pop() {
+
 		BasePresenter presenter = getPresenter();
 		if (presenter != null) {
 			presenter.setFragmentResult();
@@ -347,17 +347,17 @@ public abstract class BaseFragment
 	}
 
 	/**
+	 * @return 初始化并返回当前Presenter
+	 */
+	public abstract BasePresenter getPresenter();
+
+	/**
 	 * 加载布局之前调用
 	 */
 
 	protected void beforeSetContentView() {
 
 	}
-
-	/**
-	 * @return 初始化并返回当前Presenter
-	 */
-	protected abstract BasePresenter getPresenter();
 
 	/**
 	 * @param extras

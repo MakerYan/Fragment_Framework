@@ -22,15 +22,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.makeryan.lib.R;
+import com.makeryan.lib.fragment.fragmentation.anim.DefaultVerticalAnimator;
 import com.makeryan.lib.fragment.fragmentation.anim.FragmentAnimator;
 import com.makeryan.lib.fragment.fragmentation.debug.StackViewTouchListener;
+import com.makeryan.lib.fragment.fragmentation.helper.FragmentLifecycleCallbacks;
+import com.makeryan.lib.fragment.fragmentation.helper.internal.LifecycleHelper;
+import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.ArrayList;
-
-import com.makeryan.lib.fragment.fragmentation.anim.DefaultVerticalAnimator;
-import com.makeryan.lib.fragment.fragmentation.helper.FragmentLifecycleCallbacks;
-import com.makeryan.lib.fragment.fragmentation.helper.internal.LifecycleHelper;
 
 public class SupportActivity
 		extends AutoLayoutActivity
@@ -394,6 +394,14 @@ public class SupportActivity
 	}
 
 	@Override
+	public void startForResult(String toFragment, int requestCode) {
+
+		startForResult(
+				findFragmentByReflect(toFragment),
+				requestCode
+					  );
+	}
+
 	public void startForResult(SupportFragment toFragment, int requestCode) {
 
 		mFragmentationDelegate.dispatchStartTransaction(
@@ -453,6 +461,19 @@ public class SupportActivity
 				fragmentTag,
 				getSupportFragmentManager()
 													   );
+	}
+
+	/**
+	 * @param fragmentFullName
+	 *
+	 * @return
+	 */
+	public SupportFragment findFragmentByReflect(String fragmentFullName) {
+
+		return findFragmentByReflect(
+				fragmentFullName,
+				null
+									);
 	}
 
 	/**
@@ -788,6 +809,15 @@ public class SupportActivity
 	public boolean canSwipe() {
 
 		return true;
+	}
+
+
+	/**
+	 * 实例化Presenter
+	 */
+	public BasePresenter getPresenter() {
+
+		return null;
 	}
 
     /*--------------------Fragment专用方法start---------------------------*/

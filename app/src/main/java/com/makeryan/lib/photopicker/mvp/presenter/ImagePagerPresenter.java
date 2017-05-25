@@ -133,7 +133,7 @@ public class ImagePagerPresenter
 	}
 
 	@Override
-	public boolean onBackPressed() {
+	public boolean onBackPressedSupport() {
 
 		runExitAnimation(() -> {
 			ISupport view = getView();
@@ -141,7 +141,7 @@ public class ImagePagerPresenter
 				view.pop();
 			}
 		});
-		return super.onBackPressed();
+		return super.onBackPressedSupport();
 	}
 
 	/**

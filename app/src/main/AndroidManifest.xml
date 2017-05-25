@@ -48,11 +48,28 @@
 				android:resource="@xml/__picker_provider_paths"/>
 		</provider>
 
+		<!--remote service-->
 		<service
 			android:name=".services.MkService"
 			android:enabled="true"
 			android:exported="true">
 		</service>
+
+		<!--push service-->
+		<service
+			android:name="com.makeryan.modules.services.PushService"
+			android:enabled="true"
+			android:exported="true"
+			android:process=":push">
+		</service>
+
+		<!--notification receiver-->
+		<receiver
+			android:name="com.makeryan.modules.notifications.NotificationReceiver"
+			android:enabled="true"
+			android:exported="true"
+			android:process=":push">
+		</receiver>
 	</application>
 
 </manifest>

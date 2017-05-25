@@ -73,7 +73,7 @@ public class PermissionsFragment
 	 * @return 初始化并返回当前Presenter
 	 */
 	@Override
-	protected BasePresenter getPresenter() {
+	public BasePresenter getPresenter() {
 
 		return null;
 	}

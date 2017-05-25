@@ -20,6 +20,7 @@ import com.makeryan.lib.fragment.fragmentation.helper.internal.OnFragmentDestory
 import com.makeryan.lib.fragment.fragmentation.helper.internal.ResultRecord;
 import com.makeryan.lib.fragment.fragmentation.helper.internal.TransactionRecord;
 import com.makeryan.lib.fragment.fragmentation.helper.internal.VisibleDelegate;
+import com.makeryan.lib.mvp.presenter.BasePresenter;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -761,6 +762,15 @@ public class SupportFragment
 	}
 
 	@Override
+	public void startForResult(String toFragment, int requestCode) {
+
+		startForResult(
+				findFragmentByReflect(toFragment),
+				requestCode
+					  );
+	}
+
+	@Override
 	public void startForResult(SupportFragment toFragment, int requestCode) {
 
 		mFragmentationDelegate.dispatchStartTransaction(
@@ -849,6 +859,19 @@ public class SupportFragment
 				fragmentTag,
 				getFragmentManager()
 													   );
+	}
+
+	/**
+	 * @param fragmentFullName
+	 *
+	 * @return
+	 */
+	public SupportFragment findFragmentByReflect(String fragmentFullName) {
+
+		return findFragmentByReflect(
+				fragmentFullName,
+				null
+									);
 	}
 
 	/**
@@ -1239,5 +1262,14 @@ public class SupportFragment
 	public boolean canSwipe() {
 
 		return true;
+	}
+
+
+	/**
+	 * @return 初始化并返回当前Presenter
+	 */
+	public BasePresenter getPresenter() {
+
+		return null;
 	}
 }

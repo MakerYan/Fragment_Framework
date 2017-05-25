@@ -16,7 +16,7 @@ android {
         multiDexEnabled true
 
         ndk {
-            moduleName "MyNdk"
+            moduleName "Mk"
         }
 
         sourceSets.main {

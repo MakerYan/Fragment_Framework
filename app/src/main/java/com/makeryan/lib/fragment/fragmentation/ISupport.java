@@ -124,6 +124,16 @@ public interface ISupport {
 	void startForResult(SupportFragment toFragment, int requestCode);
 
 	/**
+	 * 类似startActivityForResult
+	 *
+	 * @param toFragment
+	 * 		目标Fragment
+	 * @param requestCode
+	 * 		requsetCode
+	 */
+	void startForResult(String toFragment, int requestCode);
+
+	/**
 	 * 启动目标Fragment,并pop当前Fragment
 	 *
 	 * @param toFragment
@@ -156,6 +166,14 @@ public interface ISupport {
 
 	/**
 	 * @param fragmentFullName
+	 *
+	 * @return
+	 */
+	SupportFragment findFragmentByReflect(String fragmentFullName);
+
+	/**
+	 * @param fragmentFullName
+	 * @param bundle
 	 *
 	 * @return
 	 */

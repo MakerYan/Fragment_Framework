@@ -45,7 +45,7 @@ public class SiblingFragment
 	 * @return 初始化并返回当前Presenter
 	 */
 	@Override
-	protected BasePresenter getPresenter() {
+	public BasePresenter getPresenter() {
 
 		return mPresenter == null ?
 				mPresenter = new SiblingPresenter(this) :

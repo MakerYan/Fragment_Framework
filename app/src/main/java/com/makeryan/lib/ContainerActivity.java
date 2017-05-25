@@ -6,9 +6,6 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 
 import com.makeryan.lib.activity.BaseActivity;
-import com.makeryan.lib.constants.RequestCodeConstants;
-import com.makeryan.lib.event.EventBean;
-import com.makeryan.lib.event.EventType;
 import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.modules.main.ui.fragment.MainFragment;
@@ -92,6 +89,11 @@ public class ContainerActivity
 		}
 	}
 
+	@Override
+	protected void onStart() {
+
+		super.onStart();
+	}
 
 	/**
 	 * 实例化Presenter
@@ -126,17 +128,6 @@ public class ContainerActivity
 	@Override
 	protected void doAction() {
 
-	}
-
-	@Override
-	public void onEventBus(EventBean event) {
-
-		if (event.getTag() == EventType.TARGET_FRAGMENT_IN_MAIN) {
-			startForResult(
-					event.targetFragment,
-					RequestCodeConstants.MAIN_TO_TARGET_FRAGMENT
-						  );
-		}
 	}
 
 	@Override

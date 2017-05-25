@@ -8,7 +8,7 @@
  */
 JNIEXPORT jstring JNICALL Java_com_makeryan_modules_jnis_Mk_getStaticMessage
         (JNIEnv *env, jclass) {
-    return env->NewStringUTF("静态方法获取到的Message");
+    return env->NewStringUTF("JNI静态方法获取到的Message");
 }
 
 /*
@@ -18,5 +18,5 @@ JNIEXPORT jstring JNICALL Java_com_makeryan_modules_jnis_Mk_getStaticMessage
  */
 JNIEXPORT jstring JNICALL Java_com_makeryan_modules_jnis_Mk_getMessage
         (JNIEnv *env, jobject) {
-    return env->NewStringUTF("非静态方法获取到的Message");
+    return env->NewStringUTF("JNI非静态方法获取到的Message");
 }

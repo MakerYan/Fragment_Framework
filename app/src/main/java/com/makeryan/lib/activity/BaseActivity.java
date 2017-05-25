@@ -331,6 +331,7 @@ public abstract class BaseActivity
 
 		return super.onOptionsItemSelected(item);
 	}
+
 	@Override
 	public void finish() {
 
@@ -466,10 +467,7 @@ public abstract class BaseActivity
 	 */
 	protected void setNavigationOnClickListener(View view) {
 
-		SupportFragment topFragment = getTopFragment();
-		if (topFragment != null && !topFragment.onBackPressedSupport()) {
-			topFragment.pop();
-		}
+		onBackPressed();
 	}
 
 	/**

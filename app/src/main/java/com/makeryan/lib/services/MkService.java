@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
 
 public class MkService
 		extends Service {
@@ -64,8 +63,7 @@ public class MkService
 		releaseTaskSubscription();
 		mTaskSubscription = Observable.interval(
 				1000,
-				TimeUnit.MILLISECONDS,
-				AndroidSchedulers.mainThread()
+				TimeUnit.MILLISECONDS
 											   )
 									  .subscribe(new Subscriber<Long>() {
 

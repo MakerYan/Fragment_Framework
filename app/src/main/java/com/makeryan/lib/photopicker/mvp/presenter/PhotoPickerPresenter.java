@@ -359,10 +359,10 @@ public class PhotoPickerPresenter
 	}
 
 	@Override
-	public boolean onBackPressed() {
+	public boolean onBackPressedSupport() {
 
 		getSupportActivity().finish();
-		return super.onBackPressed();
+		return super.onBackPressedSupport();
 	}
 
 	/**
