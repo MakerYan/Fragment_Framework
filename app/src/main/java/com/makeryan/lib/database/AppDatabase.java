@@ -1,6 +1,9 @@
 package com.makeryan.lib.database;
 
+import com.makeryan.modules.database.UserInfo;
 import com.raizlabs.android.dbflow.annotation.Database;
+import com.raizlabs.android.dbflow.annotation.Migration;
+import com.raizlabs.android.dbflow.sql.migration.AlterTableMigration;
 
 /**
  * Created by MakerYan on 2017/4/12 11:29.
@@ -17,13 +20,13 @@ public class AppDatabase {
 
 	//数据库版本号
 	public static final int VERSION = 1;
-/*
+
 	@Migration(version = AppDatabase.VERSION, database = AppDatabase.class)
 	public static class Migration2Add
-			extends AlterTableMigration<DataCache> {
+			extends AlterTableMigration<UserInfo> {
 
 
-		public Migration2Add(Class<DataCache> table) {
+		public Migration2Add(Class<UserInfo> table) {
 
 			super(table);
 		}
@@ -31,10 +34,6 @@ public class AppDatabase {
 		@Override
 		public void onPreMigrate() {
 
-			addColumn(
-					SQLiteType.REAL,
-					"save_add"
-					 );
 		}
-	}*/
+	}
 }

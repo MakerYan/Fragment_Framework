@@ -6,6 +6,7 @@ import com.makeryan.lib.BR;
 import com.makeryan.lib.databinding.FragmentMineBinding;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.event.EventType;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.modules.mine.ui.fragment.RandomFragment;
 
@@ -13,15 +14,13 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.Random;
 
-import com.makeryan.lib.fragment.fragmentation.ISupport;
-
-
 /**
- * Created by MakerYan on 2017/5/16 10:11.
+ * 我的
+ * Created by MakerYan on 2017/6/1 22:46.
+ * Modify by MakerYan on 2017/6/1 22:46.
  * Email : light.yan@qq.com
- * Personal e-mail : light.yan@qq.com
- * project name : Fragment_Framework
- * package name : com.makeryan.modules.message.mvp.presenter
+ * project name : shanghaixuankai_android
+ * package name : com.makeryan.modules.user.mvp.presenter
  */
 public class MinePresenter
 		extends BasePresenter {

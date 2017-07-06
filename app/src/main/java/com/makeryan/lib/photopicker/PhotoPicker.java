@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import com.makeryan.lib.ContainerActivity;
+import com.makeryan.lib.activity.ContainerActivity;
 import com.makeryan.lib.photopicker.fragment.PhotoPickerFragment;
 import com.makeryan.lib.photopicker.utils.PermissionsUtils;
 

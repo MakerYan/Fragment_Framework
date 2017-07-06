@@ -1,11 +1,12 @@
 <resources>
 
 	<!-- Base application theme. -->
-	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+	<style name="AppTheme" parent="AppTheme.Base">
 		<!-- Customize your theme here. -->
-		<item name="colorPrimary">@color/colorPrimary</item>
-		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-		<item name="colorAccent">@color/colorAccent</item>
+	</style>
+
+	<style name="TransparentStatusBar" parent="AppTheme.Base">
+		<!-- Customize your theme here. -->
 	</style>
 
 	<style name="AppTheme.NoActionBar">
@@ -27,30 +28,34 @@
 		<!--if you don't set this the background will be black when you slide.-->
 		<item name="android:windowIsTranslucent">true</item>
 		<!--set the right in/out animation of Activity,you can change this to yours-->
-		<item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
-		<item name="android:clickable">true</item>
+		<item name="android:windowAnimationStyle">@style/SlideRightAnimation
+		</item>
 	</style>
 
 
 	<style name="ToolbarStyle">
 		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">120px</item>
+		<item name="android:layout_height">130px</item>
+		<item name="android:paddingTop">30px</item>
 		<item name="android:background">@color/colorPrimary</item>
 		<item name="navigationIcon">@drawable/navigationbar_back</item>
-		<item name="maxButtonHeight">120px</item>
+		<item name="maxButtonHeight">88px</item>
 		<item name="title">" "</item>
 		<item name="android:title">" "</item>
 		<item name="android:id">@+id/toolbar</item>
 		<item name="layout_auto_basewidth">height</item>
+		<item name="android:layout_centerVertical">false</item>
+		<item name="android:gravity">bottom</item>
 	</style>
 	<!--Toolbar 中间title-->
 	<style name="ToolbarCenterTitle">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">match_parent</item>
-		<item name="android:textSize">48px</item>
-		<item name="android:textColor">@color/cl_313133</item>
+		<item name="android:textSize">@dimen/text_size_xlarge</item>
+		<item name="android:textColor">@color/cl_ffffffff</item>
+		<item name="android:layout_marginTop">12px</item>
 		<item name="android:gravity">center</item>
-		<item name="android:id">@+id/tv_center_title</item>
+		<item name="android:id">@+id/tvCenterTitle</item>
 		<item name="android:textStyle">normal</item>
 		<item name="android:layout_gravity">center</item>
 	</style>
@@ -64,7 +69,7 @@
 		<item name="android:gravity">center</item>
 		<item name="android:paddingLeft">24px</item>
 		<item name="android:paddingRight">24px</item>
-		<item name="android:textColor">@color/color_4d000000</item>
+		<item name="android:textColor">@color/cl_ffffffff</item>
 		<item name="android:textSize">30px</item>
 	</style>
 
@@ -76,26 +81,28 @@
 		<item name="android:scaleType">centerInside</item>
 	</style>
 
-	<!--我  页面中  好友印象  style-->
-	<style name="MyStyle_" parent="MyStyle_B">
-		<item name="android:drawableRight">@drawable/view_detail_normal</item>
-	</style>
-
-
 	<!--滑动关闭动画-->
 	<style name="SlideRightAnimation" parent="@android:style/Animation.Activity">
-		<item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
-		<item name="android:activityOpenExitAnimation">@anim/slide_out_right</item>
-		<item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>
-		<item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+		<item name="android:activityOpenEnterAnimation">@anim/slide_in_right
+		</item>
+		<item name="android:activityOpenExitAnimation">@anim/slide_out_right
+		</item>
+		<item name="android:activityCloseEnterAnimation">@anim/slide_in_right
+		</item>
+		<item name="android:activityCloseExitAnimation">@anim/slide_out_right
+		</item>
 		<item name="android:taskOpenEnterAnimation">@anim/slide_in_right</item>
 		<item name="android:taskOpenExitAnimation">@anim/slide_out_right</item>
 		<item name="android:taskCloseEnterAnimation">@anim/slide_in_right</item>
 		<item name="android:taskCloseExitAnimation">@anim/slide_out_right</item>
-		<item name="android:taskToFrontEnterAnimation">@anim/slide_in_right</item>
-		<item name="android:taskToFrontExitAnimation">@anim/slide_out_right</item>
-		<item name="android:taskToBackEnterAnimation">@anim/slide_in_right</item>
-		<item name="android:taskToBackExitAnimation">@anim/slide_out_right</item>
+		<item name="android:taskToFrontEnterAnimation">@anim/slide_in_right
+		</item>
+		<item name="android:taskToFrontExitAnimation">@anim/slide_out_right
+		</item>
+		<item name="android:taskToBackEnterAnimation">@anim/slide_in_right
+		</item>
+		<item name="android:taskToBackExitAnimation">@anim/slide_out_right
+		</item>
 	</style>
 
 
@@ -106,44 +113,6 @@
 		<item name="android:paddingLeft">40px</item>
 		<item name="android:paddingRight">40px</item>
 	</style>
-
-	<!--我和好友 页面中的ITEM-->
-	<style name="Style__">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">120px</item>
-		<item name="android:gravity">center_vertical</item>
-		<item name="android:paddingLeft">80px</item>
-		<item name="android:paddingRight">80px</item>
-		<item name="android:textColor">@color/color_80313133_selector</item>
-		<item name="android:textSize">30px</item>
-		<item name="android:drawableRight">@drawable/view_detail_normal</item>
-	</style>
-
-	<!--隐私和通知 checkbox-->
-	<style name="Style_A">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">120px</item>
-		<item name="android:button">@null</item>
-		<item name="android:drawableRight">@drawable/switch_selector</item>
-		<item name="android:gravity">center_vertical</item>
-		<item name="android:paddingLeft">60px</item>
-		<item name="android:paddingRight">60px</item>
-		<item name="android:textColor">@color/cl_313133</item>
-		<item name="android:textSize">30px</item>
-	</style>
-
-
-	<!--隐私和通知 TextView-->
-	<style name="MyStyle_B">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">120px</item>
-		<item name="android:gravity">center_vertical</item>
-		<item name="android:paddingLeft">60px</item>
-		<item name="android:paddingRight">60px</item>
-		<item name="android:textSize">30px</item>
-		<item name="android:textColor">@color/color_4d313133</item>
-	</style>
-
 
 	<style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
 		<item name="android:background">@drawable/background_tablayout</item>
@@ -198,4 +167,92 @@
 		<attr name="gifViewStyle" format="reference"/>
 	</declare-styleable>
 
+	<style name="popupAnimation" parent="android:Animation">
+		<item name="android:windowEnterAnimation">@anim/in</item>
+		<item name="android:windowExitAnimation">@anim/out</item>
+	</style>
+
+
+	<style name="menu_left_text_style">
+		<item name="android:textColor">#404b64</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:layout_marginLeft">16dp</item>
+		<item name="android:layout_height">40dp</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_alignParentLeft">true</item>
+		<item name="android:layout_centerVertical">true</item>
+	</style>
+
+
+	<style name="menu_left_text_stylet">
+		<item name="android:textColor">#404b64</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:layout_marginLeft">16dp</item>
+		<item name="android:layout_height">35dp</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_alignParentLeft">true</item>
+		<item name="android:layout_centerVertical">true</item>
+	</style>
+
+	<style name="small_menu_left_text_style">
+		<item name="android:textColor">#404b64</item>
+		<item name="android:textSize">14sp</item>
+		<item name="android:layout_marginLeft">22dp</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_alignParentLeft">true</item>
+		<item name="android:layout_centerVertical">true</item>
+	</style>
+
+	<style name="top_category_scroll_view_item_text">
+		<item name="android:textSize">18.0sp</item>
+		<item name="android:gravity">center</item>
+	</style>
+
+
+	<!-- Dialog 背景透明-->
+	<style name="Translucent_NoTitle" parent="android:style/Theme.Dialog">
+		<item name="android:background">#00000000</item> <!-- 设置自定义布局的背景透明 -->
+		<item name="android:windowBackground">@android:color/transparent
+		</item>  <!-- 设置window背景透明，也就是去边框 -->
+	</style>
+
+
+	<style name="cart_dialog" parent="@android:style/Theme.Holo.Light.Dialog">
+		<item name="android:windowFrame">@null</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:backgroundDimEnabled">true</item>
+		<item name="android:backgroundDimAmount">0.6</item>
+	</style>
+
+
+	<style name="userbaseinfo_menu_left_text_style">
+		<item name="android:textColor">#404b64</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:layout_marginLeft">16dp</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_alignParentLeft">true</item>
+		<item name="android:layout_centerVertical">true</item>
+		<!--
+		<item name="android:focusableInTouchMode">true</item>
+		<item name="android:focusable">true</item>
+		-->
+	</style>
+
+
+	<style name="userbaseinfo_menu_right_text_style">
+		<item name="android:textColor">#1e2126</item>
+		<item name="android:textSize">14sp</item>
+		<item name="android:layout_marginRight">16dp</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_alignParentRight">true</item>
+		<item name="android:layout_centerVertical">true</item>
+		<item name="android:gravity">right</item>
+	</style>
 </resources>

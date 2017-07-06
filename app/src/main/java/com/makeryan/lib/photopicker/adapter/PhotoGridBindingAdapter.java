@@ -5,12 +5,12 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.jcodecraeer.xrecyclerview.SimpleViewHolder;
-import com.makeryan.lib.BR;
-import com.makeryan.lib.R;
-import com.makeryan.lib.databinding.PickerItemPhotoBinding;
 import com.makeryan.lib.photopicker.entity.Photo;
 import com.makeryan.lib.photopicker.event.Selectable;
 import com.makeryan.lib.util.adapter.CommonRecyclerViewAdapter;
+import com.makeryan.lib.BR;
+import com.makeryan.lib.R;
+import com.makeryan.lib.databinding.PickerItemPhotoBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,6 +117,22 @@ public class PhotoGridBindingAdapter
 			selectedPhotos.remove(photo.getPath());
 		} else {
 			selectedPhotos.add(photo.getPath());
+		}
+	}
+
+
+	/**
+	 * Toggle the selection status of the item at a given position
+	 *
+	 * @param path
+	 * 		Photo of the item to toggle the selection status for
+	 */
+	public void toggleSelection(String path) {
+
+		if (selectedPhotos.contains(path)) {
+			selectedPhotos.remove(path);
+		} else {
+			selectedPhotos.add(path);
 		}
 	}
 

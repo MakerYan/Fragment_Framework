@@ -2,12 +2,17 @@ package com.makeryan.lib.activity;
 
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.multidex.MultiDexApplication;
 
+import com.antfortune.freeline.FreelineCore;
 import com.hss01248.dialog.StyledDialog;
 import com.makeryan.lib.BuildConfig;
+import com.makeryan.lib.fragment.fragmentation.Fragmentation;
+import com.makeryan.lib.fragment.fragmentation.helper.ExceptionHandler;
 import com.makeryan.lib.util.GlobUtils;
 import com.makeryan.lib.util.ImageUtil;
 import com.raizlabs.android.dbflow.config.FlowConfig;
@@ -15,8 +20,8 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 import com.socks.library.KLog;
 import com.zhy.autolayout.config.AutoLayoutConifg;
 
-import com.makeryan.lib.fragment.fragmentation.Fragmentation;
-import com.makeryan.lib.fragment.fragmentation.helper.ExceptionHandler;
+import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -55,6 +60,7 @@ public class BaseApplication
 			KLog.e(activity.getComponentName()
 						   .getShortClassName() + "执行onActivityResumed");
 			GlobUtils.init(activity);
+			StyledDialog.init(activity);
 		}
 
 		@Override
@@ -92,10 +98,12 @@ public class BaseApplication
 	public void onCreate() {
 
 		super.onCreate();
+		FreelineCore.init(this);
+		StyledDialog.init(this);
 		mApplication = this;
 		Fragmentation.builder()
 					 // 设置 栈视图 模式为 悬浮球模式   SHAKE: 摇一摇唤出   NONE：隐藏
-					 .stackViewMode(Fragmentation.BUBBLE)
+					 .stackViewMode(Fragmentation.NONE)
 					 // ture时，遇到异常："Can not perform this action after onSaveInstanceState!"时，会抛出
 					 // false时，不会抛出，会捕获，可以在handleException()里监听到
 					 .debug(BuildConfig.DEBUG)
@@ -107,6 +115,7 @@ public class BaseApplication
 						 public void onException(Exception e) {
 							 // 以Bugtags为例子: 手动把捕获到的 Exception 传到 Bugtags 后台。
 							 // Bugtags.sendException(e);
+							 KLog.d(e);
 						 }
 					 })
 					 .install();
@@ -115,12 +124,13 @@ public class BaseApplication
 						.useDeviceSize()
 						.init(this);
 		FlowManager.init(new FlowConfig.Builder(this).build());
+		GlobUtils.init(this);
 		ImageUtil.init(this);
-		StyledDialog.init(this);
 		registerActivityLifecycleCallbacks(mLifecycleCallbacks);
 		//开启debug模式，方便定位错误，具体错误检查方式可以查看http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
 		//		Config.DEBUG = true;
 		//		UMShareAPI.get(this);
+		KLog.init(BuildConfig.DEBUG);
 	}
 
 	@Override
@@ -131,4 +141,29 @@ public class BaseApplication
 		ImageUtil.destroy();
 		FlowManager.destroy();
 	}
+
+	private String getAppName(int pID) {
+
+		String          processName = null;
+		ActivityManager am          = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
+		List            l           = am.getRunningAppProcesses();
+		Iterator        i           = l.iterator();
+		PackageManager  pm          = this.getPackageManager();
+		while (i.hasNext()) {
+			ActivityManager.RunningAppProcessInfo info = (ActivityManager.RunningAppProcessInfo) (i.next());
+			try {
+				if (info.pid == pID) {
+					processName = info.processName;
+					return processName;
+				}
+			} catch (Exception e) {
+				KLog.d(
+						"Process",
+						"Error>> :" + e.toString()
+					  );
+			}
+		}
+		return processName;
+	}
+
 }

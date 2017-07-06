@@ -13,9 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.jcodecraeer.xrecyclerview.SimpleViewHolder;
-import com.makeryan.lib.BR;
-import com.makeryan.lib.R;
-import com.makeryan.lib.databinding.FragmentPhotoPickerBinding;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.event.EventType;
 import com.makeryan.lib.fragment.fragmentation.ISupport;
@@ -32,8 +29,12 @@ import com.makeryan.lib.photopicker.utils.MediaStoreHelper;
 import com.makeryan.lib.photopicker.utils.PermissionsConstant;
 import com.makeryan.lib.photopicker.utils.PermissionsUtils;
 import com.makeryan.lib.util.ImageUtil;
+import com.makeryan.lib.util.ToastUtil;
 import com.makeryan.lib.util.adapter.CommonRecyclerViewAdapter;
 import com.socks.library.KLog;
+import com.makeryan.lib.BR;
+import com.makeryan.lib.R;
+import com.makeryan.lib.databinding.FragmentPhotoPickerBinding;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -46,6 +47,7 @@ import static android.speech.RecognizerIntent.EXTRA_ORIGIN;
 import static com.makeryan.lib.photopicker.PhotoPicker.DEFAULT_COLUMN_NUMBER;
 import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_GRID_COLUMN;
 import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_MAX_COUNT;
+import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_ORIGINAL_PHOTOS;
 import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_PREVIEW_ENABLED;
 import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_SHOW_CAMERA;
 import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_SHOW_GIF;
@@ -128,7 +130,9 @@ public class PhotoPickerPresenter
 						   );
 		binding.setVariable(
 				BR.selectCount,
-				0
+				mOriginalPhotos == null ?
+						0 :
+						mOriginalPhotos.size()
 						   );
 		binding.setVariable(
 				BR.listener,
@@ -148,6 +152,11 @@ public class PhotoPickerPresenter
 					mPopupAdapter.setDirectories(dirs);
 					mAdapter.setDataList(dirs.get(0)
 											 .getPhotos());
+					if (mOriginalPhotos != null) {
+						for (String selectedPath : mOriginalPhotos) {
+							mAdapter.toggleSelection(selectedPath);
+						}
+					}
 					adjustHeight();
 				}
 									 );
@@ -178,6 +187,7 @@ public class PhotoPickerPresenter
 				true
 										   );
 		mShowGif = mExtras.getBoolean(EXTRA_SHOW_GIF);
+		mOriginalPhotos = mExtras.getStringArrayList(EXTRA_ORIGINAL_PHOTOS);
 	}
 
 	private void initRecyclerView() {
@@ -191,7 +201,7 @@ public class PhotoPickerPresenter
 				this
 		);
 		mAdapter.setFcButtonStart(true);
-		mAdapter.setFcButton(mShowCamera);
+		mAdapter.setHasFcButton(mShowCamera);
 		mBinding.RVPhotos.setAdapter(mAdapter);
 
 	}
@@ -322,6 +332,11 @@ public class PhotoPickerPresenter
 							 );
 				directory.setCoverPath(path);
 				mAdapter.notifyDataSetChanged();
+				if (mOriginalPhotos != null) {
+					for (String selectedPath : mOriginalPhotos) {
+						mAdapter.toggleSelection(selectedPath);
+					}
+				}
 			}
 		}
 	}
@@ -407,6 +422,24 @@ public class PhotoPickerPresenter
 		}
 	}
 
+	/**
+	 * item 长按点击事件
+	 *
+	 * @param view
+	 * 		点击的哪个View
+	 * @param adapter
+	 * 		这个Item属于哪个Adapter
+	 * @param holder
+	 * 		{@link SimpleViewHolder ( View )}
+	 * @param position
+	 * 		点击的哪个位置
+	 * @param data
+	 */
+	@Override
+	public void onItemLongClick(View view, CommonRecyclerViewAdapter adapter, SimpleViewHolder holder, int position, Photo data) {
+
+	}
+
 	private void onCheckViewClick(SimpleViewHolder holder, int position, PhotoGridBindingAdapter inAdapter, Photo photo) {
 
 		int     selectedItemCount = inAdapter.getSelectedItemCount();
@@ -415,11 +448,19 @@ public class PhotoPickerPresenter
 			inAdapter.toggleSelection(photo);
 			photo.setChecked(!photo.isChecked());
 			inAdapter.notifyItemChanged(position);
+		} else {
+			ToastUtil.showMessage(
+					getActivity(),
+					"最多只选择" + mMaxCount + "张"
+								 );
 		}
 		mBinding.setVariable(
 				BR.selectCount,
 				inAdapter.getSelectedItemCount()
 							);
+		if (mMaxCount == 1 && inAdapter.getSelectedItemCount() != 0) {
+			mBinding.tvDone.performClick();
+		}
 	}
 
 	private void onPhotoViewClick(View view, SimpleViewHolder holder, int position, PhotoGridBindingAdapter inAdapter, Photo photo) {
@@ -427,7 +468,7 @@ public class PhotoPickerPresenter
 		boolean previewEnable = inAdapter.isPreviewEnable();
 		if (previewEnable) {
 
-			final int index = inAdapter.isFcButton() ?
+			final int index = inAdapter.isHasFcButton() ?
 					position - 1 :
 					position;
 

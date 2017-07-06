@@ -13,7 +13,6 @@ import android.widget.FrameLayout;
 
 import com.makeryan.lib.R;
 
-
 public class OutlineContainer
 		extends FrameLayout
 		implements Animatable {

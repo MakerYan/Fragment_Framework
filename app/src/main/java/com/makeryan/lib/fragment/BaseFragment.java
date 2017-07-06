@@ -12,13 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.makeryan.lib.R;
+import com.google.gson.Gson;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 import com.makeryan.lib.fragment.fragmentation_swipeback.SwipeBackFragment;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.util.GlobUtils;
-import com.makeryan.lib.util.StatusBarUtil;
+import com.makeryan.lib.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -34,6 +34,8 @@ import java.lang.reflect.Field;
 public abstract class BaseFragment
 		extends SwipeBackFragment
 		implements View.OnClickListener {
+
+	protected Gson mGson = new Gson();
 
 	protected Bundle mExtras;
 
@@ -96,14 +98,6 @@ public abstract class BaseFragment
 	public void onResume() {
 
 		super.onResume();
-		if (getStatusColor() != 0) {
-			StatusBarUtil.setColor(
-					_mActivity,
-					_mActivity.getResources()
-							  .getColor(getStatusColor()),
-					getStatusAlpha()
-								  );
-		}
 	}
 
 	@Override
@@ -157,6 +151,10 @@ public abstract class BaseFragment
 	@Override
 	public boolean onBackPressedSupport() {
 
+		BasePresenter presenter = getPresenter();
+		if (presenter != null) {
+			return presenter.onBackPressedSupport();
+		}
 		return super.onBackPressedSupport();
 	}
 
@@ -390,18 +388,13 @@ public abstract class BaseFragment
 	protected abstract ViewDataBinding initDataBinding(LayoutInflater inflater, ViewGroup parent);
 
 	/**
-	 * @return 获取状态栏颜色
-	 */
-	protected int getStatusColor() {
-
-		return 0;
-	}
-
-	/**
 	 * @return 获取当前Toolbar
 	 */
 	protected Toolbar getToolbar(View view) {
 
+		if (view == null) {
+			return null;
+		}
 		View toolbar = view.findViewById(R.id.toolbar);
 		if (toolbar != null) {
 			return (Toolbar) toolbar;
@@ -409,15 +402,6 @@ public abstract class BaseFragment
 			return null;
 		}
 	}
-
-	/**
-	 * @return Toolbar透明色
-	 */
-	protected int getStatusAlpha() {
-
-		return 0;
-	}
-
 
 	/**
 	 * 获取控件

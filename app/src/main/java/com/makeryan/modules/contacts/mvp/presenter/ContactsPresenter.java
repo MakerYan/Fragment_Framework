@@ -10,16 +10,14 @@ import com.makeryan.lib.BR;
 import com.makeryan.lib.databinding.FragmentContactsBinding;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.event.EventType;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.photopicker.PhotoPicker;
-import com.makeryan.lib.photopicker.PhotoPreview;
 import com.makeryan.lib.util.adapter.CommonRecyclerViewAdapter;
 import com.makeryan.lib.widget.DividerGridItemDecoration;
 import com.makeryan.modules.contacts.adapters.ContactsAdapter;
 
 import java.util.ArrayList;
-
-import com.makeryan.lib.fragment.fragmentation.ISupport;
 
 
 /**
@@ -76,7 +74,6 @@ public class ContactsPresenter
 				this,
 				this
 		);
-		mAdapter.setFcButton(true);
 		mAdapter.setFcButtonStart(false);
 		binding.xRV.setAdapter(mAdapter);
 		binding.xRV.setLoadingListener(this);
@@ -123,12 +120,24 @@ public class ContactsPresenter
 	public void onItemClick(View view, CommonRecyclerViewAdapter adapter, SimpleViewHolder holder, int position, String data) {
 
 		ArrayList dataList = adapter.getDataList();
-		PhotoPreview.builder()
-					.setPhotos(dataList)
-					.setCurrentItem(adapter.isFcButton() && adapter.isFcButtonStart() ?
-											position - 1 :
-											position)
-					.start(getView());
+	}
+
+	/**
+	 * item 长按点击事件
+	 *
+	 * @param view
+	 * 		点击的哪个View
+	 * @param adapter
+	 * 		这个Item属于哪个Adapter
+	 * @param holder
+	 * 		{@link SimpleViewHolder ( View )}
+	 * @param position
+	 * 		点击的哪个位置
+	 * @param data
+	 */
+	@Override
+	public void onItemLongClick(View view, CommonRecyclerViewAdapter adapter, SimpleViewHolder holder, int position, String data) {
+
 	}
 
 	@Override

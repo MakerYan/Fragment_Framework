@@ -39,7 +39,7 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	 */
 	protected int mMaxCount = Integer.MAX_VALUE;
 
-	protected boolean mIsFcButton = false;
+	protected boolean mHasFcButton = false;
 
 	protected boolean mIsFcButtonStart = false;
 
@@ -47,14 +47,14 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 
 	protected View.OnClickListener mFunctionClickListener;
 
-	public boolean isFcButton() {
+	public boolean isHasFcButton() {
 
-		return mIsFcButton;
+		return mHasFcButton;
 	}
 
-	public void setFcButton(boolean fcButton) {
+	public void setHasFcButton(boolean hasFcButton) {
 
-		mIsFcButton = fcButton;
+		mHasFcButton = hasFcButton;
 	}
 
 	public boolean isFcButtonStart() {
@@ -79,13 +79,13 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	public CommonRecyclerViewAdapter(OnRecyclerViewItemClickListener itemClickListener, boolean hasFcButton) {
 
 		this.mItemClickListener = itemClickListener;
-		this.mIsFcButton = hasFcButton;
+		this.mHasFcButton = hasFcButton;
 	}
 
 	public CommonRecyclerViewAdapter(OnRecyclerViewItemClickListener itemClickListener, boolean hasFcButton, int maxCount) {
 
 		this.mItemClickListener = itemClickListener;
-		this.mIsFcButton = hasFcButton;
+		this.mHasFcButton = hasFcButton;
 		this.mMaxCount = maxCount;
 	}
 
@@ -99,14 +99,14 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 
 		this.mItemClickListener = itemClickListener;
 		this.mFunctionClickListener = functionClickListener;
-		this.mIsFcButton = hasFcButton;
+		this.mHasFcButton = hasFcButton;
 	}
 
 	public CommonRecyclerViewAdapter(OnRecyclerViewItemClickListener itemClickListener, View.OnClickListener functionClickListener, boolean hasFcButton, int maxCount) {
 
 		this.mItemClickListener = itemClickListener;
 		this.mFunctionClickListener = functionClickListener;
-		this.mIsFcButton = hasFcButton;
+		this.mHasFcButton = hasFcButton;
 		this.mMaxCount = maxCount;
 	}
 
@@ -164,6 +164,37 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 		addDataList(dataList);
 	}
 
+	/**
+	 * 获取最后一条数据
+	 *
+	 * @return
+	 */
+	public T getLastItem() {
+
+		for (int i = mDataList.size() - 1; i >= 0; i++) {
+			int itemViewType = getItemViewType(i);
+			if (itemViewType == CHILD_TYPE) {
+				return mDataList.get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * 获取第一条数据
+	 *
+	 * @return
+	 */
+	public T getFirstItem() {
+
+		for (int i = 0; i < mDataList.size(); i++) {
+			int itemViewType = getItemViewType(i);
+			if (itemViewType == CHILD_TYPE) {
+				return mDataList.get(i);
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * 是否已有此条数据
@@ -312,7 +343,7 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 							);
 		} else if (itemViewType == GROUP_TYPE) {
 			T data;
-			if (isFcButton() && isFcButtonStart()) {
+			if (isHasFcButton() && isFcButtonStart()) {
 				holder.itemView.setTag(position - 1);
 				data = getItem(position - 1);
 			} else {
@@ -328,7 +359,7 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 						 );
 		} else if (itemViewType == CHILD_TYPE) {
 			T data;
-			if (isFcButton() && isFcButtonStart()) {
+			if (isHasFcButton() && isFcButtonStart()) {
 				holder.itemView.setTag(position - 1);
 				data = getItem(position - 1);
 			} else {
@@ -371,14 +402,14 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	public int getItemCount() {
 
 		if (mDataList == null) {
-			if (mIsFcButton) {
+			if (mHasFcButton) {
 				return 1;
 			} else {
 				return 0;
 			}
 		}
 
-		if (mIsFcButton) {
+		if (mHasFcButton) {
 
 			int count = mDataList.size() + 1;
 			if (count > mMaxCount) {
@@ -398,14 +429,14 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	public int getItemViewType(int position) {
 
 		if (mDataList == null) {
-			if (mIsFcButton) {
+			if (mHasFcButton) {
 				return FC_TYPE;
 			} else {
 				return CHILD_TYPE;
 			}
 		}
 
-		if (mIsFcButton) {
+		if (mHasFcButton) {
 			if (mIsFcButtonStart) {
 				return position == 0 ?
 						FC_TYPE :
@@ -429,6 +460,19 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 
 		this.mSelectedPosition = position;
 		notifyDataSetChanged();
+	}
+
+	/**
+	 * 设置选中Item
+	 *
+	 * @param item
+	 */
+	public void setSelected(T item) {
+
+		if (mDataList.contains(item)) {
+			this.mSelectedPosition = mDataList.indexOf(item);
+			notifyDataSetChanged();
+		}
 	}
 
 	public boolean isSelected(int position) {
@@ -551,5 +595,21 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 		 * 		数据对象
 		 */
 		void onItemClick(View view, CommonRecyclerViewAdapter adapter, SimpleViewHolder holder, int position, T data);
+
+		/**
+		 * item 长按点击事件
+		 *
+		 * @param view
+		 * 		点击的哪个View
+		 * @param adapter
+		 * 		这个Item属于哪个Adapter
+		 * @param holder
+		 * 		{@link com.jcodecraeer.xrecyclerview.SimpleViewHolder(View)}
+		 * @param position
+		 * 		点击的哪个位置
+		 * @param data
+		 * 		数据对象
+		 */
+		void onItemLongClick(View view, CommonRecyclerViewAdapter adapter, SimpleViewHolder holder, int position, T data);
 	}
 }

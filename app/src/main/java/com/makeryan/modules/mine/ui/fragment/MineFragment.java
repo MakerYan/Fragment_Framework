@@ -5,19 +5,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.makeryan.lib.R;
-import com.makeryan.lib.databinding.FragmentMineBinding;
 import com.makeryan.lib.fragment.BaseFragment;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.modules.mine.mvp.presenter.MinePresenter;
+import com.makeryan.lib.R;
+import com.makeryan.lib.databinding.FragmentMineBinding;
 
 
 /**
- * Created by MakerYan on 2017/5/16 10:07.
+ * 我的
+ * Created by MakerYan on 2017/6/1 22:46.
+ * Modify by MakerYan on 2017/6/1 22:46.
  * Email : light.yan@qq.com
- * Personal e-mail : light.yan@qq.com
- * project name : Fragment_Framework
- * package name : com.makeryan.modules.contacts.ui.fragment
+ * project name : shanghaixuankai_android
+ * package name : com.makeryan.modules.user.ui.fragment
  */
 public class MineFragment
 		extends BaseFragment {
@@ -83,13 +84,6 @@ public class MineFragment
 	 */
 	@Override
 	protected void doAction() {
-
 		mPresenter.init(mBinding);
-	}
-
-	@Override
-	public void pop() {
-
-		getActivity().finish();
 	}
 }

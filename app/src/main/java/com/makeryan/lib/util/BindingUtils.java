@@ -1,13 +1,14 @@
 package com.makeryan.lib.util;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.ViewGroup;
+import android.view.View;
+import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,6 +40,29 @@ public class BindingUtils {
 			ImageUtil.loadAsBitmap(
 					url,
 					view
+								  );
+		}
+	}
+
+	@BindingAdapter({"src"})
+	public static void src(ImageView view, Drawable url) {
+
+		if (url != null) {
+			view.setImageDrawable(url);
+		}
+	}
+
+	@BindingAdapter({
+			"src",
+			"thumbnail"
+	})
+	public static void src(ImageView view, String url, float thumbnail) {
+
+		if (!TextUtils.isEmpty(url)) {
+			ImageUtil.loadAsBitmap(
+					url,
+					view,
+					thumbnail
 								  );
 		}
 	}
@@ -100,12 +124,6 @@ public class BindingUtils {
 		}
 	}
 
-	@BindingAdapter("src")
-	public static void src(ImageView view, Drawable src) {
-
-		view.setImageDrawable(src);
-	}
-
 	@BindingAdapter({"src"})
 	public static void src(CustomShapeImageView view, String url) {
 
@@ -113,6 +131,21 @@ public class BindingUtils {
 			ImageUtil.loadAsBitmap(
 					url,
 					view
+								  );
+		}
+	}
+
+	@BindingAdapter({
+			"src",
+			"thumbnail"
+	})
+	public static void src(CustomShapeImageView view, String url, float thumbnail) {
+
+		if (!TextUtils.isEmpty(url)) {
+			ImageUtil.loadAsBitmap(
+					url,
+					view,
+					thumbnail
 								  );
 		}
 	}
@@ -127,7 +160,8 @@ public class BindingUtils {
 			view.setScaleType(scaleType);
 			ImageUtil.loadAsBitmap(
 					url,
-					view
+					view,
+					0.1f
 								  );
 		}
 	}
@@ -136,8 +170,11 @@ public class BindingUtils {
 	public static void src(CustomShapeImageView view, int url) {
 
 		if (url != 0) {
-			view.setImageDrawable(view.getResources()
-									  .getDrawable(url));
+			ImageUtil.loadAsBitmap(
+					url,
+					view,
+					0.1f
+								  );
 		}
 	}
 
@@ -151,15 +188,20 @@ public class BindingUtils {
 			view.setScaleType(scaleType);
 			ImageUtil.loadAsBitmap(
 					url,
-					view
+					view,
+					0.1f
 								  );
 		}
 	}
 
 	@BindingAdapter("src")
-	public static void src(CustomShapeImageView view, Drawable src) {
+	public static void src(CustomShapeImageView view, Drawable url) {
 
-		view.setImageDrawable(src);
+		ImageUtil.loadAsBitmap(
+				url,
+				view,
+				0.1f
+							  );
 	}
 
 	@BindingAdapter({
@@ -311,108 +353,6 @@ public class BindingUtils {
 		}
 	}
 
-	@BindingAdapter({
-			"drawableLeft",
-			"drawableWidth",
-			"drawableHeight",
-			"isCircle"
-	})
-	public static void drawableLeft(final TextView view, String url, final int drawableWidth, final int drawableHeight, final boolean isCircle) {
-
-		if (!TextUtils.isEmpty(url)) {
-			ImageUtil.getDrawableRequestBuilder(url)
-					 .into(new SimpleTarget<GlideDrawable>() {
-
-						 @Override
-						 public void onResourceReady(GlideDrawable drawable, GlideAnimation<? super GlideDrawable> glideAnimation) {
-
-							 Drawable db = isCircle ?
-									 GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(GlobUtils.drawableConvertBitmap(drawable))) :
-									 GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(
-											 GlobUtils.drawableConvertBitmap(drawable),
-											 AutoUtils.getPercentWidthSize(30)
-																							  ));
-							 db.setBounds(
-									 0,
-									 0,
-									 AutoUtils.getPercentWidthSize(drawableWidth),
-									 AutoUtils.getPercentHeightSize(drawableHeight)
-										 );
-							 view.setCompoundDrawables(
-									 db,
-									 null,
-									 null,
-									 null
-													  );
-						 }
-					 });
-		}
-	}
-
-	@BindingAdapter({
-			"drawableLeft",
-			"drawableWidth",
-			"drawableHeight",
-			"isCircle"
-	})
-	public static void drawableLeft(final TextView view, @DrawableRes int url, final int drawableWidth, final int drawableHeight, final boolean isCircle) {
-
-		if (url != 0) {
-			Context   context   = view.getContext();
-			Resources resources = context.getResources();
-			Drawable  drawable  = resources.getDrawable(url);
-			Drawable db = isCircle ?
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(GlobUtils.drawableConvertBitmap(drawable))) :
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(
-							GlobUtils.drawableConvertBitmap(drawable),
-							AutoUtils.getPercentWidthSize(30)
-																			 ));
-			db.setBounds(
-					0,
-					0,
-					AutoUtils.getPercentWidthSize(drawableWidth),
-					AutoUtils.getPercentHeightSize(drawableHeight)
-						);
-			view.setCompoundDrawables(
-					db,
-					null,
-					null,
-					null
-									 );
-		}
-	}
-
-	@BindingAdapter({
-			"drawableLeft",
-			"drawableWidth",
-			"drawableHeight",
-			"isCircle"
-	})
-	public static void drawableLeft(final TextView view, Drawable url, final int drawableWidth, final int drawableHeight, final boolean isCircle) {
-
-		if (url != null) {
-
-			Drawable db = isCircle ?
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(GlobUtils.drawableConvertBitmap(url))) :
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(
-							GlobUtils.drawableConvertBitmap(url),
-							AutoUtils.getPercentWidthSize(30)
-																			 ));
-			db.setBounds(
-					0,
-					0,
-					AutoUtils.getPercentWidthSize(drawableWidth),
-					AutoUtils.getPercentHeightSize(drawableHeight)
-						);
-			view.setCompoundDrawables(
-					db,
-					null,
-					null,
-					null
-									 );
-		}
-	}
-
 	@BindingAdapter({"drawableTop"})
 	public static void drawableTop(TextView view, int res) {
 
@@ -503,108 +443,6 @@ public class BindingUtils {
 													  );
 						 }
 					 });
-		}
-	}
-
-	@BindingAdapter({
-			"drawableTop",
-			"drawableWidth",
-			"drawableHeight",
-			"isCircle"
-	})
-	public static void drawableTop(final TextView view, String url, final int drawableWidth, final int drawableHeight, final boolean isCircle) {
-
-		if (!TextUtils.isEmpty(url)) {
-			ImageUtil.getDrawableRequestBuilder(url)
-					 .into(new SimpleTarget<GlideDrawable>() {
-
-						 @Override
-						 public void onResourceReady(GlideDrawable drawable, GlideAnimation<? super GlideDrawable> glideAnimation) {
-
-							 Drawable db = isCircle ?
-									 GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(GlobUtils.drawableConvertBitmap(drawable))) :
-									 GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(
-											 GlobUtils.drawableConvertBitmap(drawable),
-											 AutoUtils.getPercentWidthSize(30)
-																							  ));
-							 db.setBounds(
-									 0,
-									 0,
-									 AutoUtils.getPercentWidthSize(drawableWidth),
-									 AutoUtils.getPercentHeightSize(drawableHeight)
-										 );
-							 view.setCompoundDrawables(
-									 null,
-									 db,
-									 null,
-									 null
-													  );
-						 }
-					 });
-		}
-	}
-
-	@BindingAdapter({
-			"drawableTop",
-			"drawableWidth",
-			"drawableHeight",
-			"isCircle"
-	})
-	public static void drawableTop(final TextView view, @DrawableRes int url, final int drawableWidth, final int drawableHeight, final boolean isCircle) {
-
-		if (url != 0) {
-			Context   context   = view.getContext();
-			Resources resources = context.getResources();
-			Drawable  drawable  = resources.getDrawable(url);
-			Drawable db = isCircle ?
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(GlobUtils.drawableConvertBitmap(drawable))) :
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(
-							GlobUtils.drawableConvertBitmap(drawable),
-							AutoUtils.getPercentWidthSize(30)
-																			 ));
-			db.setBounds(
-					0,
-					0,
-					AutoUtils.getPercentWidthSize(drawableWidth),
-					AutoUtils.getPercentHeightSize(drawableHeight)
-						);
-			view.setCompoundDrawables(
-					null,
-					db,
-					null,
-					null
-									 );
-		}
-	}
-
-	@BindingAdapter({
-			"drawableTop",
-			"drawableWidth",
-			"drawableHeight",
-			"isCircle"
-	})
-	public static void drawableTop(final TextView view, Drawable url, final int drawableWidth, final int drawableHeight, final boolean isCircle) {
-
-		if (url != null) {
-
-			Drawable db = isCircle ?
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(GlobUtils.drawableConvertBitmap(url))) :
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(
-							GlobUtils.drawableConvertBitmap(url),
-							AutoUtils.getPercentWidthSize(30)
-																			 ));
-			db.setBounds(
-					0,
-					0,
-					AutoUtils.getPercentWidthSize(drawableWidth),
-					AutoUtils.getPercentHeightSize(drawableHeight)
-						);
-			view.setCompoundDrawables(
-					null,
-					db,
-					null,
-					null
-									 );
 		}
 	}
 
@@ -701,110 +539,6 @@ public class BindingUtils {
 		}
 	}
 
-	@BindingAdapter({
-			"drawableRight",
-			"drawableWidth",
-			"drawableHeight",
-			"isCircle"
-	})
-	public static void drawableRight(final TextView view, String url, final int drawableWidth, final int drawableHeight, final boolean isCircle) {
-
-		if (!TextUtils.isEmpty(url)) {
-			ImageUtil.getDrawableRequestBuilder(url)
-					 .into(new SimpleTarget<GlideDrawable>() {
-
-						 @Override
-						 public void onResourceReady(GlideDrawable drawable, GlideAnimation<? super GlideDrawable> glideAnimation) {
-
-							 Drawable db = isCircle ?
-									 GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(GlobUtils.drawableConvertBitmap(drawable))) :
-									 GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(
-											 GlobUtils.drawableConvertBitmap(drawable),
-											 AutoUtils.getPercentWidthSize(30)
-																							  ));
-							 db.setBounds(
-									 0,
-									 0,
-									 AutoUtils.getPercentWidthSize(drawableWidth),
-									 AutoUtils.getPercentHeightSize(drawableHeight)
-										 );
-							 view.setCompoundDrawables(
-									 null,
-									 null,
-									 db,
-									 null
-													  );
-						 }
-					 });
-		}
-	}
-
-	@BindingAdapter({
-			"drawableRight",
-			"drawableWidth",
-			"drawableHeight",
-			"isCircle"
-	})
-	public static void drawableRight(final TextView view, @DrawableRes int url, final int drawableWidth, final int drawableHeight, final boolean isCircle) {
-
-		if (url != 0) {
-			Context   context   = view.getContext();
-			Resources resources = context.getResources();
-			Drawable  drawable  = resources.getDrawable(url);
-			Drawable db = isCircle ?
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(GlobUtils.drawableConvertBitmap(drawable))) :
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(
-							GlobUtils.drawableConvertBitmap(drawable),
-							AutoUtils.getPercentWidthSize(30)
-																			 ));
-			db.setBounds(
-					0,
-					0,
-					AutoUtils.getPercentWidthSize(drawableWidth),
-					AutoUtils.getPercentHeightSize(drawableHeight)
-						);
-			view.setCompoundDrawables(
-					null,
-					null,
-					db,
-					null
-									 );
-		}
-	}
-
-	@BindingAdapter({
-			"drawableRight",
-			"drawableWidth",
-			"drawableHeight",
-			"isCircle"
-	})
-	public static void drawableRight(final TextView view, Drawable url, final int drawableWidth, final int drawableHeight, final boolean isCircle) {
-
-		if (url != null) {
-
-			Context   context   = view.getContext();
-			Resources resources = context.getResources();
-			Drawable db = isCircle ?
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(GlobUtils.drawableConvertBitmap(url))) :
-					GlobUtils.bitmapConvertDrawable(GlobUtils.makeRoundCorner(
-							GlobUtils.drawableConvertBitmap(url),
-							AutoUtils.getPercentWidthSize(30)
-																			 ));
-			db.setBounds(
-					0,
-					0,
-					AutoUtils.getPercentWidthSize(drawableWidth),
-					AutoUtils.getPercentHeightSize(drawableHeight)
-						);
-			view.setCompoundDrawables(
-					null,
-					null,
-					db,
-					null
-									 );
-		}
-	}
-
 	@BindingAdapter({"drawableBottom"})
 	public static void drawableBottom(TextView view, int res) {
 
@@ -870,6 +604,7 @@ public class BindingUtils {
 			Glide.with(relativeLayout.getContext())
 				 .load(url)
 				 .centerCrop()
+				 .thumbnail(0.2f)
 				 .crossFade()
 				 .into(new SimpleTarget<GlideDrawable>() {
 
@@ -888,6 +623,7 @@ public class BindingUtils {
 		if (!TextUtils.isEmpty(url)) {
 			Glide.with(linearLayout.getContext())
 				 .load(url)
+				 .thumbnail(0.2f)
 				 .centerCrop()
 				 .crossFade()
 				 .into(new SimpleTarget<GlideDrawable>() {
@@ -901,89 +637,127 @@ public class BindingUtils {
 		}
 	}
 
-	@BindingAdapter("layout_height")
-	public static void setLayoutHeight(RelativeLayout view, float height) {
+	@BindingAdapter({"setSpanCount"})
+	public static void setSpanCount(RecyclerView view, int spanCount) {
 
-		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		if (layoutParams == null) {
-			layoutParams = new RelativeLayout.LayoutParams(
-					ViewGroup.LayoutParams.MATCH_PARENT,
-					(int) height
-			);
-		} else {
-			layoutParams.height = (int) height;
+		RecyclerView.LayoutManager layoutManager = view.getLayoutManager();
+		if (layoutManager == null) {
+			return;
 		}
-		view.setLayoutParams(layoutParams);
+		if (layoutManager instanceof GridLayoutManager) {
+			((GridLayoutManager) layoutManager).setSpanCount(spanCount);
+			view.setLayoutManager(layoutManager);
+		}
+	}
+
+	@BindingAdapter({
+			"layout_width",
+			"layout_height"
+	})
+	public static void setLayoutParams(View view, int width, int height) {
+
+		ViewParent parent = view.getParent();
+		if (parent == null) {
+			return;
+		}
+		if (parent instanceof FrameLayout) {
+			FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) view.getLayoutParams();
+			layoutParams.width = width == 0 ?
+					FrameLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentWidthSize(width);
+			layoutParams.height = height == 0 ?
+					FrameLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentHeightSize(height);
+			view.setLayoutParams(layoutParams);
+			return;
+		}
+		if (parent instanceof RelativeLayout) {
+			RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+			layoutParams.width = width == 0 ?
+					RelativeLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentWidthSize(width);
+			layoutParams.height = height == 0 ?
+					RelativeLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentHeightSize(height);
+			view.setLayoutParams(layoutParams);
+			return;
+		}
+		if (parent instanceof LinearLayout) {
+			LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
+			layoutParams.width = width == 0 ?
+					LinearLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentWidthSize(width);
+			layoutParams.height = height == 0 ?
+					LinearLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentHeightSize(height);
+			view.setLayoutParams(layoutParams);
+			return;
+		}
+	}
+
+	@BindingAdapter({"layout_width"})
+	public static void setLayoutWidth(View view, int width) {
+
+		ViewParent parent = view.getParent();
+		if (parent == null) {
+			return;
+		}
+		if (parent instanceof FrameLayout) {
+			FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) view.getLayoutParams();
+			layoutParams.width = width == 0 ?
+					FrameLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentWidthSize(width);
+			view.setLayoutParams(layoutParams);
+			return;
+		}
+		if (parent instanceof RelativeLayout) {
+			RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+			layoutParams.width = width == 0 ?
+					RelativeLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentWidthSize(width);
+			view.setLayoutParams(layoutParams);
+			return;
+		}
+		if (parent instanceof LinearLayout) {
+			LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
+			layoutParams.width = width == 0 ?
+					LinearLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentWidthSize(width);
+			view.setLayoutParams(layoutParams);
+			return;
+		}
 	}
 
 	@BindingAdapter("layout_height")
-	public static void setLayoutHeight(LinearLayout view, int dimenHeightRes) {
+	public static void setLayoutHeight(View view, int height) {
 
-		Context                context      = view.getContext();
-		Resources              resources    = context.getResources();
-		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		if (layoutParams == null) {
-			layoutParams = new RelativeLayout.LayoutParams(
-					ViewGroup.LayoutParams.MATCH_PARENT,
-					dimenHeightRes == -2 ?
-							ViewGroup.LayoutParams.WRAP_CONTENT :
-							resources.getDimensionPixelSize(dimenHeightRes)
-			);
-		} else {
-			layoutParams.height = dimenHeightRes == -2 ?
-					ViewGroup.LayoutParams.WRAP_CONTENT :
-					resources.getDimensionPixelSize(dimenHeightRes);
+		ViewParent parent = view.getParent();
+		if (parent == null) {
+			return;
 		}
-		view.setLayoutParams(layoutParams);
-	}
-
-	@BindingAdapter("android:layout_height")
-	public static void setLayoutHeight(FrameLayout view, float height) {
-
-		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		if (layoutParams == null) {
-			layoutParams = new ViewGroup.LayoutParams(
-					ViewGroup.LayoutParams.MATCH_PARENT,
-					(int) height
-			);
-		} else {
-			layoutParams.height = (int) height;
+		if (parent instanceof FrameLayout) {
+			FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) view.getLayoutParams();
+			layoutParams.height = height == 0 ?
+					FrameLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentWidthSize(height);
+			view.setLayoutParams(layoutParams);
+			return;
 		}
-		view.setLayoutParams(layoutParams);
-	}
-
-	@BindingAdapter("layout_width")
-	public static void setLayoutWidth(ImageView view, int dimenWidth) {
-
-		Context                context      = view.getContext();
-		Resources              resources    = context.getResources();
-		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		if (layoutParams == null) {
-			layoutParams = new ViewGroup.LayoutParams(
-					AutoUtils.getPercentWidthSize(dimenWidth),
-					ViewGroup.LayoutParams.WRAP_CONTENT
-			);
-		} else {
-			layoutParams.width = AutoUtils.getPercentWidthSize(dimenWidth);
+		if (parent instanceof RelativeLayout) {
+			RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+			layoutParams.height = height == 0 ?
+					RelativeLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentWidthSize(height);
+			view.setLayoutParams(layoutParams);
+			return;
 		}
-		view.setLayoutParams(layoutParams);
-	}
-
-
-	@BindingAdapter("layout_height")
-	public static void setLayoutHeight(ImageView view, int height) {
-
-		Context                context      = view.getContext();
-		Resources              resources    = context.getResources();
-		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		if (layoutParams == null) {
-			layoutParams = new ViewGroup.LayoutParams(
-					ViewGroup.LayoutParams.WRAP_CONTENT,
-					AutoUtils.getPercentHeightSize(height)
-			);
-		} else {
-			layoutParams.height = AutoUtils.getPercentHeightSize(height);
+		if (parent instanceof LinearLayout) {
+			LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
+			layoutParams.height = height == 0 ?
+					LinearLayout.LayoutParams.MATCH_PARENT :
+					AutoUtils.getPercentWidthSize(height);
+			view.setLayoutParams(layoutParams);
+			return;
 		}
-		view.setLayoutParams(layoutParams);
 	}
 }

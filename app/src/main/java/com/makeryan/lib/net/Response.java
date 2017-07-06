@@ -13,8 +13,6 @@ import java.io.Serializable;
  * Created by MakerYan on 16/9/13 17:29.
  * Email : light.yan@qq.com
  * Personal e-mail : light.yan@qq.com
- * project name : ChengGua
- * package name : com.chenggua.cg.app.lib.net
  */
 public class Response<T>
 		extends BaseObservable
@@ -27,66 +25,57 @@ public class Response<T>
 	 * msg : string
 	 */
 
-	@SerializedName("bizCode")
-	public int bizCode;
+	@SerializedName("status")
+	public int status;
 
-	@SerializedName("code")
-	public int code;
+	@SerializedName("result")
+	public T result;
 
-	@SerializedName("data")
-	public T data;
-
-	@SerializedName("msg")
-	public String msg;
+	@SerializedName("message")
+	public String message;
 
 	private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
 
-	@Bindable
-	public int getBizCode() {
+	@Override
+	public String toString() {
 
-		return bizCode;
-	}
-
-	public void setBizCode(int bizCode) {
-
-		this.bizCode = bizCode;
-		notifyChange(BR.bizCode);
+		return "Response{" + "status=" + status + ", result=" + result + ", message='" + message + '\'' + "} " + super.toString();
 	}
 
 	@Bindable
-	public int getCode() {
+	public int getStatus() {
 
-		return code;
+		return status;
 	}
 
-	public void setCode(int code) {
+	public void setStatus(int status) {
 
-		this.code = code;
-		notifyChange(BR.code);
-	}
-
-	@Bindable
-	public T getData() {
-
-		return data;
-	}
-
-	public void setData(T data) {
-
-		this.data = data;
-		notifyChange(BR.data);
+		this.status = status;
+		notifyChange(BR.status);
 	}
 
 	@Bindable
-	public String getMsg() {
+	public T getResult() {
 
-		return msg;
+		return result;
 	}
 
-	public void setMsg(String msg) {
+	public void setResult(T result) {
 
-		this.msg = msg;
-		notifyChange(BR.msg);
+		this.result = result;
+		notifyChange(BR.result);
+	}
+
+	@Bindable
+	public String getMessage() {
+
+		return message;
+	}
+
+	public void setMessage(String message) {
+
+		this.message = message;
+		notifyChange(BR.message);
 	}
 
 	private void notifyChange(int propertyId) {
@@ -116,11 +105,5 @@ public class Response<T>
 		if (propertyChangeRegistry != null) {
 			propertyChangeRegistry.remove(callback);
 		}
-	}
-
-	@Override
-	public String toString() {
-
-		return "Response{" + "bizCode=" + bizCode + ", code=" + code + ", data=" + data + ", msg='" + msg + '\'' + ", propertyChangeRegistry=" + propertyChangeRegistry + "} " + super.toString();
 	}
 }

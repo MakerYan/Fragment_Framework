@@ -42,13 +42,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             shrinkResources true
             zipAlignEnabled true
             buildConfigField("boolean", "LOG_DEBUG", "false")
@@ -63,6 +56,29 @@ android {
             jniDebuggable true
         }
     }
+
+    dataBinding {
+        enabled true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
@@ -98,11 +114,6 @@ dependencies {
     // dbflow end
     // nineoldandroids
     compile 'com.nineoldandroids:library:2.4.0'
-    // DialogPlus start
-    testCompile 'org.mockito:mockito-core:1.9.5'
-    testCompile 'org.robolectric:robolectric:3.0'
-    testCompile 'org.assertj:assertj-core:1.7.0'
-    // DialogPlus end
     // https://github.com/Bigkoo/Android-PickerView
     compile 'com.contrarywind:Android-PickerView:3.2.3'
     // https://github.com/MakerYan/DialogUtil

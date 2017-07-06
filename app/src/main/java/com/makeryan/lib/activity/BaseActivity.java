@@ -9,15 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.makeryan.lib.R;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.fragment.fragmentation.SupportActivity;
 import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 import com.makeryan.lib.fragment.fragmentation.helper.FragmentLifecycleCallbacks;
 import com.makeryan.lib.fragment.fragmentation_swipeback.SwipeBackActivity;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
-import com.makeryan.lib.util.StatusBarUtil;
 import com.socks.library.KLog;
+import com.makeryan.lib.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -36,6 +35,7 @@ public abstract class BaseActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
+		beforeOnCreate();
 		super.onCreate(savedInstanceState);
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -62,9 +62,7 @@ public abstract class BaseActivity
 			initWidget(savedInstanceState);
 			registerListener();
 		}
-		enqueueAction(() -> {
-			doAction();
-		});
+		doAction();
 		registerFragmentLifecycleCallbacks(new FragmentLifecycleCallbacks() {
 
 			/**
@@ -277,19 +275,6 @@ public abstract class BaseActivity
 	protected void onResume() {
 
 		super.onResume();
-		enqueueAction(() -> {
-			if (getStatusColor() != 0) {
-				StatusBarUtil.setColor(
-						this,
-						getResources().getColor(getStatusColor()),
-						getStatusBarAlpha()
-									  );
-			}
-			if (getPresenter() != null) {
-				getPresenter().resume();
-			}
-		});
-
 	}
 
 	@Override
@@ -408,6 +393,10 @@ public abstract class BaseActivity
 	 */
 	public abstract BasePresenter getPresenter();
 
+	protected void beforeOnCreate() {
+
+	}
+
 	/**
 	 * 加载布局之前调用
 	 */
@@ -424,22 +413,6 @@ public abstract class BaseActivity
 	 * @return 是否使用Databinding绑定了布局
 	 */
 	protected abstract ViewDataBinding initDatabinding();
-
-	/**
-	 * @return 状态栏颜色
-	 */
-	protected int getStatusColor() {
-
-		return R.color.colorPrimaryDark;
-	}
-
-	/**
-	 * @return Toolbar透明色
-	 */
-	protected int getStatusBarAlpha() {
-
-		return 0;
-	}
 
 	/**
 	 * @return 获取当前Toolbar

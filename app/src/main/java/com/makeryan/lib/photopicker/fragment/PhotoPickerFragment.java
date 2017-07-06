@@ -6,17 +6,17 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.makeryan.lib.R;
-import com.makeryan.lib.databinding.FragmentPhotoPickerBinding;
 import com.makeryan.lib.fragment.BaseFragment;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.photopicker.mvp.presenter.PhotoPickerPresenter;
+import com.makeryan.lib.R;
+import com.makeryan.lib.databinding.FragmentPhotoPickerBinding;
 
 import java.util.ArrayList;
 
-import static android.speech.RecognizerIntent.EXTRA_ORIGIN;
 import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_GRID_COLUMN;
 import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_MAX_COUNT;
+import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_ORIGINAL_PHOTOS;
 import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_PREVIEW_ENABLED;
 import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_SHOW_CAMERA;
 import static com.makeryan.lib.photopicker.PhotoPicker.EXTRA_SHOW_GIF;
@@ -58,7 +58,7 @@ public class PhotoPickerFragment
 				maxCount
 				   );
 		args.putStringArrayList(
-				EXTRA_ORIGIN,
+				EXTRA_ORIGINAL_PHOTOS,
 				originalPhotos
 							   );
 		return newInstance(args);

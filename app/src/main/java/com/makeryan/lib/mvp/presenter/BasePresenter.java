@@ -13,29 +13,44 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.hss01248.dialog.StyledDialog;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.fragment.PermissionsFragment;
 import com.makeryan.lib.fragment.fragmentation.ISupport;
 import com.makeryan.lib.fragment.fragmentation.SupportActivity;
 import com.makeryan.lib.fragment.fragmentation.SupportFragment;
+import com.makeryan.lib.listeners.OnResponseListener;
+import com.makeryan.lib.net.API;
+import com.makeryan.lib.net.HttpUtil;
 import com.makeryan.lib.net.Response;
 import com.makeryan.lib.util.ToastUtil;
 import com.makeryan.lib.util.adapter.CommonRecyclerViewAdapter;
+import com.makeryan.modules.vo.request.SuperRequest;
+import com.makeryan.modules.vo.response.SuperResponse;
 import com.socks.library.KLog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -172,7 +187,7 @@ public abstract class BasePresenter<V extends ISupport>
 					-1
 										) == PermissionsFragment.PERMISSIONS_DENIED;
 			if (b) {
-				getView().pop();
+				getSupportActivity().onBackPressedSupport();
 			}
 		}
 	}
@@ -181,7 +196,7 @@ public abstract class BasePresenter<V extends ISupport>
 
 		// 拒绝时, 关闭页面, 缺少主要权限, 无法运行
 		if (requestCode == PermissionsFragment.REQUEST_CODE && data != null && data.getInt(PermissionsFragment.EXTRA_PERMISSIONS) == PermissionsFragment.PERMISSIONS_DENIED) {
-			getView().pop();
+			getSupportActivity().onBackPressedSupport();
 		}
 	}
 
@@ -203,11 +218,6 @@ public abstract class BasePresenter<V extends ISupport>
 
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 
-	}
-
-	public boolean pop() {
-
-		return false;
 	}
 
 	/**
@@ -347,11 +357,6 @@ public abstract class BasePresenter<V extends ISupport>
 
 	}
 
-	protected void onCreateStatusUI(String status, View statusView) {
-		// TODO: 16/12/3 子类必需带有super
-		setViewClickListener(statusView);
-	}
-
 	protected void setViewClickListener(View statusView) {
 
 		if (statusView instanceof ViewGroup) {
@@ -413,6 +418,621 @@ public abstract class BasePresenter<V extends ISupport>
 
 	}
 
+	public Subscription requestApi(String api, OnResponseListener listener) {
+
+		return requestApi(
+				api,
+				true,
+				listener
+						 );
+	}
+
+	public Subscription requestApi(String api, boolean showLoading, OnResponseListener listener) {
+
+		return HttpUtil.getApiService()
+					   .postApi(api)
+					   .subscribeOn(Schedulers.io())
+					   .observeOn(AndroidSchedulers.mainThread())
+					   .subscribe(new Subscriber<Response<SuperResponse>>() {
+
+						   @Override
+						   public void onStart() {
+
+							   super.onStart();
+							   if (showLoading) {
+								   getView().enqueueAction(() -> {
+									   StyledDialog.buildLoading()
+												   .show();
+								   });
+							   }
+							   if (listener != null) {
+								   listener.onStart();
+							   }
+						   }
+
+						   @Override
+						   public void onCompleted() {
+
+							   if (listener != null) {
+								   listener.onCompleted();
+							   }
+						   }
+
+						   @Override
+						   public void onError(Throwable e) {
+
+							   KLog.d("\n" + e.getCause() + "\n" + e.getMessage());
+							   KLog.d(API.BASE_NEWURL + api);
+							   getView().enqueueAction(() -> {
+								   StyledDialog.dismissLoading();
+							   });
+							   if (listener != null) {
+								   listener.onError(e);
+							   }
+						   }
+
+						   @Override
+						   public void onNext(Response<SuperResponse> superResponseResponse) {
+
+							   getView().enqueueAction(() -> {
+
+								   if (showLoading) {
+									   StyledDialog.dismissLoading();
+								   }
+								   if (checkApiResponse(superResponseResponse)) {
+									   if (listener != null) {
+										   KLog.d(API.BASE_NEWURL + api);
+										   KLog.json(mGson.toJson(superResponseResponse));
+										   listener.onNext(superResponseResponse);
+										   listener.onNext(superResponseResponse.getResult());
+									   }
+								   }
+							   });
+						   }
+					   });
+	}
+
+	public Subscription requestApi(String api, SuperRequest request, OnResponseListener listener) {
+
+		return requestApi(
+				api,
+				request,
+				true,
+				listener
+						 );
+	}
+
+	public Subscription requestApi(String api, SuperRequest request, boolean showLoading, OnResponseListener listener) {
+
+		return HttpUtil.getApiService()
+					   .postApi(
+							   api,
+							   request
+							   )
+					   .subscribeOn(Schedulers.io())
+					   .observeOn(AndroidSchedulers.mainThread())
+					   .subscribe(new Subscriber<Response<SuperResponse>>() {
+
+						   @Override
+						   public void onStart() {
+
+							   super.onStart();
+							   if (showLoading) {
+								   getView().enqueueAction(() -> {
+									   StyledDialog.buildLoading()
+												   .show();
+								   });
+							   }
+							   if (listener != null) {
+								   listener.onStart();
+							   }
+						   }
+
+						   @Override
+						   public void onCompleted() {
+
+							   if (listener != null) {
+								   listener.onCompleted();
+							   }
+						   }
+
+						   @Override
+						   public void onError(Throwable e) {
+
+							   KLog.d("\n" + e.getCause() + "\n" + e.getMessage());
+							   KLog.d(API.BASE_NEWURL + api);
+							   KLog.json(mGson.toJson(request));
+							   getView().enqueueAction(() -> {
+								   StyledDialog.dismissLoading();
+							   });
+							   if (listener != null) {
+								   listener.onError(e);
+							   }
+						   }
+
+						   @Override
+						   public void onNext(Response<SuperResponse> superResponseResponse) {
+
+							   getView().enqueueAction(() -> {
+								   if (showLoading) {
+									   StyledDialog.dismissLoading();
+								   }
+								   if (checkApiResponse(superResponseResponse)) {
+									   if (listener != null) {
+										   KLog.d(API.BASE_NEWURL + api);
+										   listener.onNext(superResponseResponse);
+										   listener.onNext(superResponseResponse.getResult());
+									   }
+								   }
+							   });
+						   }
+					   });
+	}
+
+	public Subscription requestListApi(String api, OnResponseListener listener) {
+
+		return requestListApi(
+				api,
+				true,
+				listener
+							 );
+	}
+
+	public Subscription requestListApi(String api, boolean showLoading, OnResponseListener listener) {
+
+		return HttpUtil.getApiService()
+					   .postListApi(api)
+					   .subscribeOn(Schedulers.io())
+					   .observeOn(AndroidSchedulers.mainThread())
+					   .subscribe(new Subscriber<Response<List<SuperResponse>>>() {
+
+						   @Override
+						   public void onStart() {
+
+							   super.onStart();
+							   if (showLoading) {
+								   getView().enqueueAction(() -> {
+									   StyledDialog.buildLoading()
+												   .show();
+								   });
+							   }
+							   if (listener != null) {
+								   listener.onStart();
+							   }
+						   }
+
+						   @Override
+						   public void onCompleted() {
+
+							   if (listener != null) {
+								   listener.onCompleted();
+							   }
+						   }
+
+						   @Override
+						   public void onError(Throwable e) {
+
+							   KLog.d("\n" + e.getCause() + "\n" + e.getMessage());
+							   KLog.d(api);
+							   if (showLoading) {
+								   getView().enqueueAction(() -> {
+									   StyledDialog.dismissLoading();
+								   });
+							   }
+							   if (listener != null) {
+								   listener.onError(e);
+							   }
+						   }
+
+						   @Override
+						   public void onNext(Response<List<SuperResponse>> superResponseResponse) {
+
+							   getView().enqueueAction(() -> {
+
+								   if (showLoading) {
+									   StyledDialog.dismissLoading();
+								   }
+								   if (checkApiResponse(superResponseResponse)) {
+									   if (listener != null) {
+										   listener.onNextList(superResponseResponse);
+										   listener.onNextList(superResponseResponse.getResult());
+									   }
+								   }
+							   });
+						   }
+					   });
+	}
+
+	public Subscription requestListApi(String api, SuperRequest request, OnResponseListener listener) {
+
+		return requestListApi(
+				api,
+				request,
+				true,
+				listener
+							 );
+	}
+
+	public Subscription requestListApi(String api, SuperRequest request, boolean showLoading, OnResponseListener listener) {
+
+		return HttpUtil.getApiService()
+					   .postListApi(
+							   api,
+							   request
+								   )
+					   .subscribeOn(Schedulers.io())
+					   .observeOn(AndroidSchedulers.mainThread())
+					   .subscribe(new Subscriber<Response<List<SuperResponse>>>() {
+
+						   @Override
+						   public void onStart() {
+
+							   super.onStart();
+							   if (showLoading) {
+								   getView().enqueueAction(() -> {
+									   StyledDialog.buildLoading()
+												   .show();
+								   });
+							   }
+							   if (listener != null) {
+								   listener.onStart();
+							   }
+						   }
+
+						   @Override
+						   public void onCompleted() {
+
+							   if (listener != null) {
+								   listener.onCompleted();
+							   }
+						   }
+
+						   @Override
+						   public void onError(Throwable e) {
+
+							   KLog.d("\n" + e.getCause() + "\n" + e.getMessage());
+							   KLog.d(API.BASE_NEWURL + api);
+							   KLog.json(mGson.toJson(request));
+							   if (showLoading) {
+								   getView().enqueueAction(() -> {
+									   StyledDialog.dismissLoading();
+								   });
+							   }
+							   if (listener != null) {
+								   listener.onError(e);
+							   }
+						   }
+
+						   @Override
+						   public void onNext(Response<List<SuperResponse>> superResponseResponse) {
+
+							   getView().enqueueAction(() -> {
+
+								   if (showLoading) {
+									   StyledDialog.dismissLoading();
+								   }
+								   if (checkApiResponse(superResponseResponse)) {
+									   if (listener != null) {
+										   listener.onNextList(superResponseResponse);
+										   listener.onNextList(superResponseResponse.getResult());
+									   }
+								   }
+							   });
+						   }
+					   });
+	}
+
+	public Subscription requestApi(String api, SuperResponse request, OnResponseListener listener) {
+
+		return requestApi(
+				api,
+				request,
+				true,
+				listener
+						 );
+	}
+
+	public Subscription requestApi(String api, SuperResponse request, boolean showLoading, OnResponseListener listener) {
+
+		return HttpUtil.getApiService()
+					   .postApi(
+							   api,
+							   request
+							   )
+					   .subscribeOn(Schedulers.io())
+					   .observeOn(AndroidSchedulers.mainThread())
+					   .subscribe(new Subscriber<Response<SuperResponse>>() {
+
+						   @Override
+						   public void onStart() {
+
+							   super.onStart();
+							   if (showLoading) {
+								   getView().enqueueAction(() -> {
+									   StyledDialog.buildLoading()
+												   .show();
+								   });
+							   }
+							   if (listener != null) {
+								   listener.onStart();
+							   }
+						   }
+
+						   @Override
+						   public void onCompleted() {
+
+							   if (listener != null) {
+								   listener.onCompleted();
+							   }
+						   }
+
+						   @Override
+						   public void onError(Throwable e) {
+
+							   KLog.d("\n" + e.getCause() + "\n" + e.getMessage());
+							   KLog.d(API.BASE_NEWURL + api);
+							   KLog.json(mGson.toJson(request));
+							   getView().enqueueAction(() -> {
+								   StyledDialog.dismissLoading();
+							   });
+							   if (listener != null) {
+								   listener.onError(e);
+							   }
+						   }
+
+						   @Override
+						   public void onNext(Response<SuperResponse> superResponseResponse) {
+
+							   getView().enqueueAction(() -> {
+								   if (showLoading) {
+									   StyledDialog.dismissLoading();
+								   }
+								   if (checkApiResponse(superResponseResponse)) {
+
+									   if (listener != null) {
+										   KLog.d(API.BASE_NEWURL + api);
+										   KLog.json(mGson.toJson(superResponseResponse));
+										   listener.onNext(superResponseResponse);
+										   listener.onNext(superResponseResponse.getResult());
+										   List<SuperResponse> userList = superResponseResponse.getResult()
+																							   .getUser_list();
+										   if (userList == null || userList.isEmpty()) {
+											   listener.onListEmpty();
+										   }
+									   }
+								   }
+							   });
+						   }
+					   });
+	}
+
+	public Subscription requestListApi(String api, SuperResponse request, OnResponseListener listener) {
+
+		return requestListApi(
+				api,
+				request,
+				true,
+				listener
+							 );
+	}
+
+	public Subscription requestListApi(String api, SuperResponse request, boolean showLoading, OnResponseListener listener) {
+
+		return HttpUtil.getApiService()
+					   .postListApi(
+							   api,
+							   request
+								   )
+					   .subscribeOn(Schedulers.io())
+					   .observeOn(AndroidSchedulers.mainThread())
+					   .subscribe(new Subscriber<Response<List<SuperResponse>>>() {
+
+						   @Override
+						   public void onStart() {
+
+							   super.onStart();
+							   if (showLoading) {
+								   getView().enqueueAction(() -> {
+									   StyledDialog.buildLoading()
+												   .show();
+								   });
+							   }
+							   if (listener != null) {
+								   listener.onStart();
+							   }
+						   }
+
+						   @Override
+						   public void onCompleted() {
+
+							   if (listener != null) {
+								   listener.onCompleted();
+							   }
+						   }
+
+						   @Override
+						   public void onError(Throwable e) {
+
+							   KLog.d("\n" + e.getCause() + "\n" + e.getMessage());
+							   KLog.d(API.BASE_NEWURL + api);
+							   KLog.json(mGson.toJson(request));
+							   if (showLoading) {
+								   getView().enqueueAction(() -> {
+									   StyledDialog.dismissLoading();
+								   });
+							   }
+							   if (listener != null) {
+								   listener.onError(e);
+							   }
+						   }
+
+						   @Override
+						   public void onNext(Response<List<SuperResponse>> superResponseResponse) {
+
+							   getView().enqueueAction(() -> {
+
+								   if (showLoading) {
+									   StyledDialog.dismissLoading();
+								   }
+								   if (checkApiResponse(superResponseResponse)) {
+									   if (listener != null) {
+										   listener.onNextList(superResponseResponse);
+										   listener.onNextList(superResponseResponse.getResult());
+										   List<SuperResponse> userList = superResponseResponse.getResult();
+										   if (userList == null || userList.isEmpty()) {
+											   listener.onListEmpty();
+										   }
+									   }
+								   }
+							   });
+						   }
+					   });
+	}
+
+	public Subscription uploadFile(String api, String filePath, OnResponseListener listener) {
+
+		return uploadFile(
+				api,
+				filePath,
+				true,
+				listener
+						 );
+	}
+
+	public Subscription uploadFile(String api, String filePath, boolean showLoading, OnResponseListener listener) {
+
+		return uploadFile(
+				api,
+				new File(filePath),
+				showLoading,
+				listener
+						 );
+	}
+
+	public Subscription uploadFile(String api, File file, boolean showLoading, OnResponseListener listener) {
+		//构建要上传的文件
+		RequestBody requestFile = RequestBody.create(
+				//				MediaType.parse("application/otcet-stream"),
+				MediaType.parse("multipart/form-data"),
+				file
+													);
+
+		MultipartBody.Part body = MultipartBody.Part.createFormData(
+				"filename",
+				// 服务端key
+				file.getName(),
+				requestFile
+																   );
+
+		String descriptionString = "这是上传图片的描述内容";
+		RequestBody description = RequestBody.create(
+				MediaType.parse("multipart/form-data"),
+				descriptionString
+													);
+		return HttpUtil.getApiService()
+					   .uploadFile(
+							   api,
+							   description,
+							   body
+								  )
+					   .subscribeOn(Schedulers.io())
+					   .observeOn(AndroidSchedulers.mainThread())
+					   .subscribe(new Subscriber<Response<SuperResponse>>() {
+
+						   @Override
+						   public void onStart() {
+
+							   super.onStart();
+							   if (showLoading) {
+								   getView().enqueueAction(() -> {
+									   StyledDialog.buildLoading()
+												   .show();
+								   });
+							   }
+							   if (listener != null) {
+								   listener.onStart();
+							   }
+						   }
+
+						   @Override
+						   public void onCompleted() {
+
+							   if (listener != null) {
+								   listener.onCompleted();
+							   }
+						   }
+
+						   @Override
+						   public void onError(Throwable e) {
+
+							   KLog.d("\n" + e.getCause() + "\n" + e.getMessage());
+							   KLog.d(API.BASE_NEWURL + api);
+							   KLog.json(file.getAbsolutePath());
+							   if (showLoading) {
+								   getView().enqueueAction(() -> {
+									   StyledDialog.dismissLoading();
+								   });
+							   }
+							   if (listener != null) {
+								   listener.onError(e);
+							   }
+						   }
+
+						   @Override
+						   public void onNext(Response<SuperResponse> response) {
+
+							   getView().enqueueAction(() -> {
+
+								   if (showLoading) {
+									   StyledDialog.dismissLoading();
+								   }
+								   if (checkApiResponse(response)) {
+									   if (listener != null) {
+										   KLog.d(API.BASE_NEWURL + api);
+										   KLog.json(mGson.toJson(response));
+										   listener.onNext(response);
+										   listener.onNext(response.getResult());
+									   }
+								   }
+							   });
+						   }
+					   });
+	}
+
+	/**
+	 * 线程中执行耗时操作
+	 * @param subscriber
+	 * @param <T>
+	 *
+	 * @return
+	 */
+	public <T> Subscription onThreading(Observable.OnSubscribe<T> subscriber) {
+		return Observable.create(subscriber)
+						 .subscribeOn(Schedulers.io())
+						 .observeOn(AndroidSchedulers.mainThread())
+						 .subscribe(new Action1<T>() {
+
+							 @Override
+							 public void call(T t) {
+
+							 }
+						 });
+	}
+	/**
+	 * 线程中执行耗时操作
+	 * @param subscriber
+	 * @param action
+	 * @param <T>
+	 *
+	 * @return
+	 */
+	public <T> Subscription onThreading(Observable.OnSubscribe<T> subscriber, Action1<T> action) {
+		return Observable.create(subscriber)
+						 .subscribeOn(Schedulers.io())
+						 .observeOn(AndroidSchedulers.mainThread())
+						 .subscribe(action);
+	}
+
 	/**
 	 * 检查网络请求回来的错误码
 	 *
@@ -422,13 +1042,13 @@ public abstract class BasePresenter<V extends ISupport>
 	 */
 	public boolean checkApiResponse(Response response) {
 
-		int code = response.getCode();
+		int code = response.getStatus();
 
-		if (code != 200) {
-			showLongToast(response.getMsg());
+		if (code != 0) {
+			showLongToast(response.getMessage());
 		}
 
-		return code == 200;
+		return code == 0;
 	}
 
 	public void resetRecyclerViewStatus(XRecyclerView xRecyclerView, List list, boolean isRefresh) {
@@ -503,10 +1123,12 @@ public abstract class BasePresenter<V extends ISupport>
 
 	/**
 	 * XRecyclerView 下拉刷新回调监听
+	 * 子类复写需要带上super
 	 */
 	@Override
 	public void onRefresh(XRecyclerView recyclerView, CommonRecyclerViewAdapter adapter) {
 
+		recyclerView.setLoadingMoreEnabled(true);
 	}
 
 	/**

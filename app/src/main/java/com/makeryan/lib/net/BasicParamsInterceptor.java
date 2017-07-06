@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import com.socks.library.KLog;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -75,14 +77,27 @@ public class BasicParamsInterceptor
 											   .iterator();
 			while (iterator.hasNext()) {
 				Map.Entry entry = (Map.Entry) iterator.next();
-				headerBuilder.add(
-						(String) entry.getKey(),
-						(String) entry.getValue()
-								 );
+				String    value = String.valueOf(entry.getValue());
+//				KLog.d("\nkey : " + entry.getKey() + "\nvalue : " + new String(
+//						Base64.decode(value),
+//						"UTF-8"
+//				));
+				if (!TextUtils.isEmpty(value)) {
+					try {
+						headerBuilder.add(
+								(String) entry.getKey(),
+								value
+										 );
+					} catch (Exception e) {
+						KLog.d("\n" + e.getCause() + "\n" + e.getMessage());
+					}
+				}
 			}
 		}
 
-		if (headerLinesList.size() > 0) {
+		if (headerLinesList.size() > 0)
+
+		{
 			for (String line : headerLinesList) {
 				headerBuilder.add(line);
 			}
@@ -93,7 +108,9 @@ public class BasicParamsInterceptor
 
 
 		// process queryParams inject whatever it's GET or POST
-		if (queryParamsMap.size() > 0) {
+		if (queryParamsMap.size() > 0)
+
+		{
 			injectParamsIntoUrl(
 					request,
 					requestBuilder,
@@ -104,7 +121,11 @@ public class BasicParamsInterceptor
 
 
 		// process post body inject
-		if (canInjectIntoBody(request)) {
+		if (
+
+				canInjectIntoBody(request))
+
+		{
 			FormBody.Builder formBodyBuilder = new FormBody.Builder();
 			if (paramsMap.size() > 0) {
 				Iterator iterator = paramsMap.entrySet()
@@ -126,7 +147,9 @@ public class BasicParamsInterceptor
 					MediaType.parse("application/x-www-form-urlencoded;charset=UTF-8"),
 					postBodyString
 												  ));
-		} else {    // can't inject into body, then inject into url
+		} else
+
+		{    // can't inject into body, then inject into url
 			injectParamsIntoUrl(
 					request,
 					requestBuilder,
@@ -136,7 +159,9 @@ public class BasicParamsInterceptor
 		KLog.d(
 				"BaseHttp",
 				"url : " + request.url()
-								  .toString()
+								  .
+
+										  toString()
 			  );
 		request = requestBuilder.build();
 		return chain.proceed(request);
@@ -271,5 +296,29 @@ public class BasicParamsInterceptor
 			return interceptor;
 		}
 
+	}
+
+	//由于okhttp header 中的 value 不支持 null, \n 和 中文这样的特殊字符,所以这里
+	//会首先替换 \n ,然后使用 okhttp 的校验方式,校验不通过的话,就返回 encode 后的字符串
+	private static String getValueEncoded(String value)
+			throws UnsupportedEncodingException {
+
+		if (value == null) {
+			return "null";
+		}
+		String newValue = value.replace(
+				"\n",
+				""
+									   );
+		for (int i = 0, length = newValue.length(); i < length; i++) {
+			char c = newValue.charAt(i);
+			if (c <= '\u001f' || c >= '\u007f') {
+				return URLEncoder.encode(
+						newValue,
+						"UTF-8"
+										);
+			}
+		}
+		return newValue;
 	}
 }

@@ -3,6 +3,7 @@ package com.makeryan.lib.net;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonWriter;
+import com.makeryan.lib.BuildConfig;
 import com.socks.library.KLog;
 
 import java.io.IOException;
@@ -23,7 +24,9 @@ import retrofit2.Converter;
 public class JsonRequestBodyConverter<T>
 		implements Converter<T, RequestBody> {
 
-	private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
+	//	private static final MediaType MEDIA_TYPE = MediaType.parse("application/octet-stream; charset=UTF-8"); // 二进制流
+	private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8"); // POST JSON
+	//	private static final MediaType MEDIA_TYPE = MediaType.parse("application/x-www-form-urlencoded; charset=UTF-8"); //表单
 
 	private static final Charset UTF_8 = Charset.forName("UTF-8");
 
@@ -63,7 +66,10 @@ public class JsonRequestBodyConverter<T>
 		//				MEDIA_TYPE,
 		//				postBody
 		//								 );
-		KLog.d("request中传递的json数据：\n" + gson.toJson(value));
+		if (BuildConfig.DEBUG) {
+			KLog.d("request中传递的json数据：\n" + gson.toJson(value));
+			KLog.json(gson.toJson(value));
+		}
 		Buffer buffer = new Buffer();
 		Writer writer = new OutputStreamWriter(
 				buffer.outputStream(),
@@ -80,5 +86,4 @@ public class JsonRequestBodyConverter<T>
 				buffer.readByteString()
 								 );
 	}
-
 }

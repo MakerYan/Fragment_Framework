@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pull_to_refresh_pull_labels">下拉可刷新…</string>
+  <string name="pull_to_refresh_release_labels">松开即可更新…</string>
+  <string name="pull_to_refresh_refreshing_labels">加载中…</string>
+  
+   <string name="pull_to_refresh_from_bottom_pull_labels">@string/pull_to_refresh_pull_labels</string>
+    <string name="pull_to_refresh_from_bottom_release_labels">@string/pull_to_refresh_release_labels</string>
+    <string name="pull_to_refresh_from_bottom_refreshing_labels">@string/pull_to_refresh_refreshing_labels</string>
+</resources>

@@ -14,8 +14,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.makeryan.lib.R;
 import com.nineoldandroids.view.ViewHelper;
+import com.makeryan.lib.R;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -72,12 +72,6 @@ public class JazzyViewPager
 			);
 	}
 
-	/**
-	 * 获得所有的自定义的样式
-	 *
-	 * @param context
-	 * @param attrs
-	 */
 	@SuppressWarnings("incomplete-switch")
 	public JazzyViewPager(Context context, AttributeSet attrs) {
 
@@ -120,7 +114,7 @@ public class JazzyViewPager
 	public void setTransitionEffect(TransitionEffect effect) {
 
 		mEffect = effect;
-		// reset();
+		//		reset();
 	}
 
 	public void setPagingEnabled(boolean enabled) {
@@ -245,40 +239,40 @@ public class JazzyViewPager
 		GOING_RIGHT
 	}
 
-	// public void reset() {
-	// resetPrivate();
-	// int curr = getCurrentItem();
-	// onPageScrolled(curr, 0.0f, 0);
-	// }
+	//	public void reset() {
+	//	resetPrivate();
+	//	int curr = getCurrentItem();
+	//	onPageScrolled(curr, 0.0f, 0);
+	//}
 	//
-	// private void resetPrivate() {
-	// for (int i = 0; i < getChildCount(); i++) {
-	// View v = getChildAt(i);
-	// // ViewHelper.setRotation(v, -ViewHelper.getRotation(v));
-	// // ViewHelper.setRotationX(v, -ViewHelper.getRotationX(v));
-	// // ViewHelper.setRotationY(v, -ViewHelper.getRotationY(v));
-	// //
-	// // ViewHelper.setTranslationX(v, -ViewHelper.getTranslationX(v));
-	// // ViewHelper.setTranslationY(v, -ViewHelper.getTranslationY(v));
+	//private void resetPrivate() {
+	//	for (int i = 0; i < getChildCount(); i++) {
+	//		View v = getChildAt(i);
+	//		//			ViewHelper.setRotation(v, -ViewHelper.getRotation(v));
+	//		//			ViewHelper.setRotationX(v, -ViewHelper.getRotationX(v));
+	//		//			ViewHelper.setRotationY(v, -ViewHelper.getRotationY(v));
+	//		//
+	//		//			ViewHelper.setTranslationX(v, -ViewHelper.getTranslationX(v));
+	//		//			ViewHelper.setTranslationY(v, -ViewHelper.getTranslationY(v));
 	//
-	// ViewHelper.setRotation(v, 0);
-	// ViewHelper.setRotationX(v, 0);
-	// ViewHelper.setRotationY(v, 0);
+	//		ViewHelper.setRotation(v, 0);
+	//		ViewHelper.setRotationX(v, 0);
+	//		ViewHelper.setRotationY(v, 0);
 	//
-	// ViewHelper.setTranslationX(v, 0);
-	// ViewHelper.setTranslationY(v, 0);
+	//		ViewHelper.setTranslationX(v, 0);
+	//		ViewHelper.setTranslationY(v, 0);
 	//
-	// ViewHelper.setAlpha(v, 1.0f);
+	//		ViewHelper.setAlpha(v, 1.0f);
 	//
-	// ViewHelper.setScaleX(v, 1.0f);
-	// ViewHelper.setScaleY(v, 1.0f);
+	//		ViewHelper.setScaleX(v, 1.0f);
+	//		ViewHelper.setScaleY(v, 1.0f);
 	//
-	// ViewHelper.setPivotX(v, 0);
-	// ViewHelper.setPivotY(v, 0);
+	//		ViewHelper.setPivotX(v, 0);
+	//		ViewHelper.setPivotY(v, 0);
 	//
-	// logState(v, "Child " + i);
-	// }
-	// }
+	//		logState(v, "Child " + i);
+	//	}
+	//}
 
 	private void logState(View v, String title) {
 
@@ -870,11 +864,6 @@ public class JazzyViewPager
 	@Override
 	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-		Log.e(
-				TAG,
-				"position= " + position + " ,positionOffset = " + positionOffset + ",positionOffsetPixels =  " + positionOffsetPixels
-			 );
-
 		if (mState == State.IDLE && positionOffset > 0) {
 			oldPage = getCurrentItem();
 			mState = position == oldPage ?
@@ -882,7 +871,6 @@ public class JazzyViewPager
 					State.GOING_LEFT;
 		}
 		boolean goingRight = position == oldPage;
-
 		if (mState == State.GOING_RIGHT && !goingRight) {
 			mState = State.GOING_LEFT;
 		} else if (mState == State.GOING_LEFT && goingRight) {
@@ -893,8 +881,8 @@ public class JazzyViewPager
 				0 :
 				positionOffset;
 
-		//		 mLeft = getChildAt(position);
-		//		 mRight = getChildAt(position+1);
+		//		mLeft = getChildAt(position);
+		//		mRight = getChildAt(position+1);
 		mLeft = findViewFromObject(position);
 		mRight = findViewFromObject(position + 1);
 

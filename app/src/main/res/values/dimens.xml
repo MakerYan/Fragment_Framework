@@ -1,9 +1,86 @@
 <resources>
-	<dimen name="fab_margin">16dp</dimen>
 
-	<dimen name="textandiconmargin">10dp</dimen>
-
-	<dimen name="dialogplus_default_center_margin">16dp</dimen>
+	<!-- Default screen margins, per the Android Design guidelines. -->
 	<dimen name="activity_horizontal_margin">16dp</dimen>
 	<dimen name="activity_vertical_margin">16dp</dimen>
+
+	<dimen name="header_footer_left_right_padding">24dp</dimen>
+	<dimen name="header_footer_top_bottom_padding">12dp</dimen>
+
+	<dimen name="body_left_padding">9dp</dimen>
+	<dimen name="body_right_padding">9dp</dimen>
+
+	<dimen name="listitem_paddingtop">8dp</dimen>
+	<dimen name="listitem_paddingbottom">8dp</dimen>
+
+	<dimen name="listitem_three_dp">3dp</dimen>
+	<dimen name="listitem_five_dp">5dp</dimen>
+
+	<dimen name="fab_margin">16dp</dimen>
+
+	<dimen name="stroke_width">3dp</dimen>
+
+	<dimen name="dialogplus_default_center_margin">16dp</dimen>
+
+
+	<dimen name="text_size_xsmall">8px</dimen>
+	<dimen name="text_size_small">16px</dimen>
+	<dimen name="text_size_normal">24px</dimen>
+	<dimen name="text_size_normal_">28px</dimen>
+	<dimen name="text_size_large">32px</dimen>
+	<dimen name="text_size_large_">36px</dimen>
+	<dimen name="text_size_xlarge">40px</dimen>
+	<dimen name="text_size_xxlarge">48px</dimen>
+	<dimen name="text_size_xxxlarge">56px</dimen>
+	<dimen name="textandiconmargin">20px</dimen>
+
+	<dimen name="widget_height_line1">1px</dimen>
+	<dimen name="widget_height_line2">2px</dimen>
+	<dimen name="widget_height_line4">4px</dimen>
+	<dimen name="widget_height_line6">6px</dimen>
+	<dimen name="widget_height_line8">8px</dimen>
+	<dimen name="widget_height_line10">10px</dimen>
+
+	<dimen name="widget_height_xxxsmall">1px</dimen>
+	<dimen name="widget_height_xxsmall">8px</dimen>
+	<dimen name="widget_height_xsmall">16px</dimen>
+	<dimen name="widget_height_small">24px</dimen>
+	<dimen name="widget_height_normal">32px</dimen>
+	<dimen name="widget_height_large">40px</dimen>
+	<dimen name="widget_height_xlarge">48px</dimen>
+	<dimen name="widget_height_xxlarge">60px</dimen>
+	<dimen name="widget_height_xxxlarge">72px</dimen>
+	<dimen name="widget_height_xxxxlarge">96px</dimen>
+	<dimen name="widget_height_xxxxlarge_">110px</dimen>
+	<dimen name="widget_height_xxxxxlarge">130px</dimen>
+	<dimen name="widget_height_xxxxxlarge_">148px</dimen>
+	<dimen name="widget_height_xxxxxxlarge">154px</dimen>
+	<dimen name="widget_height_xxxxxxxlarge">178px</dimen>
+
+	<dimen name="margin_widget_xxxsmall">1px</dimen>
+	<dimen name="margin_widget_xxsmall">8px</dimen>
+	<dimen name="margin_widget_xsmall">16px</dimen>
+	<dimen name="margin_widget_small">24px</dimen>
+	<dimen name="margin_widget_normal">32px</dimen>
+	<dimen name="margin_widget_large">40px</dimen>
+	<dimen name="margin_widget_xlarge">48px</dimen>
+	<dimen name="margin_widget_xxlarge">56px</dimen>
+	<dimen name="margin_widget_xxxlarge">64px</dimen>
+	<dimen name="margin_widget_xxxxlarge">72px</dimen>
+	<dimen name="margin_widget_xxxxxlarge">80px</dimen>
+	<dimen name="margin_widget_xxxxxxlarge">88px</dimen>
+	<dimen name="margin_widget_xxxxxxxlarge">96px</dimen>
+	<dimen name="margin_widget_xxxxxxxxlarge">104px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxlarge">112px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxxlarge">120px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxxxlarge">128px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxxxxlarge">136px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxxxxxlarge">144px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxxxxxxlarge">152px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxxxxxxxlarge">160px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxxxxxxxxlarge">168px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxxxxxxxxxlarge">176px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxxxxxxxxxxlarge">184px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxxxxxxxxxxxlarge">192px</dimen>
+	<dimen name="margin_widget_xxxxxxxxxxxxxxxxxxxxlarge">200px</dimen>
 </resources>

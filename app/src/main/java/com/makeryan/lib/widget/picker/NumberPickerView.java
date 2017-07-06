@@ -169,7 +169,7 @@ public class NumberPickerView
 
 	private int mScaledTouchSlop = 8;
 
-	private String mHintText;
+	private String mHintText = "";
 
 	private String mTextEllipsize;
 
@@ -229,6 +229,8 @@ public class NumberPickerView
 	private Paint mPaintHint = new Paint();
 
 	private String[] mDisplayedValues;
+
+	private String[] mOriginalDisplayedValues;
 
 	private CharSequence[] mAlterTextArrayWithMeasureHint;
 
@@ -335,22 +337,6 @@ public class NumberPickerView
 				attrs,
 				R.styleable.NumberPickerView
 													 );
-
-		mMinShowIndex = a.getInteger(
-				R.styleable.NumberPickerView_npv_MinValue,
-				0
-									);
-
-
-		mMaxShowIndex = a.getInteger(
-				R.styleable.NumberPickerView_npv_MaxValue,
-				0
-									);
-
-		mDisplayedValues = new String[mMaxShowIndex - mMinShowIndex + 1];
-		for (int j = 0; j < mMaxShowIndex - mMinShowIndex + 1; j++) {
-			mDisplayedValues[j] = mMinShowIndex + j + "";
-		}
 		int n = a.getIndexCount();
 		for (int i = 0; i < n; i++) {
 			int attr = a.getIndex(i);
@@ -430,6 +416,12 @@ public class NumberPickerView
 											);
 			} else if (attr == R.styleable.NumberPickerView_npv_TextArray) {
 				mDisplayedValues = convertCharSequenceArrayToStringArray(a.getTextArray(attr));
+				mOriginalDisplayedValues = convertCharSequenceArrayToStringArray(a.getTextArray(attr));
+				if (mDisplayedValues == null) {
+					String[] textArray = (String[]) a.getTextArray(attr);
+					mDisplayedValues = textArray;
+					mOriginalDisplayedValues = textArray;
+				}
 			} else if (attr == R.styleable.NumberPickerView_npv_WrapSelectorWheel) {
 				mWrapSelectorWheel = a.getBoolean(
 						attr,
@@ -1120,6 +1112,33 @@ public class NumberPickerView
 		updateNotWrapYLimit();
 	}
 
+	/**
+	 * 动态刷新最小值
+	 *
+	 * @param minValue
+	 */
+	public void setMinValueWithRefresh(int minValue) {
+
+		mMinValue = minValue;
+		String[] stringArr = new String[mOriginalDisplayedValues.length - minValue];
+		for (int i = minValue; i < mOriginalDisplayedValues.length; i++) {
+			stringArr[i - minValue] = mOriginalDisplayedValues[i];
+		}
+		mDisplayedValues = stringArr;
+		mMinShowIndex = 0;
+		mMaxShowIndex = mMaxValue - mMinValue + mMinShowIndex;
+		setMinAndMaxShowIndex(
+				mMinShowIndex,
+				mMaxShowIndex
+							 );
+		updateNotWrapYLimit();
+	}
+
+	public int getMinValueWithRefresh() {
+
+		return mMinValue;
+	}
+
 	public int getMaxValue() {
 
 		return mMaxValue;
@@ -1169,6 +1188,11 @@ public class NumberPickerView
 	public String getContentByCurrValue() {
 
 		return mDisplayedValues[getValue() - mMinValue];
+	}
+
+	public String getContentByCurrValueWithHint() {
+
+		return mDisplayedValues[getValue() - mMinValue] + mHintText;
 	}
 
 	public boolean getWrapSelectorWheel() {
@@ -2178,5 +2202,25 @@ public class NumberPickerView
 		int SCROLL_STATE_FLING = 2;
 
 		void onScrollStateChange(NumberPickerView view, int scrollState);
+	}
+
+	public void setNpv_TextArray(String[] textArray) {
+
+		setDisplayedValues(textArray);
+	}
+
+	public String[] getNpv_TextArray() {
+
+		return mDisplayedValues;
+	}
+
+	public void setNpv_HintText(String hintText) {
+
+		setHintText(hintText);
+	}
+
+	public String getNpv_HintText() {
+
+		return mHintText;
 	}
 }

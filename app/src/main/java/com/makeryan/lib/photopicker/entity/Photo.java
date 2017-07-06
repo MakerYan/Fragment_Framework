@@ -3,8 +3,8 @@ package com.makeryan.lib.photopicker.entity;
 import android.databinding.Bindable;
 import android.databinding.PropertyChangeRegistry;
 
-import com.makeryan.lib.BR;
 import com.makeryan.lib.pojo.BaseBean;
+import com.makeryan.lib.BR;
 
 /**
  * Created by donglua on 15/6/30.

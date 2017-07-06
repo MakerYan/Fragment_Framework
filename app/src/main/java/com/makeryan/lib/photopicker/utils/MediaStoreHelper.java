@@ -7,9 +7,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
-import com.makeryan.lib.R;
 import com.makeryan.lib.photopicker.PhotoPicker;
 import com.makeryan.lib.photopicker.entity.PhotoDirectory;
+import com.socks.library.KLog;
+import com.makeryan.lib.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,53 +80,59 @@ public class MediaStoreHelper {
 			photoDirectoryAll.setId("ALL");
 
 			data.moveToFirst();
-			do {
-				int    imageId  = data.getInt(data.getColumnIndexOrThrow(_ID));
-				String bucketId = data.getString(data.getColumnIndexOrThrow(BUCKET_ID));
-				String name     = data.getString(data.getColumnIndexOrThrow(BUCKET_DISPLAY_NAME));
-				String path     = data.getString(data.getColumnIndexOrThrow(DATA));
-				long   size     = data.getInt(data.getColumnIndexOrThrow(SIZE));
+			try {
+				do {
+					int    imageId  = data.getInt(data.getColumnIndexOrThrow(_ID));
+					String bucketId = data.getString(data.getColumnIndexOrThrow(BUCKET_ID));
+					String name     = data.getString(data.getColumnIndexOrThrow(BUCKET_DISPLAY_NAME));
+					String path     = data.getString(data.getColumnIndexOrThrow(DATA));
+					long   size     = data.getInt(data.getColumnIndexOrThrow(SIZE));
 
-				if (size < 1) {
-					continue;
-				}
+					if (size < 1) {
+						continue;
+					}
 
-				PhotoDirectory photoDirectory = new PhotoDirectory();
-				photoDirectory.setId(bucketId);
-				photoDirectory.setName(name);
+					PhotoDirectory photoDirectory = new PhotoDirectory();
+					photoDirectory.setId(bucketId);
+					photoDirectory.setName(name);
 
-				if (!directories.contains(photoDirectory)) {
-					photoDirectory.setCoverPath(path);
-					photoDirectory.addPhoto(
+					if (!directories.contains(photoDirectory)) {
+						photoDirectory.setCoverPath(path);
+						photoDirectory.addPhoto(
+								imageId,
+								path
+											   );
+						photoDirectory.setDateAdded(data.getLong(data.getColumnIndexOrThrow(DATE_ADDED)));
+						directories.add(photoDirectory);
+					} else {
+						directories.get(directories.indexOf(photoDirectory))
+								   .addPhoto(
+										   imageId,
+										   path
+											);
+					}
+
+					photoDirectoryAll.addPhoto(
 							imageId,
 							path
-										   );
-					photoDirectory.setDateAdded(data.getLong(data.getColumnIndexOrThrow(DATE_ADDED)));
-					directories.add(photoDirectory);
-				} else {
-					directories.get(directories.indexOf(photoDirectory))
-							   .addPhoto(
-									   imageId,
-									   path
-										);
+											  );
+				} while (data.moveToNext());
+				if (photoDirectoryAll.getPhotoPaths()
+									 .size() > 0) {
+					photoDirectoryAll.setCoverPath(photoDirectoryAll.getPhotoPaths()
+																	.get(0));
 				}
+				directories.add(
+						INDEX_ALL_PHOTOS,
+						photoDirectoryAll
+							   );
+				if (resultCallback != null) {
+					resultCallback.onResultCallback(directories);
+				}
+			} catch (Exception e) {
+				KLog.d(e.getCause() + "\n" + e.getMessage());
+			} finally {
 
-				photoDirectoryAll.addPhoto(
-						imageId,
-						path
-										  );
-			} while (data.moveToNext());
-			if (photoDirectoryAll.getPhotoPaths()
-								 .size() > 0) {
-				photoDirectoryAll.setCoverPath(photoDirectoryAll.getPhotoPaths()
-																.get(0));
-			}
-			directories.add(
-					INDEX_ALL_PHOTOS,
-					photoDirectoryAll
-						   );
-			if (resultCallback != null) {
-				resultCallback.onResultCallback(directories);
 			}
 		}
 

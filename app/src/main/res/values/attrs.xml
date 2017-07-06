@@ -1,5 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<declare-styleable name="NormalEditText">
+		<attr name="android:hint"/>
+		<attr name="isShowLeftText" format="boolean"/>
+		<attr name="lefeText" format="string|reference"/>
+		<attr name="lefeTextColor" format="color|reference"/>
+	</declare-styleable>
+
+	<declare-styleable name="PullToRefresh">
+
+		<!-- A drawable to use as the background of the Refreshable View -->
+		<attr name="ptrRefreshableViewBackground" format="reference|color"/>
+
+		<!-- A drawable to use as the background of the Header and Footer Loading Views -->
+		<attr name="ptrHeaderBackground" format="reference|color"/>
+
+		<!-- Text Color of the Header and Footer Loading Views -->
+		<attr name="ptrHeaderTextColor" format="reference|color"/>
+
+		<!-- Text Color of the Header and Footer Loading Views Sub Header -->
+		<attr name="ptrHeaderSubTextColor" format="reference|color"/>
+
+		<!-- Mode of Pull-to-Refresh that should be used -->
+		<attr name="ptrMode">
+			<flag name="disabled" value="0x0"/>
+			<flag name="pullFromStart" value="0x1"/>
+			<flag name="pullFromEnd" value="0x2"/>
+			<flag name="both" value="0x3"/>
+			<flag name="manualOnly" value="0x4"/>
+
+			<!-- These last two are depreacted -->
+			<flag name="pullDownFromTop" value="0x1"/>
+			<flag name="pullUpFromBottom" value="0x2"/>
+		</attr>
+
+		<!-- Whether the Indicator overlay(s) should be used -->
+		<attr name="ptrShowIndicator" format="reference|boolean"/>
+
+		<!-- Drawable to use as Loading Indicator. Changes both Header and Footer. -->
+		<attr name="ptrDrawable" format="reference"/>
+
+		<!-- Drawable to use as Loading Indicator in the Header View. Overrides value set in ptrDrawable. -->
+		<attr name="ptrDrawableStart" format="reference"/>
+
+		<!-- Drawable to use as Loading Indicator in the Footer View. Overrides value set in ptrDrawable. -->
+		<attr name="ptrDrawableEnd" format="reference"/>
+
+		<!-- Whether Android's built-in Over Scroll should be utilised for Pull-to-Refresh. -->
+		<attr name="ptrOverScroll" format="reference|boolean"/>
+
+		<!-- Base text color, typeface, size, and style for Header and Footer Loading Views -->
+		<attr name="ptrHeaderTextAppearance" format="reference"/>
+
+		<!-- Base text color, typeface, size, and style for Header and Footer Loading Views Sub Header -->
+		<attr name="ptrSubHeaderTextAppearance" format="reference"/>
+
+		<!-- Style of Animation should be used displayed when pulling. -->
+		<attr name="ptrAnimationStyle">
+			<flag name="rotate" value="0x0"/>
+			<flag name="flip" value="0x1"/>
+		</attr>
+
+		<!-- Whether the user can scroll while the View is Refreshing -->
+		<attr name="ptrScrollingWhileRefreshingEnabled" format="reference|boolean"/>
+
+		<!--
+			Whether PullToRefreshListView has it's extras enabled. This allows the user to be
+			able to scroll while refreshing, and behaves better. It acheives this by adding
+			Header and/or Footer Views to the ListView.
+
+
+
+		-->
+		<attr name="ptrListViewExtrasEnabled" format="reference|boolean"/>
+
+		<!--
+			Whether the Drawable should be continually rotated as you pull. This only
+			takes effect when using the 'Rotate' Animation Style.
+
+
+
+		-->
+		<attr name="ptrRotateDrawableWhilePulling" format="reference|boolean"/>
+
+		<!-- BELOW HERE ARE DEPRECEATED. DO NOT USE. -->
+		<attr name="ptrAdapterViewBackground" format="reference|color"/>
+		<attr name="ptrDrawableTop" format="reference"/>
+		<attr name="ptrDrawableBottom" format="reference"/>
+	</declare-styleable>
+
+
+	<declare-styleable name="SimpleArcLoader">
+
+		<attr name="arc_style" format="enum">
+			<enum name="simple_arc" value="0"></enum>
+			<enum name="complete_arc" value="1"></enum>
+		</attr>
+
+		<attr name="arc_margin" format="dimension"/>
+		<attr name="arc_thickness" format="dimension"/>
+
+		<attr name="arc_speed" format="enum">
+			<enum name="slow" value="0"></enum>
+			<enum name="medium" value="1"></enum>
+			<enum name="fast" value="2"></enum>
+		</attr>
+
+		<attr name="arc_colors" format="reference"></attr>
+
+	</declare-styleable>
+
+	<declare-styleable name="ShineButton">
+		<attr name="btn_color" format="color"/>
+		<attr name="btn_fill_color" format="color"/>
+		<attr name="shine_count" format="integer"/>
+		<attr name="shine_turn_angle" format="float"/>
+		<attr name="small_shine_offset_angle" format="float"/>
+		<attr name="enable_flashing" format="boolean"/>
+		<attr name="allow_random_color" format="boolean"/>
+		<attr name="small_shine_color" format="color"/>
+		<attr name="big_shine_color" format="color"/>
+		<attr name="shine_animation_duration" format="integer"/>
+		<attr name="click_animation_duration" format="integer"/>
+		<attr name="shine_distance_multiple" format="float"/>
+		<attr name="shine_size" format="dimension"/>
+	</declare-styleable>
+	<declare-styleable name="PorterImageView">
+		<attr name="siShape" format="integer|reference"/>
+	</declare-styleable>
+
+	<declare-styleable name="roundedimageview">
+		<attr name="border_thickness" format="dimension"/>
+		<attr name="border_inside_color" format="color"/>
+		<attr name="border_outside_color" format="color"></attr>
+	</declare-styleable>
+
+
 	<!--basedialog start-->
 	<style name="BaseDialog" parent="@android:style/Theme.Holo.Dialog">
 		<!-- 是否有边框 -->
@@ -29,4 +166,5 @@
 		</item>
 	</style>
 	<!--basedialog end-->
+
 </resources>
