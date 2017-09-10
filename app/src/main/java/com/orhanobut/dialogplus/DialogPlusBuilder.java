@@ -11,9 +11,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 
-import com.makeryan.lib.R;
-
 import java.util.Arrays;
+
+import com.makeryan.lib.R;
 
 public class DialogPlusBuilder {
 
@@ -70,6 +70,8 @@ public class DialogPlusBuilder {
 	private int defaultContentHeight;
 
 	private int overlayBackgroundResource = R.color.dialogplus_black_overlay;
+
+	protected int mBackgroundId;
 
 	private DialogPlusBuilder() {
 

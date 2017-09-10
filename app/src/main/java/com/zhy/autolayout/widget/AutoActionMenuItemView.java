@@ -6,9 +6,10 @@ import android.support.v7.view.menu.ActionMenuItemView;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 
-import com.makeryan.lib.R;
 import com.zhy.autolayout.utils.AutoUtils;
 import com.zhy.autolayout.utils.DimenUtils;
+
+import com.makeryan.lib.R;
 
 /**
  * Created by hupei on 2016/3/7 14:44.

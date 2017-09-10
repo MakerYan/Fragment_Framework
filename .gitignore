@@ -46,3 +46,6 @@ freeline
 freeline_project_description.json
 Fragment_Framework.iml
 gradle
+app/src/main/jni
+app/src/main/libs
+app/src/main/obj

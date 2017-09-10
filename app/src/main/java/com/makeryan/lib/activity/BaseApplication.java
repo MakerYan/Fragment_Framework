@@ -2,9 +2,7 @@ package com.makeryan.lib.activity;
 
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Application;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.multidex.MultiDexApplication;
 
@@ -19,10 +17,6 @@ import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.socks.library.KLog;
 import com.zhy.autolayout.config.AutoLayoutConifg;
-
-import java.util.Iterator;
-import java.util.List;
-
 
 /**
  * Created by MakerYan on 16/4/8 22:32.
@@ -99,6 +93,7 @@ public class BaseApplication
 
 		super.onCreate();
 		FreelineCore.init(this);
+		// LocationUtils.init(this);
 		StyledDialog.init(this);
 		mApplication = this;
 		Fragmentation.builder()
@@ -140,30 +135,6 @@ public class BaseApplication
 		GlobUtils.destroy();
 		ImageUtil.destroy();
 		FlowManager.destroy();
+		// LocationUtils.destroy();
 	}
-
-	private String getAppName(int pID) {
-
-		String          processName = null;
-		ActivityManager am          = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
-		List            l           = am.getRunningAppProcesses();
-		Iterator        i           = l.iterator();
-		PackageManager  pm          = this.getPackageManager();
-		while (i.hasNext()) {
-			ActivityManager.RunningAppProcessInfo info = (ActivityManager.RunningAppProcessInfo) (i.next());
-			try {
-				if (info.pid == pID) {
-					processName = info.processName;
-					return processName;
-				}
-			} catch (Exception e) {
-				KLog.d(
-						"Process",
-						"Error>> :" + e.toString()
-					  );
-			}
-		}
-		return processName;
-	}
-
 }

@@ -11,9 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.makeryan.lib.R;
-
 import java.util.List;
+
+import com.makeryan.lib.R;
 
 
 public class DebugHierarchyViewContainer

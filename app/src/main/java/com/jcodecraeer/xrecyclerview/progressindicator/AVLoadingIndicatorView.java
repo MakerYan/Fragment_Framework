@@ -40,6 +40,7 @@ import com.jcodecraeer.xrecyclerview.progressindicator.indicator.PacmanIndicator
 import com.jcodecraeer.xrecyclerview.progressindicator.indicator.SemiCircleSpinIndicator;
 import com.jcodecraeer.xrecyclerview.progressindicator.indicator.SquareSpinIndicator;
 import com.jcodecraeer.xrecyclerview.progressindicator.indicator.TriangleSkewSpinIndicator;
+
 import com.makeryan.lib.R;
 
 

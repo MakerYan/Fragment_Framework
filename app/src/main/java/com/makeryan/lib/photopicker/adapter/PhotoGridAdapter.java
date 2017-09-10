@@ -11,7 +11,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.makeryan.lib.R;
 import com.makeryan.lib.photopicker.entity.Photo;
 import com.makeryan.lib.photopicker.entity.PhotoDirectory;
 import com.makeryan.lib.photopicker.event.OnItemCheckListener;
@@ -22,6 +21,8 @@ import com.makeryan.lib.photopicker.utils.MediaStoreHelper;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.makeryan.lib.R;
 
 
 /**

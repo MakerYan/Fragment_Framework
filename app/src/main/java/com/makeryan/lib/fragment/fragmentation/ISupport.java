@@ -3,6 +3,7 @@ package com.makeryan.lib.fragment.fragmentation;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 /**
@@ -250,6 +251,25 @@ public interface ISupport {
 	void showSoftInput(View view);
 
 	void enqueueAction(Runnable runnable);
+
+	/**
+	 * 检查权限
+	 *
+	 * @param permission
+	 *
+	 * @return
+	 */
+	boolean checkPermission(String permission);
+
+	/**
+	 * 请求权限
+	 *
+	 * @param requestCode
+	 * @param permission
+	 */
+	void requestPermission(int requestCode, String permission);
+
+	FragmentManager getChildFragmentManager();
 
     /*--------------------Fragment专用方法start---------------------------*/
 

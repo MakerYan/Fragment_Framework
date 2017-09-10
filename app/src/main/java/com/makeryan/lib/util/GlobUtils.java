@@ -36,9 +36,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,6 +52,9 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
+import com.makeryan.lib.R;
+import okhttp3.ResponseBody;
+
 /**
  * Created by MakerYan on 16/4/7 13:34.
  * Email: light.yan@qq.com
@@ -58,7 +63,11 @@ public class GlobUtils {
 
 	private static Context mContext;
 
-	public static final String YYYY_MM_DD = "yyyy-MM-dd";
+	public static final String y4M2d2 = "yyyy-MM-dd";
+
+	public static final String y4M2d2_H2m2s2 = "yyyy-MM-dd HH:mm:ss";
+
+	public static final String y4M2d2H2 = "yyyyMMddHHmm";
 
 	private GlobUtils() {
 
@@ -1038,7 +1047,7 @@ public class GlobUtils {
 
 			arrayOfString = str2.split("\\s+");
 			for (String num : arrayOfString) {
-				KLog.d(str2 + num + "\t");
+				KLog.i(str2 + num + "\t");
 			}
 			initial_memory = Integer.valueOf(arrayOfString[1])
 									.intValue() * 1024;// 获得系统总内存，单位是KB，乘以1024转换为Byte
@@ -1176,6 +1185,234 @@ public class GlobUtils {
 			dayList.add(String.valueOf(i));
 		}
 		return (String[]) dayList.toArray();
+	}
+
+	/**
+	 * 获取身高数组
+	 *
+	 * @return
+	 */
+	public static String[] getHeightDisplay() {
+
+		String[] strings = mContext.getResources()
+								   .getStringArray(R.array.height_display);
+		return strings;
+	}
+
+	/**
+	 * 获取体重数组
+	 *
+	 * @return
+	 */
+	public static String[] getWeightDisplay() {
+
+		String[] strings = mContext.getResources()
+								   .getStringArray(R.array.weight_display);
+		return strings;
+	}
+
+	/**
+	 * 获取学历数组
+	 *
+	 * @return
+	 */
+	public static String[] getEducationDisplay() {
+
+		String[] strings = mContext.getResources()
+								   .getStringArray(R.array.education_display);
+		return strings;
+	}
+
+	/**
+	 * 获取是否有车数组
+	 *
+	 * @return
+	 */
+	public static String[] getCarDisplay() {
+
+		String[] strings = mContext.getResources()
+								   .getStringArray(R.array.car_display);
+		return strings;
+	}
+
+	/**
+	 * 获取是否有房数组
+	 *
+	 * @return
+	 */
+	public static String[] getHouseDisplay() {
+
+		String[] strings = mContext.getResources()
+								   .getStringArray(R.array.car_display);
+		return strings;
+	}
+
+	/**
+	 * 获取收入数组
+	 *
+	 * @return
+	 */
+	public static String[] getIncomeDisplay() {
+
+		String[] strings = mContext.getResources()
+								   .getStringArray(R.array.income_display);
+		return strings;
+	}
+
+	/**
+	 * 获取性取向数组
+	 *
+	 * @return
+	 */
+	public static String[] getSexualOrientationDisplay() {
+
+		String[] strings = mContext.getResources()
+								   .getStringArray(R.array.sexual_orientation_display);
+		return strings;
+	}
+
+	/**
+	 * 获取接受或拒绝数组
+	 *
+	 * @return
+	 */
+	public static String[] getAcceptDisplay() {
+
+		String[] strings = mContext.getResources()
+								   .getStringArray(R.array.accept_display);
+		return strings;
+	}
+
+	public static List<String> getCustomBell(String path) {
+
+		List<String> list   = new ArrayList<String>();
+		File         folder = new File(path);
+		File[]       files  = folder.listFiles();
+		if (files == null) {
+			return list;
+		}
+		for (int i = 0; i < files.length; i++) {
+			list.add(files[i].getAbsolutePath());
+		}
+		return list;
+	}
+/*
+
+	public static List<Bell> getCustomBell(String path) {
+
+		List<Bell> list   = new ArrayList<Bell>();
+		File       folder = new File(path);
+		File[]     files  = folder.listFiles();
+		if (files == null) {
+			return list;
+		}
+		for (int i = 0; i < files.length; i++) {
+			Bell bell = new Bell();
+			bell.setBellName(files[i].getName());
+			bell.setBellPath(files[i].getAbsolutePath());
+			list.add(bell);
+		}
+		return list;
+	}
+*/
+
+	public static String formatCurrentDate(String format) {
+
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		return sdf.format(new Date());
+	}
+
+	public static String formatDate(Date date, String format) {
+
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		return sdf.format(date);
+	}
+
+	public static Date parse(String strDate) {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			return sdf.parse(strDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return new Date();
+	}
+
+	/**
+	 * 将下载的文件写入手机空间
+	 *
+	 * @param body
+	 * @param fileName
+	 * 		文件名
+	 *
+	 * @return
+	 */
+	public static File writeToDisk(ResponseBody body, String fileName) {
+
+		File filePath = new File(Environment.getExternalStorageDirectory()
+											.getPath() + File.separator + "CNPC" + File.separator + "download");
+		if (!filePath.exists()) {
+			filePath.mkdirs();
+		}
+		File file = null;
+		try {
+			// todo change the file location/name according to your needs
+			file = new File(
+					filePath,
+					fileName
+			);
+			if (file.exists()) {
+				file.delete();
+			}
+			InputStream  inputStream  = null;
+			OutputStream outputStream = null;
+
+			try {
+				byte[] fileReader = new byte[1024];
+
+				long fileSize           = body.contentLength();
+				long fileSizeDownloaded = 0;
+
+				inputStream = body.byteStream();
+				outputStream = new FileOutputStream(file);
+
+				while (true) {
+					int read = inputStream.read(fileReader);
+
+					if (read == -1) {
+						break;
+					}
+
+					outputStream.write(
+							fileReader,
+							0,
+							read
+									  );
+
+					fileSizeDownloaded += read;
+
+					KLog.d("file download: " + fileSizeDownloaded + " of " + fileSize);
+				}
+
+				outputStream.flush();
+				return file;
+			} catch (IOException e) {
+				KLog.e(e);
+				return file;
+			} finally {
+				if (inputStream != null) {
+					inputStream.close();
+				}
+
+				if (outputStream != null) {
+					outputStream.close();
+				}
+			}
+		} catch (IOException e) {
+			KLog.e(e);
+			return file;
+		}
 	}
 
 	public static void destroy() {

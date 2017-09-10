@@ -15,8 +15,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.makeryan.lib.R;
 import com.zhy.autolayout.utils.AutoUtils;
+
+import com.makeryan.lib.R;
 
 
 /**

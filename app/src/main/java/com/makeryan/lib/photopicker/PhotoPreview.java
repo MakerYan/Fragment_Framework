@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.makeryan.lib.activity.ContainerActivity;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
 import com.makeryan.lib.photopicker.fragment.ImagePagerFragment;
 
 import java.util.ArrayList;
-
-import com.makeryan.lib.fragment.fragmentation.ISupport;
 
 /**
  * Created by Donglua on 16/6/25.

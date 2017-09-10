@@ -13,11 +13,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
 
-import com.makeryan.lib.R;
 import com.makeryan.lib.util.adapter.CommonRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.makeryan.lib.R;
 
 
 public class XRecyclerView

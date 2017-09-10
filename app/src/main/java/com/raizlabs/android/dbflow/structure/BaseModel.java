@@ -7,6 +7,8 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.DefaultTransactionQueue;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -16,7 +18,8 @@ import java.io.Serializable;
 public class BaseModel
 		extends BaseObservable
 		implements Model,
-				   Serializable {
+				   Serializable,
+				   Closeable {
 
 	/**
 	 * Specifies the Action that was taken when data changes
@@ -151,5 +154,19 @@ public class BaseModel
 			modelAdapter = FlowManager.getModelAdapter(getClass());
 		}
 		return modelAdapter;
+	}
+
+	/**
+	 * Closes this stream and releases any system resources associated
+	 * with it. If the stream is already closed then invoking this
+	 * method has no effect.
+	 *
+	 * @throws IOException
+	 * 		if an I/O error occurs
+	 */
+	@Override
+	public void close()
+			throws IOException {
+
 	}
 }

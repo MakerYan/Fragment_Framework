@@ -12,10 +12,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.makeryan.lib.R;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.makeryan.lib.R;
 
 /**
  * Created by sunfusheng on 16/5/31.

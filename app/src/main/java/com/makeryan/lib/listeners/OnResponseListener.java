@@ -1,8 +1,10 @@
 package com.makeryan.lib.listeners;
 
-import com.makeryan.lib.net.Response;
-import com.makeryan.modules.vo.response.SuperResponse;
 
+import com.makeryan.lib.net.Response;
+import com.makeryan.lib.net.response.SuperResponse;
+
+import java.io.File;
 import java.util.List;
 
 /**
@@ -29,4 +31,12 @@ public interface OnResponseListener {
 	void onNextList(List<SuperResponse> response);
 
 	void onListEmpty();
+
+	void downloadFile(File file, String url);
+
+	void downloadProgress(long total, long progress, boolean idDone, String url);
+
+	void downloadComplete();
+
+	void downloadFileEmpty(String url);
 }

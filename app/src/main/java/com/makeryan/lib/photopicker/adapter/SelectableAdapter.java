@@ -18,7 +18,7 @@ public abstract class SelectableAdapter<VH extends RecyclerView.ViewHolder>
 
 	protected List<PhotoDirectory> photoDirectories;
 
-	protected List<String>         selectedPhotos;
+	protected List<String> selectedPhotos;
 
 	public int currentDirectoryIndex = 0;
 

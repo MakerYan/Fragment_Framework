@@ -26,10 +26,11 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.flyco.tablayout.utils.FragmentChangeManager;
 import com.flyco.tablayout.utils.UnreadMsgUtils;
 import com.flyco.tablayout.widget.MsgView;
-import com.makeryan.lib.R;
 import com.zhy.autolayout.AutoFrameLayout;
 
 import java.util.ArrayList;
+
+import com.makeryan.lib.R;
 
 public class SegmentTabLayout
 		extends AutoFrameLayout

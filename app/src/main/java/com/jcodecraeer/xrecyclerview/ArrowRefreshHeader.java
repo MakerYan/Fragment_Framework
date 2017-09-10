@@ -16,9 +16,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.progressindicator.AVLoadingIndicatorView;
-import com.makeryan.lib.R;
 
 import java.util.Date;
+
+import com.makeryan.lib.R;
 
 public class ArrowRefreshHeader
 		extends LinearLayout

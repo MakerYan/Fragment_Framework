@@ -2,27 +2,35 @@ package com.makeryan.lib.util;
 
 import android.content.res.Resources;
 import android.databinding.BindingAdapter;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.makeryan.lib.net.Base64;
 import com.makeryan.lib.widget.CircleImageView;
 import com.makeryan.lib.widget.CustomShapeImageView;
 import com.zhy.autolayout.AutoRelativeLayout;
 import com.zhy.autolayout.utils.AutoUtils;
+
+import java.io.IOException;
 
 /**
  * Created by MakerYan on 16/7/15 11:18.
@@ -41,6 +49,101 @@ public class BindingUtils {
 					url,
 					view
 								  );
+		}
+	}
+
+	@BindingAdapter({"src"})
+	public static void src(ImageView view, Bitmap url) {
+
+		if (url != null) {
+			ImageUtil.loadAsBitmap(
+					url,
+					view
+								  );
+		}
+	}
+
+	@BindingAdapter({"src"})
+	public static void src(ImageView view, byte[] url) {
+
+		if (url != null) {
+			ImageUtil.getRequestManager()
+					 .load(url)
+					 .centerCrop()
+					 .into(view);
+		}
+	}
+
+	@BindingAdapter({
+			"src",
+			"error"
+	})
+	public static void src(ImageView view, String url, int error) {
+
+		if (!TextUtils.isEmpty(url)) {
+			ImageUtil.loadAsBitmap(
+					url,
+					view,
+					error
+								  );
+		}
+	}
+
+	@BindingAdapter({
+			"src",
+			"placeHolder",
+			"error"
+	})
+	public static void src(ImageView view, String url, int placeHolder, int error) {
+
+		if (!TextUtils.isEmpty(url)) {
+			ImageUtil.loadAsBitmap(
+					url,
+					view,
+					placeHolder,
+					error
+								  );
+		}
+	}
+
+	@BindingAdapter({
+			"src",
+			"error"
+	})
+	public static void src(ImageView view, String url, Drawable error) {
+
+		if (!TextUtils.isEmpty(url)) {
+			ImageUtil.loadAsBitmap(
+					url,
+					view,
+					error
+								  );
+		}
+	}
+
+	@BindingAdapter({
+			"src",
+			"placeHolder",
+			"error"
+	})
+	public static void src(ImageView view, String url, Drawable placeHolder, Drawable error) {
+
+		if (!TextUtils.isEmpty(url)) {
+			ImageUtil.loadAsBitmap(
+					url,
+					view,
+					placeHolder,
+					error
+								  );
+		}
+	}
+
+	@BindingAdapter({"src"})
+	public static void src(ImageView view, int url) {
+
+		if (url != 0) {
+			view.setImageDrawable(view.getResources()
+									  .getDrawable(url));
 		}
 	}
 
@@ -79,15 +182,6 @@ public class BindingUtils {
 					url,
 					view
 								  );
-		}
-	}
-
-	@BindingAdapter({"src"})
-	public static void src(ImageView view, int url) {
-
-		if (url != 0) {
-			view.setImageDrawable(view.getResources()
-									  .getDrawable(url));
 		}
 	}
 
@@ -353,6 +447,99 @@ public class BindingUtils {
 		}
 	}
 
+	@BindingAdapter({"drawableLeft"})
+	public static void drawableLeft(EditText view, int res) {
+
+		if (res != 0) {
+			view.setCompoundDrawablesWithIntrinsicBounds(
+					res,
+					0,
+					0,
+					0
+														);
+		}
+	}
+
+	@BindingAdapter({
+			"drawableLeft",
+			"drawableWidth",
+			"drawableHeight"
+	})
+	public static void drawableLeft(EditText view, int res, int drawableWidth, int drawableHeight) {
+
+		if (res != 0) {
+			Resources resources = view.getResources();
+			Drawable  drawable  = resources.getDrawable(res);
+			drawable.setBounds(
+					0,
+					0,
+					AutoUtils.getPercentWidthSize(drawableWidth),
+					AutoUtils.getPercentHeightSize(drawableHeight)
+							  );
+			view.setCompoundDrawables(
+					drawable,
+					null,
+					null,
+					null
+									 );
+		}
+	}
+
+	@BindingAdapter({
+			"drawableLeft",
+			"drawableWidth",
+			"drawableHeight"
+	})
+	public static void drawableLeft(EditText view, Drawable drawable, int drawableWidth, int drawableHeight) {
+
+		if (drawable != null) {
+			drawable.setBounds(
+					0,
+					0,
+					AutoUtils.getPercentWidthSize(drawableWidth),
+					AutoUtils.getPercentHeightSize(drawableHeight)
+							  );
+			view.setCompoundDrawables(
+					drawable,
+					null,
+					null,
+					null
+									 );
+		}
+	}
+
+
+	@BindingAdapter({
+			"drawableLeft",
+			"drawableWidth",
+			"drawableHeight"
+	})
+	public static void drawableLeft(final EditText view, String url, final int drawableWidth, final int drawableHeight) {
+
+		if (!TextUtils.isEmpty(url)) {
+			ImageUtil.getDrawableRequestBuilder(url)
+					 .into(new SimpleTarget<GlideDrawable>() {
+
+						 @Override
+						 public void onResourceReady(GlideDrawable drawable, GlideAnimation<? super GlideDrawable> glideAnimation) {
+
+							 drawable.setBounds(
+									 0,
+									 0,
+									 AutoUtils.getPercentWidthSize(drawableWidth),
+									 AutoUtils.getPercentHeightSize(drawableHeight)
+											   );
+							 view.setCompoundDrawables(
+									 drawable,
+									 null,
+									 null,
+									 null
+													  );
+						 }
+					 });
+		}
+	}
+
 	@BindingAdapter({"drawableTop"})
 	public static void drawableTop(TextView view, int res) {
 
@@ -549,6 +736,86 @@ public class BindingUtils {
 					0,
 					res
 														);
+		}
+	}
+
+	@BindingAdapter({
+			"drawableBottom",
+			"drawableWidth",
+			"drawableHeight"
+	})
+	public static void drawableBottom(TextView view, int res, int drawableWidth, int drawableHeight) {
+
+		if (res != 0) {
+			Resources resources = view.getResources();
+			Drawable  drawable  = resources.getDrawable(res);
+			drawable.setBounds(
+					0,
+					0,
+					AutoUtils.getPercentWidthSize(drawableWidth),
+					AutoUtils.getPercentHeightSize(drawableHeight)
+							  );
+			view.setCompoundDrawables(
+					null,
+					null,
+					null,
+					drawable
+									 );
+		}
+	}
+
+	@BindingAdapter({
+			"drawableBottom",
+			"drawableWidth",
+			"drawableHeight"
+	})
+	public static void drawableBottom(TextView view, Drawable drawable, int drawableWidth, int drawableHeight) {
+
+		if (drawable != null) {
+			drawable.setBounds(
+					0,
+					0,
+					AutoUtils.getPercentWidthSize(drawableWidth),
+					AutoUtils.getPercentHeightSize(drawableHeight)
+							  );
+			view.setCompoundDrawables(
+					null,
+					null,
+					null,
+					drawable
+									 );
+		}
+	}
+
+
+	@BindingAdapter({
+			"drawableBottom",
+			"drawableWidth",
+			"drawableHeight"
+	})
+	public static void drawableBottom(final TextView view, String url, final int drawableWidth, final int drawableHeight) {
+
+		if (!TextUtils.isEmpty(url)) {
+			ImageUtil.getDrawableRequestBuilder(url)
+					 .into(new SimpleTarget<GlideDrawable>() {
+
+						 @Override
+						 public void onResourceReady(GlideDrawable drawable, GlideAnimation<? super GlideDrawable> glideAnimation) {
+
+							 drawable.setBounds(
+									 0,
+									 0,
+									 AutoUtils.getPercentWidthSize(drawableWidth),
+									 AutoUtils.getPercentHeightSize(drawableHeight)
+											   );
+							 view.setCompoundDrawables(
+									 null,
+									 null,
+									 null,
+									 drawable
+													  );
+						 }
+					 });
 		}
 	}
 
@@ -758,6 +1025,43 @@ public class BindingUtils {
 					AutoUtils.getPercentWidthSize(height);
 			view.setLayoutParams(layoutParams);
 			return;
+		}
+	}
+
+	@BindingAdapter("canScroll")
+	public static void setCanScroll(NestedScrollView view, boolean canScroll) {
+
+		view.setOnTouchListener(new View.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+
+				return !canScroll;
+			}
+		});
+	}
+
+	@BindingAdapter("canScroll")
+	public static void setCanScroll(ScrollView view, boolean canScroll) {
+
+		view.setOnTouchListener(new View.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+
+				return !canScroll;
+			}
+		});
+	}
+
+	@BindingAdapter({"decodeTwice2Str"})
+	public static void decodeTwice2Str(TextView view, String encodeContent) {
+
+		try {
+			String content = Base64.bytes2Str(Base64.decode(Base64.decode(encodeContent)));
+			view.setText(content);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

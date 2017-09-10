@@ -4,8 +4,9 @@ import android.content.Context;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.makeryan.lib.R;
 import com.makeryan.lib.fragment.fragmentation.anim.FragmentAnimator;
+
+import com.makeryan.lib.R;
 
 /**
  * @Hide Created by YoKeyword on 16/7/26.

@@ -5,12 +5,12 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.jcodecraeer.xrecyclerview.SimpleViewHolder;
-import com.makeryan.lib.photopicker.entity.Photo;
-import com.makeryan.lib.photopicker.event.Selectable;
-import com.makeryan.lib.util.adapter.CommonRecyclerViewAdapter;
 import com.makeryan.lib.BR;
 import com.makeryan.lib.R;
 import com.makeryan.lib.databinding.PickerItemPhotoBinding;
+import com.makeryan.lib.photopicker.entity.Photo;
+import com.makeryan.lib.photopicker.event.Selectable;
+import com.makeryan.lib.util.adapter.CommonRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,9 +8,10 @@ import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.makeryan.lib.R;
 import com.zhy.autolayout.utils.AutoUtils;
 import com.zhy.autolayout.utils.DimenUtils;
+
+import com.makeryan.lib.R;
 
 /**
  * Created by zhy on 16/3/3.

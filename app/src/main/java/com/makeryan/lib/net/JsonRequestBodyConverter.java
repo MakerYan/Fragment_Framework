@@ -25,8 +25,8 @@ public class JsonRequestBodyConverter<T>
 		implements Converter<T, RequestBody> {
 
 	//	private static final MediaType MEDIA_TYPE = MediaType.parse("application/octet-stream; charset=UTF-8"); // 二进制流
-	private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8"); // POST JSON
-	//	private static final MediaType MEDIA_TYPE = MediaType.parse("application/x-www-form-urlencoded; charset=UTF-8"); //表单
+	//	private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8"); // POST JSON
+	private static final MediaType MEDIA_TYPE = MediaType.parse("application/x-www-form-urlencoded; charset=UTF-8"); //表单
 
 	private static final Charset UTF_8 = Charset.forName("UTF-8");
 
@@ -68,7 +68,7 @@ public class JsonRequestBodyConverter<T>
 		//								 );
 		if (BuildConfig.DEBUG) {
 			KLog.d("request中传递的json数据：\n" + gson.toJson(value));
-			KLog.json(gson.toJson(value));
+			// KLog.json(gson.toJson(value));
 		}
 		Buffer buffer = new Buffer();
 		Writer writer = new OutputStreamWriter(

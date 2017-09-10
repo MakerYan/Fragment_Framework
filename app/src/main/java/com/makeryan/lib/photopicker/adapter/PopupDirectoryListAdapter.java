@@ -8,11 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
-import com.makeryan.lib.R;
 import com.makeryan.lib.photopicker.entity.PhotoDirectory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.makeryan.lib.R;
 
 /**
  * Created by donglua on 15/6/28.

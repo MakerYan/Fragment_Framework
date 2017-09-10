@@ -36,4 +36,39 @@ public interface EventType {
 	 * SupportFragment
 	 */
 	int TARGET_FRAGMENT = 6668;
+
+	/**
+	 * 保存录制视频
+	 */
+	int SAVE_VIDEO = 6671;
+
+	/**
+	 * RecyclerView item 移除
+	 */
+	int REMOVE_ITEM = 1991;
+
+	/**
+	 * 故障详情签到, 通知待办任务刷新状态
+	 */
+	int EXECUTE_STATUS = 7701;
+
+	/**
+	 * eventbus notify refresh to do task
+	 */
+	int REFRESH_TO_DO_TASKS = 7702;
+
+	/**
+	 * 首页巡检
+	 */
+	int ALL_INSPECTION = 7703;
+
+	/**
+	 * 首页报修
+	 */
+	int ALL_REPAIR = 7704;
+
+	/**
+	 * 信鸽_振动
+	 */
+	int XG_CONFIG = 7705;
 }

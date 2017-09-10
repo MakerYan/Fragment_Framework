@@ -7,11 +7,12 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.makeryan.lib.R;
 import com.zhy.autolayout.AutoLayoutInfo;
 import com.zhy.autolayout.utils.AutoLayoutHelper;
 
 import java.util.ArrayList;
+
+import com.makeryan.lib.R;
 
 /**
  * 自动换行布局

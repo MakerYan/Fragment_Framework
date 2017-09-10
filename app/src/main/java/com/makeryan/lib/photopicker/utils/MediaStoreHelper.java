@@ -10,10 +10,11 @@ import android.support.v4.content.Loader;
 import com.makeryan.lib.photopicker.PhotoPicker;
 import com.makeryan.lib.photopicker.entity.PhotoDirectory;
 import com.socks.library.KLog;
-import com.makeryan.lib.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.makeryan.lib.R;
 
 import static android.provider.BaseColumns._ID;
 import static android.provider.MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME;

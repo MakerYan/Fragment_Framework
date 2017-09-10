@@ -9,103 +9,177 @@ package com.makeryan.lib.net;
  */
 public interface API {
 
-	String BASE_URL = "http://120.76.41.154:9988/api/";
-
-	String BASE_NEWURL = "http://120.76.41.154:9988/newApi/";
-
-	String XY_PUBLISHID = "XUNYU-PUBLISHID";
 
 	/**
-	 * 精选
+	 * 通知与俟
 	 */
-	String JX_LIST = "jx_list.asp";
+	String QUICK_START = "http://10.206.129.209:2017/ZSY_JWX/business/pages/operationManual/operationManual.jsp";
 
-	/**
-	 * 主页推送消息
-	 */
-	String PERSONALMSG = "push_msg.asp";
+	String TEST_URL = "http://10.206.129.209:2017/ZSY_JWX/";
+
+	String WEI_CHU = "http://10.206.180.69:8080/ZSY_JWX/";
+
+	String EXTERNAL_URL = "http://119.97.219.136:2017/ZSY_JWX/";
+
+	String BASE_URL = EXTERNAL_URL;
+
+	String SUFFIX = ".action";
 
 	/**
 	 * 登录接口
 	 */
-	String USER_LOGIN = "userLogin.asp";
+	String LOGIN = "bsuser/login" + SUFFIX;
 
 	/**
-	 * 注册接口
+	 * 巡检接口
 	 */
-	String AUTOREG = "auto_reg.asp";
+	String INSPECTION = "insp/findList" + SUFFIX;
 
 	/**
-	 * 搜爱列表
+	 * 巡检ITEM详情
 	 */
-	String HOT_LIST = "hot_list.asp";
+	String INSP_DETAILS = "insp/findDetails" + SUFFIX;
 
 	/**
-	 * 请求关注某人
+	 * 完成巡检
 	 */
-	String USER_LIKE = "userLike.asp";
+	String INSP_UPDATE_INSP = "insp/updateInsp" + SUFFIX;
 
 	/**
-	 * 浏览记录
+	 * 获取故障类型
 	 */
-	String HISTORY_USER = "historyUser.asp";
+	String DEVICE_FINDDIC = "device/findDic" + SUFFIX;
 
 	/**
-	 * 礼物列表
+	 * 获取设备类型
 	 */
-	String PRESENT_LIST = "present_list.asp";
-
-	/**
-	 * 获取用户信息
-	 */
-	String USER_INFO = "user_info.asp";
-
-	/**
-	 * 设置爱情真心话
-	 */
-	String SET_ZXH = "zxh.asp";
-
-	/**
-	 * 获取设置爱情真心话
-	 */
-	String GET_ZXH = "get_zxh.asp";
-
-	/**
-	 * 提交征友条件
-	 */
-	String SAVE_CONDITION = "save_condition.asp";
-
-	/**
-	 * 修改保存个人信息
-	 */
-	String SAVE_BASEINFO = "save_baseinfo.asp";
-
-	/**
-	 * 打招呼
-	 * fid
-	 */
-	String SAY_HI = "sayHi.asp";
-
-	/**
-	 * 上传
-	 */
-	String UPLOAD_FILE = "upload.asp";
-
-	/**
-	 * 这个接口是，聊天界面，那个循环滚动播放的 谁赠送谁什么礼物
-	 * 不用额外传参数，公共参数即可
-	 */
-	String PRESENT_MESSAGE = "present_message.asp";
-
-	/**
-	 * 这个接口是 取到征友条件填 过的值。因为进入界面，需要帮用户初始化以前填过的内容
-	 * 不用额外传参数，公共参数即可
-	 */
-	String GET_CONDITION = "get_condition.asp";
+	String DEVICE_FIND_LIST = "device/findList" + SUFFIX;
 
 
 	/**
-	 * 私信->谁关注我,我的关注
+	 * 获取设备名称
 	 */
-	String PERSONAL_FOLLOW = "personal_follow.asp";
+	String DEVICE_FIND_DEVICE_NAME = "device/findLeader" + SUFFIX;
+
+	/**
+	 * 获取故障部位
+	 */
+	String DEVICE_FIND_FAULT_POSITION = "device/findPart" + SUFFIX;
+
+	/**
+	 * 获取配件厂商
+	 */
+	String DEVICE_FIND_FAC_LIST = "device/findFacList" + SUFFIX;
+
+	/**
+	 * 获取配件名称
+	 */
+	String DEVICE_FIND_BASE_LIST = "device/findBaseList" + SUFFIX;
+
+	/**
+	 * 获取品牌型号
+	 */
+	String DEVICE_FIND_MODEL_LIST = "device/findModelList" + SUFFIX;
+
+	/**
+	 * 站经理
+	 * 获取报修工单
+	 */
+	String REPA_FIND_LIST = "repa/findList" + SUFFIX;
+
+	/**
+	 * 维修工
+	 * 报修任务,加油站列表
+	 */
+	String REPA_FIND_STA_LIST = "repa/findStaList" + SUFFIX;
+
+	/**
+	 * 维修签到
+	 */
+	String REPA_SIGN = "repa/sign" + SUFFIX;
+
+	/**
+	 * 巡检签到
+	 */
+	String INSP_SIGN = "insp/sign" + SUFFIX;
+
+	/**
+	 * 立即报修
+	 */
+	String IMMEDIATE_REPAIR = "repa/addRepa" + SUFFIX;
+
+	/**
+	 * 报修-已完成
+	 */
+	String REPA_FIND_END_LIST = "repa/findEndList" + SUFFIX;
+
+	/**
+	 * 上传文件
+	 */
+	String FILE_UPLOAD = "file/upload" + SUFFIX;
+
+	/**
+	 * 上传文件
+	 */
+	String FILE_UPLOAD2 = "file/upload2" + SUFFIX;
+
+	/**
+	 * 故障描述快捷关键字
+	 */
+	String FIND_DESC_LIST = "device/findDescList" + SUFFIX;
+
+	/**
+	 * 故障详情-完成检修
+	 */
+	String REPA_UPDATE_REPA = "repa/updateRepa" + SUFFIX;
+
+	/**
+	 * 申请重新派工
+	 */
+	String REPA_AGAIN_REPA = "repa/againRepa" + SUFFIX;
+
+	/**
+	 * 更改到站日期
+	 */
+	String INSP_AGAIN_INSP = "insp/againInsp" + SUFFIX;
+
+	/**
+	 * 新增设备
+	 */
+	String DEVICE_ADD_TEMP = "device/addTemp" + SUFFIX;
+
+	/**
+	 * 已报修列表
+	 */
+	String REPA_FIND_OWN_LIST = "repa/findOwnList" + SUFFIX;
+
+	/**
+	 * 个人中心
+	 */
+	String BSUSER_FIND_BASE = "bsuser/findBase" + SUFFIX;
+
+	/**
+	 * 修改密码
+	 */
+	String BSUSER_UPDATE_PASSWORD = "bsuser/updatePsd" + SUFFIX;
+
+	/**
+	 * 公告查询
+	 */
+	String BSUSER_FIND_NOTICE = "bsuser/findNotice" + SUFFIX;
+
+	/**
+	 * 获取当前APP版本
+	 */
+	String BSUSER_FIND_APP_VERSION = "bsuser/findAppVersion" + SUFFIX;
+
+	/**
+	 * 本地存储数据的版本
+	 */
+	String BSUSER_FIND_DIC_VERSION = "bsuser/findDicVersion" + SUFFIX;
+
+	/**
+	 * 风险作业
+	 */
+	String REPA_UPDATE_RISK = "repa/updateRisk" + SUFFIX;
 }

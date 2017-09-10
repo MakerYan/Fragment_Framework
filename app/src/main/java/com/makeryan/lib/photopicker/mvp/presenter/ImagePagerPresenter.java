@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
+import com.makeryan.lib.databinding.FragmentImagePagerBinding;
 import com.makeryan.lib.fragment.fragmentation.ISupport;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.photopicker.adapter.PhotoPagerAdapter;
@@ -14,7 +15,6 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
-import com.makeryan.lib.databinding.FragmentImagePagerBinding;
 
 import java.util.ArrayList;
 

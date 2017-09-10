@@ -2,11 +2,13 @@ package com.makeryan.lib.net;
 
 import android.text.TextUtils;
 
+import com.makeryan.lib.BuildConfig;
 import com.socks.library.KLog;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,7 +23,9 @@ import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okio.Buffer;
+import okio.BufferedSource;
 
 
 /**
@@ -34,6 +38,8 @@ import okio.Buffer;
 public class BasicParamsInterceptor
 		implements Interceptor {
 
+	ProgressListener mProgressListener = null;
+
 	Map<String, String> queryParamsMap = new HashMap<>();
 
 	Map<String, String> paramsMap = new HashMap<>();
@@ -44,6 +50,11 @@ public class BasicParamsInterceptor
 
 	private BasicParamsInterceptor() {
 
+	}
+
+	private BasicParamsInterceptor(ProgressListener progressListener) {
+
+		mProgressListener = progressListener;
 	}
 
 	private static String bodyToString(final RequestBody request) {
@@ -78,10 +89,10 @@ public class BasicParamsInterceptor
 			while (iterator.hasNext()) {
 				Map.Entry entry = (Map.Entry) iterator.next();
 				String    value = String.valueOf(entry.getValue());
-//				KLog.d("\nkey : " + entry.getKey() + "\nvalue : " + new String(
-//						Base64.decode(value),
-//						"UTF-8"
-//				));
+				//				KLog.d("\nkey : " + entry.getKey() + "\nvalue : " + new String(
+				//						Base64.decode(value),
+				//						"UTF-8"
+				//				));
 				if (!TextUtils.isEmpty(value)) {
 					try {
 						headerBuilder.add(
@@ -156,15 +167,35 @@ public class BasicParamsInterceptor
 					paramsMap
 							   );
 		}
-		KLog.d(
-				"BaseHttp",
-				"url : " + request.url()
-								  .
-
-										  toString()
-			  );
 		request = requestBuilder.build();
-		return chain.proceed(request);
+		Response response = chain.proceed(request);
+		if (BuildConfig.DEBUG) {
+			//获得返回的body，注意此处不要使用responseBody.string()获取返回数据，原因在于这个方法会消耗返回结果的数据(buffer)
+			ResponseBody responseBody = response.body();
+
+			//为了不消耗buffer，我们这里使用source先获得buffer对象，然后clone()后使用
+			BufferedSource source = responseBody.source();
+			source.request(Long.MAX_VALUE); // Buffer the entire body.
+			//获得返回的数据
+			Buffer buffer = source.buffer();
+			KLog.d("url : " + request.url()
+									 .toString());
+			//使用前clone()下，避免直接消耗
+			KLog.d("response:\n" + buffer.clone()
+										 .readString(Charset.forName("UTF-8")));
+		}
+
+
+		if (mProgressListener != null) {
+			return response.newBuilder()
+						   .body(new ProgressResponseBody(
+								   response.body(),
+								   mProgressListener
+						   ))
+						   .build();
+		} else {
+			return response;
+		}
 	}
 
 	private boolean canInjectIntoBody(Request request) {
@@ -222,6 +253,12 @@ public class BasicParamsInterceptor
 		public Builder() {
 
 			interceptor = new BasicParamsInterceptor();
+		}
+
+
+		public Builder(ProgressListener progressListener) {
+
+			interceptor = new BasicParamsInterceptor(progressListener);
 		}
 
 		public Builder addParam(String key, String value) {

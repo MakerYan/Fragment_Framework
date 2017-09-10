@@ -9,7 +9,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
-import android.util.Log;
+
+import com.socks.library.KLog;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,9 +28,9 @@ public class ImageCaptureManager {
 
 	private final static String CAPTURED_PHOTO_PATH_KEY = "mCurrentPhotoPath";
 
-	public static final  int    REQUEST_TAKE_PHOTO      = 1;
+	public static final int REQUEST_TAKE_PHOTO = 1;
 
-	private String  mCurrentPhotoPath;
+	private String mCurrentPhotoPath;
 
 	private Context mContext;
 
@@ -41,19 +42,21 @@ public class ImageCaptureManager {
 	private File createImageFile()
 			throws IOException {
 		// Create an image file name
-		String timeStamp     = new SimpleDateFormat(
+		String timeStamp = new SimpleDateFormat(
 				"yyyyMMdd_HHmmss",
 				Locale.ENGLISH
 		).format(new Date());
 		String imageFileName = "JPEG_" + timeStamp + ".jpg";
-		File   storageDir    = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+		File storageDir = new File(Environment.getExternalStorageDirectory()
+											  .getPath() + File.separator + "CNPC" + File.separator + "upload");
+		//		File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
 		if (!storageDir.exists()) {
-			if (!storageDir.mkdir()) {
-				Log.e(
+			if (!storageDir.mkdirs()) {
+				KLog.e(
 						"TAG",
 						"Throwing Errors...."
-					 );
+					  );
 				throw new IOException();
 			}
 		}

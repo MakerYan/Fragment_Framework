@@ -31,9 +31,10 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.flyco.tablayout.utils.FragmentChangeManager;
 import com.flyco.tablayout.utils.UnreadMsgUtils;
 import com.flyco.tablayout.widget.MsgView;
-import com.makeryan.lib.R;
 
 import java.util.ArrayList;
+
+import com.makeryan.lib.R;
 
 /**
  * 没有继承HorizontalScrollView不能滑动,对于ViewPager无依赖

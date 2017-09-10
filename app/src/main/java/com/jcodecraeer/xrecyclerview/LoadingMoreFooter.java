@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.progressindicator.AVLoadingIndicatorView;
+
 import com.makeryan.lib.R;
 
 public class LoadingMoreFooter

@@ -20,7 +20,7 @@ public class FileRequestBodyConverter
 			throws IOException {
 
 		return RequestBody.create(
-//				MediaType.parse("application/otcet-stream"),
+				//				MediaType.parse("application/otcet-stream"),
 				MediaType.parse("multipart/form-data"),
 				file
 								 );

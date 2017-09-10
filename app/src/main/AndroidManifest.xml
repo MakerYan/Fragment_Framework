@@ -19,10 +19,11 @@
 		android:label="@string/app_name"
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
-		android:theme="@style/AppTheme">
+		android:theme="@style/TransparentStatusBar">
 		<activity
-			android:name=".ContainerActivity"
+			android:name=".activity.ContainerActivity"
 			android:label="@string/app_name"
+			android:launchMode="standard"
 			android:theme="@style/AppTheme.NoActionBar">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
@@ -48,28 +49,6 @@
 				android:resource="@xml/__picker_provider_paths"/>
 		</provider>
 
-		<!--remote service-->
-		<service
-			android:name=".services.MkService"
-			android:enabled="true"
-			android:exported="true">
-		</service>
-
-		<!--push service-->
-		<service
-			android:name="com.makeryan.modules.services.PushService"
-			android:enabled="true"
-			android:exported="true"
-			android:process=":push">
-		</service>
-
-		<!--notification receiver-->
-		<receiver
-			android:name="com.makeryan.modules.notifications.NotificationReceiver"
-			android:enabled="true"
-			android:exported="true"
-			android:process=":push">
-		</receiver>
 	</application>
 
 </manifest>

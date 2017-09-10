@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jcodecraeer.xrecyclerview.SimpleViewHolder;
+import com.makeryan.lib.BR;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 /**
  * Created by MakerYan on 16/8/7 23:14.
@@ -33,6 +35,8 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	protected OnRecyclerViewItemClickListener<T> mItemClickListener;
 
 	protected ArrayList<T> mDataList = new ArrayList<T>();
+
+	protected ArrayList<T> mSelectedDataList = new ArrayList<T>();
 
 	/**
 	 * item 最大数量
@@ -129,8 +133,8 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 
 		if (dataList != null) {
 			mDataList.addAll(dataList);
-			notifyDataSetChanged();
 		}
+		notifyDataSetChanged();
 	}
 
 	public void addDataList(int position, List<T> dataList) {
@@ -235,7 +239,7 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 		notifyDataSetChanged();
 	}
 
-	public void removeItems(int position) {
+	public void removeItem(int position) {
 
 		mDataList.remove(position);
 		notifyDataSetChanged();
@@ -259,7 +263,7 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 
 	public void clear() {
 
-		mDataList.clear();
+		mDataList = new ArrayList<T>();
 		notifyDataSetChanged();
 	}
 
@@ -452,6 +456,7 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	}
 
 	/**
+	 * 单项选择
 	 * 设置选中Item
 	 *
 	 * @param position
@@ -463,6 +468,7 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	}
 
 	/**
+	 * 单项选择
 	 * 设置选中Item
 	 *
 	 * @param item
@@ -475,6 +481,83 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 		}
 	}
 
+	/**
+	 * 多项选择
+	 * 设置选中Item
+	 *
+	 * @param position
+	 */
+	public void toggleSelected(int position) {
+
+		T item = mDataList.get(position);
+		if (mSelectedDataList.contains(item)) {
+			this.mSelectedDataList.remove(item);
+		} else {
+			this.mSelectedDataList.add(item);
+		}
+		notifyDataSetChanged();
+	}
+
+	/**
+	 * 多项选择
+	 * 设置选中Item
+	 *
+	 * @param item
+	 */
+	public void toggleSelected(T item) {
+
+		if (this.mSelectedDataList.contains(item)) {
+			this.mSelectedDataList.remove(item);
+		} else {
+			this.mSelectedDataList.add(item);
+		}
+		notifyDataSetChanged();
+	}
+
+	/**
+	 * 全选或全不选
+	 */
+	public void toggleAll() {
+
+		if (this.mSelectedDataList.isEmpty()) {
+			this.mSelectedDataList.addAll(mDataList);
+		} else {
+			this.mSelectedDataList.clear();
+		}
+		notifyDataSetChanged();
+	}
+
+	public boolean isToggle(int position) {
+
+		if (this.mSelectedDataList.size() == 0) {
+			return false;
+		}
+		return this.mSelectedDataList.contains(mDataList.get(position));
+	}
+
+	public boolean isToggle(T item) {
+
+		if (this.mSelectedDataList.size() == 0) {
+			return false;
+		}
+		return this.mSelectedDataList.contains(item);
+	}
+
+	/**
+	 * @return 多项选择数据
+	 */
+	public ArrayList<T> getSelectedDataList() {
+
+		return mSelectedDataList;
+	}
+
+	/**
+	 * 单项选择调用
+	 *
+	 * @param position
+	 *
+	 * @return
+	 */
 	public boolean isSelected(int position) {
 
 		return mSelectedPosition == position;
@@ -522,7 +605,29 @@ public abstract class CommonRecyclerViewAdapter<T, D extends ViewDataBinding>
 	 * @param binding
 	 * @param data
 	 */
-	public abstract void bindData(int position, SimpleViewHolder holder, D binding, T data);
+	public void bindData(int position, SimpleViewHolder holder, D binding, T data) {
+
+		binding.setVariable(
+				BR.position,
+				position
+						   );
+		binding.setVariable(
+				BR.holder,
+				holder
+						   );
+		binding.setVariable(
+				BR.adapter,
+				this
+						   );
+		binding.setVariable(
+				BR.item,
+				data
+						   );
+		binding.setVariable(
+				BR.listener,
+				mItemClickListener
+						   );
+	}
 
 	/**
 	 * bind group data

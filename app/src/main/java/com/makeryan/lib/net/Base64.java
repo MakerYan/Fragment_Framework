@@ -1,5 +1,7 @@
 package com.makeryan.lib.net;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * <p>Encodes and decodes to and from Base64 notation.</p>
  * <p>Homepage: <a href="http://iharder.net/base64">http://iharder.net/base64</a>.</p>
@@ -938,8 +940,8 @@ public class Base64 {
 			-9,
 			-9
 			// Decimal 123 - 126
-      /*,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 127 - 139
-        -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 140 - 152
+	  /*,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 127 - 139
+		-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 140 - 152
         -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 153 - 165
         -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 166 - 178
         -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 179 - 191
@@ -2099,6 +2101,24 @@ public class Base64 {
 		return bytes;
 	}   // end decode
 
+
+	public static String bytes2Str(byte[] source)
+			throws UnsupportedEncodingException {
+
+		return new String(
+				source,
+				"UTF-8"
+		);
+	}
+
+	public static String bytes2Str(byte[] source, String charsetName)
+			throws UnsupportedEncodingException {
+
+		return new String(
+				source,
+				charsetName
+		);
+	}
 
 	/**
 	 * Attempts to decode Base64 data and deserialize a Java

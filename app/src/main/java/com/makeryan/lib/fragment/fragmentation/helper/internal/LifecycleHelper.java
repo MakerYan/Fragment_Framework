@@ -3,10 +3,9 @@ package com.makeryan.lib.fragment.fragmentation.helper.internal;
 import android.os.Bundle;
 
 import com.makeryan.lib.fragment.fragmentation.SupportFragment;
+import com.makeryan.lib.fragment.fragmentation.helper.FragmentLifecycleCallbacks;
 
 import java.util.ArrayList;
-
-import com.makeryan.lib.fragment.fragmentation.helper.FragmentLifecycleCallbacks;
 
 
 public class LifecycleHelper {

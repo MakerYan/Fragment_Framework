@@ -38,7 +38,7 @@ import android.widget.OverScroller;
 import android.widget.Scroller;
 
 public class TouchImageView
-        extends ImageView {
+		extends ImageView {
 
 	private static final String DEBUG = "DEBUG";
 
@@ -76,19 +76,19 @@ public class TouchImageView
 
 	private State state;
 
-	private float   minScale;
+	private float minScale;
 
-	private float   maxScale;
+	private float maxScale;
 
-	private float   superMinScale;
+	private float superMinScale;
 
-	private float   superMaxScale;
+	private float superMaxScale;
 
 	private float[] m;
 
 	private Context context;
 
-	private Fling   fling;
+	private Fling fling;
 
 	private ScaleType mScaleType;
 
@@ -110,13 +110,13 @@ public class TouchImageView
 
 	private ScaleGestureDetector mScaleDetector;
 
-	private GestureDetector      mGestureDetector;
+	private GestureDetector mGestureDetector;
 
-	private GestureDetector.OnDoubleTapListener doubleTapListener      = null;
+	private GestureDetector.OnDoubleTapListener doubleTapListener = null;
 
-	private OnTouchListener                     userTouchListener      = null;
+	private OnTouchListener userTouchListener = null;
 
-	private OnTouchImageViewListener            touchImageViewListener = null;
+	private OnTouchImageViewListener touchImageViewListener = null;
 
 	public TouchImageView(Context context) {
 
@@ -267,11 +267,11 @@ public class TouchImageView
 		if (mScaleType == ScaleType.FIT_XY) {
 			throw new UnsupportedOperationException("getZoomedRect() not supported with FIT_XY");
 		}
-		PointF topLeft     = transformCoordTouchToBitmap(
+		PointF topLeft = transformCoordTouchToBitmap(
 				0,
 				0,
 				true
-														);
+													);
 		PointF bottomRight = transformCoordTouchToBitmap(
 				viewWidth,
 				viewHeight,
@@ -370,7 +370,8 @@ public class TouchImageView
 		onDrawReady = true;
 		imageRenderedAtLeastOnce = true;
 		if (delayedZoomVariables != null) {
-			setZoom(delayedZoomVariables.scale,
+			setZoom(
+					delayedZoomVariables.scale,
 					delayedZoomVariables.focusX,
 					delayedZoomVariables.focusY,
 					delayedZoomVariables.scaleType
@@ -653,12 +654,12 @@ public class TouchImageView
 			maxTrans = 0;
 		}
 
-      if (trans < minTrans) {
-        return -trans + minTrans;
-      }
-      if (trans > maxTrans) {
-        return -trans + maxTrans;
-      }
+		if (trans < minTrans) {
+			return -trans + minTrans;
+		}
+		if (trans > maxTrans) {
+			return -trans + maxTrans;
+		}
 		return 0;
 	}
 
@@ -834,13 +835,14 @@ public class TouchImageView
 			//
 			float prevActualWidth = prevMatchViewWidth * normalizedScale;
 			float actualWidth     = getImageWidth();
-			translateMatrixAfterRotate(Matrix.MTRANS_X,
-									   transX,
-									   prevActualWidth,
-									   actualWidth,
-									   prevViewWidth,
-									   viewWidth,
-									   drawableWidth
+			translateMatrixAfterRotate(
+					Matrix.MTRANS_X,
+					transX,
+					prevActualWidth,
+					actualWidth,
+					prevViewWidth,
+					viewWidth,
+					drawableWidth
 									  );
 
 			//
@@ -848,13 +850,14 @@ public class TouchImageView
 			//
 			float prevActualHeight = prevMatchViewHeight * normalizedScale;
 			float actualHeight     = getImageHeight();
-			translateMatrixAfterRotate(Matrix.MTRANS_Y,
-									   transY,
-									   prevActualHeight,
-									   actualHeight,
-									   prevViewHeight,
-									   viewHeight,
-									   drawableHeight
+			translateMatrixAfterRotate(
+					Matrix.MTRANS_Y,
+					transY,
+					prevActualHeight,
+					actualHeight,
+					prevViewHeight,
+					viewHeight,
+					drawableHeight
 									  );
 
 			//
@@ -1020,10 +1023,10 @@ public class TouchImageView
 				consumed = doubleTapListener.onDoubleTap(e);
 			}
 			if (state == State.NONE) {
-				float         targetZoom = (normalizedScale == minScale) ?
+				float targetZoom = (normalizedScale == minScale) ?
 						maxScale :
 						minScale;
-				DoubleTapZoom doubleTap  = new DoubleTapZoom(
+				DoubleTapZoom doubleTap = new DoubleTapZoom(
 						targetZoom,
 						e.getX(),
 						e.getY(),
@@ -1078,16 +1081,16 @@ public class TouchImageView
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
 						last.set(curr);
-                      if (fling != null) {
-                        fling.cancelFling();
-                      }
+						if (fling != null) {
+							fling.cancelFling();
+						}
 						setState(State.DRAG);
 						break;
 
 					case MotionEvent.ACTION_MOVE:
 						if (state == State.DRAG) {
-							float deltaX    = curr.x - last.x;
-							float deltaY    = curr.y - last.y;
+							float deltaX = curr.x - last.x;
+							float deltaY = curr.y - last.y;
 							float fixTransX = getFixDragTrans(
 									deltaX,
 									viewWidth,
@@ -1330,12 +1333,12 @@ public class TouchImageView
 		 */
 		private void translateImageToCenterTouchPosition(float t) {
 
-			float  targetX = startTouch.x + t * (endTouch.x - startTouch.x);
-			float  targetY = startTouch.y + t * (endTouch.y - startTouch.y);
-			PointF curr    = transformCoordBitmapToTouch(
+			float targetX = startTouch.x + t * (endTouch.x - startTouch.x);
+			float targetY = startTouch.y + t * (endTouch.y - startTouch.y);
+			PointF curr = transformCoordBitmapToTouch(
 					bitmapX,
 					bitmapY
-														);
+													 );
 			matrix.postTranslate(
 					targetX - curr.x,
 					targetY - curr.y
@@ -1453,7 +1456,7 @@ public class TouchImageView
 
 		CompatScroller scroller;
 
-		int            currX, currY;
+		int currX, currY;
 
 		Fling(int velocityX, int velocityY) {
 
@@ -1538,11 +1541,11 @@ public class TouchImageView
 	@TargetApi(VERSION_CODES.GINGERBREAD)
 	private class CompatScroller {
 
-		Scroller     scroller;
+		Scroller scroller;
 
 		OverScroller overScroller;
 
-		boolean      isPreGingerbread;
+		boolean isPreGingerbread;
 
 		public CompatScroller(Context context) {
 
@@ -1644,11 +1647,11 @@ public class TouchImageView
 
 	private class ZoomVariables {
 
-		public float     scale;
+		public float scale;
 
-		public float     focusX;
+		public float focusX;
 
-		public float     focusY;
+		public float focusY;
 
 		public ScaleType scaleType;
 

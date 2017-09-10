@@ -8,13 +8,14 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.TextView;
 
-import com.makeryan.lib.R;
 import com.zhy.autolayout.AutoLayoutInfo;
 import com.zhy.autolayout.utils.AutoLayoutHelper;
 import com.zhy.autolayout.utils.AutoUtils;
 import com.zhy.autolayout.utils.DimenUtils;
 
 import java.lang.reflect.Field;
+
+import com.makeryan.lib.R;
 
 /**
  * Created by hupei on 2015/12/28 20:33.

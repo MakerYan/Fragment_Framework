@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.makeryan.lib.R;
 import com.makeryan.lib.fragment.fragmentation_swipeback.SwipeBackActivity;
 import com.makeryan.lib.fragment.fragmentation_swipeback.SwipeBackFragment;
 
@@ -24,6 +23,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.makeryan.lib.R;
 
 /**
  * Thx https://github.com/ikew0ng/SwipeBackLayout

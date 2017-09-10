@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.makeryan.lib.R;
 import com.zhy.autolayout.AutoLayoutInfo;
 import com.zhy.autolayout.utils.AutoLayoutHelper;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -15,6 +14,8 @@ import com.zhy.autolayout.utils.AutoUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import com.makeryan.lib.R;
 
 /**
  * Created by zhy on 15/12/10.

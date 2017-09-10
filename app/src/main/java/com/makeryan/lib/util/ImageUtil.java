@@ -2,6 +2,7 @@ package com.makeryan.lib.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.ImageView;
 
@@ -135,24 +136,86 @@ public class ImageUtil {
 							  .into(imageView);
 	}
 
-	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, int defaulImgId) {
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, int error) {
 
-		return loadAsBitmap(
-				url,
-				imageView,
-				defaulImgId,
-				0.3f
-						   );
+		return sRequestManager.load(url)
+							  .asBitmap()
+							  .thumbnail(0.03f)
+							  .error(error)
+							  .centerCrop()
+							  .into(imageView);
 
 	}
 
-	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, int defaulImgId, float thumbnail) {
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, Drawable error) {
+
+		return sRequestManager.load(url)
+							  .asBitmap()
+							  .thumbnail(0.03f)
+							  .error(error)
+							  .centerCrop()
+							  .into(imageView);
+
+	}
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, int placeHolder, int error) {
+
+		return sRequestManager.load(url)
+							  .asBitmap()
+							  .thumbnail(0.03f)
+							  .error(error)
+							  .placeholder(placeHolder)
+							  .centerCrop()
+							  .into(imageView);
+
+	}
+
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, float thumbnail, Drawable placeHolder, Drawable error) {
 
 		return sRequestManager.load(url)
 							  .asBitmap()
 							  .thumbnail(thumbnail)
-							  .error(defaulImgId)
-							  .placeholder(defaulImgId)
+							  .error(error)
+							  .placeholder(placeHolder)
+							  .centerCrop()
+							  .into(imageView);
+
+	}
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, Drawable placeHolder, Drawable error) {
+
+		return sRequestManager.load(url)
+							  .asBitmap()
+							  .thumbnail(0.03f)
+							  .error(error)
+							  .placeholder(placeHolder)
+							  .centerCrop()
+							  .into(imageView);
+
+	}
+
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, float thumbnail, int placeHolder, int error) {
+
+		return sRequestManager.load(url)
+							  .asBitmap()
+							  .thumbnail(thumbnail)
+							  .error(error)
+							  .placeholder(placeHolder)
+							  .centerCrop()
+							  .into(imageView);
+
+	}
+
+
+	public static com.bumptech.glide.request.target.Target loadAsBitmap(String url, ImageView imageView, int placeHolder, float thumbnail) {
+
+		return sRequestManager.load(url)
+							  .asBitmap()
+							  .thumbnail(thumbnail)
+							  .error(placeHolder)
+							  .placeholder(placeHolder)
 							  .centerCrop()
 							  .into(imageView);
 

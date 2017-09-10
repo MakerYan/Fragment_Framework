@@ -6,11 +6,14 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.makeryan.lib.R;
+import com.makeryan.lib.databinding.FragmentPhotoPickerBinding;
 import com.makeryan.lib.fragment.BaseFragment;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.photopicker.mvp.presenter.PhotoPickerPresenter;
-import com.makeryan.lib.R;
-import com.makeryan.lib.databinding.FragmentPhotoPickerBinding;
+import com.makeryan.lib.photopicker.utils.PermissionsUtils;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.ShowRequestPermissionRationale;
 
 import java.util.ArrayList;
 
@@ -116,5 +119,35 @@ public class PhotoPickerFragment
 	protected void doAction() {
 
 		mPresenter.init(mBinding);
+	}
+
+	@ShowRequestPermissionRationale(PermissionsUtils.REQUEST_CODE_CAMERA)
+	public void whyNeedCamera() {
+
+		MPermissions.requestPermissions(
+				this,
+				PermissionsUtils.REQUEST_CODE_CAMERA,
+				PermissionsUtils.CAMERA
+									   );
+	}
+
+	@ShowRequestPermissionRationale(PermissionsUtils.REQUEST_CODE_WRITE_EXTERNAL_STORAGE)
+	public void whyNeedWriteExternalStorage() {
+
+		MPermissions.requestPermissions(
+				this,
+				PermissionsUtils.REQUEST_CODE_WRITE_EXTERNAL_STORAGE,
+				PermissionsUtils.WRITE_EXTERNAL_STORAGE
+									   );
+	}
+
+	@ShowRequestPermissionRationale(PermissionsUtils.REQUEST_CODE_RECORD_AUDIO)
+	public void whyNeedRecordAudio() {
+
+		MPermissions.requestPermissions(
+				this,
+				PermissionsUtils.REQUEST_CODE_RECORD_AUDIO,
+				PermissionsUtils.RECORD_AUDIO
+									   );
 	}
 }

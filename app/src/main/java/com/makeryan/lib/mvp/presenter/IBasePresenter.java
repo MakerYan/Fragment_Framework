@@ -2,6 +2,7 @@ package com.makeryan.lib.mvp.presenter;//package com.xiaoxixi8.shiguangji.mvp.pr
 
 
 import com.makeryan.lib.fragment.fragmentation.ISupport;
+
 import rx.functions.Action0;
 import rx.functions.Action1;
 

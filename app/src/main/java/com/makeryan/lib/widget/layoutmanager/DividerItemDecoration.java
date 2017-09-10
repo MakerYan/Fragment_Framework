@@ -10,8 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.makeryan.lib.R;
 import com.zhy.autolayout.utils.AutoUtils;
+
+import com.makeryan.lib.R;
 
 /**
  * Created by Maker on 16/11/13.

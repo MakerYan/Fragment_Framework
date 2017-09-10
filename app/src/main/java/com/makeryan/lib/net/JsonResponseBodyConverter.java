@@ -3,8 +3,6 @@ package com.makeryan.lib.net;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
-import com.makeryan.lib.BuildConfig;
-import com.socks.library.KLog;
 
 import java.io.IOException;
 
@@ -69,9 +67,6 @@ public class JsonResponseBodyConverter<T>
 		JsonReader jsonReader = mGson.newJsonReader(responseBody.charStream());
 		try {
 			T read = adapter.read(jsonReader);
-			if (BuildConfig.DEBUG) {
-				KLog.json(mGson.toJson(read));
-			}
 			return read;
 		} finally {
 			responseBody.close();

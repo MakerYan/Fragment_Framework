@@ -2,9 +2,7 @@ package com.makeryan.lib.photopicker.mvp.presenter;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -13,11 +11,13 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.jcodecraeer.xrecyclerview.SimpleViewHolder;
+import com.makeryan.lib.BR;
+import com.makeryan.lib.R;
+import com.makeryan.lib.databinding.FragmentPhotoPickerBinding;
 import com.makeryan.lib.event.EventBean;
 import com.makeryan.lib.event.EventType;
 import com.makeryan.lib.fragment.fragmentation.ISupport;
 import com.makeryan.lib.fragment.fragmentation.SupportActivity;
-import com.makeryan.lib.fragment.fragmentation.SupportFragment;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.photopicker.adapter.PhotoGridBindingAdapter;
 import com.makeryan.lib.photopicker.adapter.PopupDirectoryListAdapter;
@@ -26,15 +26,11 @@ import com.makeryan.lib.photopicker.entity.PhotoDirectory;
 import com.makeryan.lib.photopicker.fragment.ImagePagerFragment;
 import com.makeryan.lib.photopicker.utils.ImageCaptureManager;
 import com.makeryan.lib.photopicker.utils.MediaStoreHelper;
-import com.makeryan.lib.photopicker.utils.PermissionsConstant;
 import com.makeryan.lib.photopicker.utils.PermissionsUtils;
 import com.makeryan.lib.util.ImageUtil;
 import com.makeryan.lib.util.ToastUtil;
 import com.makeryan.lib.util.adapter.CommonRecyclerViewAdapter;
 import com.socks.library.KLog;
-import com.makeryan.lib.BR;
-import com.makeryan.lib.R;
-import com.makeryan.lib.databinding.FragmentPhotoPickerBinding;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -267,10 +263,19 @@ public class PhotoPickerPresenter
 
 		int id = v.getId();
 		if (id == R.id.ivCamera) {
-			if (!PermissionsUtils.checkCameraPermission(getView().getTopFragment())) {
+
+			if (!checkPermission(PermissionsUtils.CAMERA)) {
+				requestPermission(
+						PermissionsUtils.REQUEST_CODE_CAMERA,
+						PermissionsUtils.CAMERA
+								 );
 				return;
 			}
-			if (!PermissionsUtils.checkWriteStoragePermission(getView().getTopFragment())) {
+			if (!checkPermission(PermissionsUtils.WRITE_EXTERNAL_STORAGE)) {
+				requestPermission(
+						PermissionsUtils.REQUEST_CODE_WRITE_EXTERNAL_STORAGE,
+						PermissionsUtils.WRITE_EXTERNAL_STORAGE
+								 );
 				return;
 			}
 			openCamera();
@@ -337,23 +342,6 @@ public class PhotoPickerPresenter
 						mAdapter.toggleSelection(selectedPath);
 					}
 				}
-			}
-		}
-	}
-
-
-	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-		if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-			SupportFragment fragment = getView().getTopFragment();
-			switch (requestCode) {
-				case PermissionsConstant.REQUEST_CAMERA:
-				case PermissionsConstant.REQUEST_EXTERNAL_WRITE:
-					if (PermissionsUtils.checkWriteStoragePermission(fragment) && PermissionsUtils.checkCameraPermission(fragment)) {
-						openCamera();
-					}
-					break;
 			}
 		}
 	}

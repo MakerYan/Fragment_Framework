@@ -21,9 +21,10 @@ import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 
-import com.makeryan.lib.R;
 import com.zhy.autolayout.AutoLayoutInfo;
 import com.zhy.autolayout.utils.AutoLayoutHelper;
+
+import com.makeryan.lib.R;
 
 
 /**

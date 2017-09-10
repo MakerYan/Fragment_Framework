@@ -10,13 +10,15 @@ import android.support.annotation.RequiresApi;
 
 public class PermissionsConstant {
 
-	public static final int REQUEST_CAMERA         = 1;
+	public static final int REQUEST_CAMERA = 1;
 
-	public static final int REQUEST_EXTERNAL_READ  = 2;
+	public static final int REQUEST_EXTERNAL_READ = 2;
 
 	public static final int REQUEST_EXTERNAL_WRITE = 3;
 
-	public static final String[] PERMISSIONS_CAMERA         = {
+	public static final int REQUEST_RECORD_AUDIO = 4;
+
+	public static final String[] PERMISSIONS_CAMERA = {
 			Manifest.permission.CAMERA,
 			Manifest.permission.WRITE_EXTERNAL_STORAGE
 	};
@@ -28,5 +30,9 @@ public class PermissionsConstant {
 	@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 	public static final String[] PERMISSIONS_EXTERNAL_READ = {
 			Manifest.permission.READ_EXTERNAL_STORAGE
+	};
+
+	public static final String[] PERMISSIONS_RECORD_AUDIO = {
+			Manifest.permission.RECORD_AUDIO
 	};
 }

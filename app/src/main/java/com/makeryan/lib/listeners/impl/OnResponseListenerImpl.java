@@ -2,8 +2,9 @@ package com.makeryan.lib.listeners.impl;
 
 import com.makeryan.lib.listeners.OnResponseListener;
 import com.makeryan.lib.net.Response;
-import com.makeryan.modules.vo.response.SuperResponse;
+import com.makeryan.lib.net.response.SuperResponse;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -55,6 +56,26 @@ public class OnResponseListenerImpl
 
 	@Override
 	public void onListEmpty() {
+
+	}
+
+	@Override
+	public void downloadFile(File file, String url) {
+
+	}
+
+	@Override
+	public void downloadProgress(long total, long progress, boolean isDone, String url) {
+
+	}
+
+	@Override
+	public void downloadComplete() {
+
+	}
+
+	@Override
+	public void downloadFileEmpty(String url) {
 
 	}
 }

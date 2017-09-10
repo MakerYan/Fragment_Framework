@@ -1,9 +1,11 @@
 package com.makeryan.lib.util;
 
-import com.google.gson.Gson;
 import com.makeryan.modules.database.UserInfo;
+import com.raizlabs.android.dbflow.sql.language.From;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.Model;
+
+import java.util.List;
 
 /**
  * Created by MakerYan on 2017/4/12 13:42.
@@ -13,8 +15,6 @@ import com.raizlabs.android.dbflow.structure.Model;
  * package name : com.makeryan.lib.util
  */
 public class FlowUtils {
-
-	protected static Gson mGson = new Gson();
 
 	/**
 	 * 从数据库中获取表对象
@@ -37,6 +37,23 @@ public class FlowUtils {
 		}
 		return t;
 	}
+
+	public static <T extends Model> List<T> queryList(Class<T> model) {
+
+		List<T> list = SQLite.select()
+							 .from(model)
+							 .queryList();
+		return list;
+	}
+
+
+	public static <T extends Model> From<T> from(Class<T> model) {
+
+		From<T> from = SQLite.select()
+							 .from(model);
+		return from;
+	}
+
 
 	/**
 	 * @return 获取用户信息对象

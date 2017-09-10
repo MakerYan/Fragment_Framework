@@ -11,12 +11,13 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.makeryan.lib.R;
 import com.makeryan.lib.photopicker.utils.AndroidLifecycleUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.makeryan.lib.R;
 
 /**
  * Created by donglua on 15/6/21.
@@ -39,9 +40,10 @@ public class PhotoPagerAdapter
 
 		final Context context = container.getContext();
 		View itemView = LayoutInflater.from(context)
-									  .inflate(R.layout.__picker_picker_item_pager,
-											   container,
-											   false
+									  .inflate(
+											  R.layout.__picker_picker_item_pager,
+											  container,
+											  false
 											  );
 
 		final ImageView imageView = (ImageView) itemView.findViewById(R.id.iv_pager);

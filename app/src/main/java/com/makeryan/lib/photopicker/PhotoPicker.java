@@ -1,16 +1,16 @@
 package com.makeryan.lib.photopicker;
 
-import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 
 import com.makeryan.lib.activity.ContainerActivity;
+import com.makeryan.lib.fragment.fragmentation.ISupport;
 import com.makeryan.lib.photopicker.fragment.PhotoPickerFragment;
 import com.makeryan.lib.photopicker.utils.PermissionsUtils;
 
 import java.util.ArrayList;
-
-import com.makeryan.lib.fragment.fragmentation.ISupport;
 
 
 /**
@@ -62,25 +62,31 @@ public class PhotoPicker {
 		 * @param requestCode
 		 * 		requestCode for result
 		 */
+		@RequiresApi(api = Build.VERSION_CODES.M)
 		public void start(@NonNull ISupport iSupport, int requestCode) {
 
 			if (iSupport == null) {
 				return;
 			}
-			Activity activity = iSupport.getActivity();
-			if (PermissionsUtils.checkReadStoragePermission(activity)) {
-				iSupport.enqueueAction(() -> {
+
+			if (!iSupport.checkPermission(PermissionsUtils.READ_EXTERNAL_STORAGE)) {
+				iSupport.requestPermission(
+						PermissionsUtils.REQUEST_CODE_READ_EXTERNAL_STORAGE,
+						PermissionsUtils.READ_EXTERNAL_STORAGE
+										  );
+				return;
+			}
+			iSupport.enqueueAction(() -> {
 
 					/*iSupport.startForResult(
 							PhotoPickerFragment.newInstance(getBundle()),
 							requestCode
 										   );*/
-					ContainerActivity.start(
-							activity,
-							PhotoPickerFragment.newInstance(getBundle())
-										   );
-				});
-			}
+				ContainerActivity.start(
+						iSupport.getActivity(),
+						PhotoPickerFragment.newInstance(getBundle())
+									   );
+			});
 		}
 
 		//		/**

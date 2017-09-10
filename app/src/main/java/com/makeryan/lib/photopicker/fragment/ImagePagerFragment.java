@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import com.makeryan.lib.R;
+import com.makeryan.lib.databinding.FragmentImagePagerBinding;
 import com.makeryan.lib.fragment.BaseFragment;
 import com.makeryan.lib.mvp.presenter.BasePresenter;
 import com.makeryan.lib.photopicker.mvp.presenter.ImagePagerPresenter;
-import com.makeryan.lib.R;
-import com.makeryan.lib.databinding.FragmentImagePagerBinding;
 
 import java.util.ArrayList;
 

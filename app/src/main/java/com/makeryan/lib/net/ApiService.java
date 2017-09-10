@@ -1,19 +1,20 @@
 package com.makeryan.lib.net;
 
+import com.makeryan.lib.net.request.SuperRequest;
+import com.makeryan.lib.net.response.SuperResponse;
 
-import com.makeryan.modules.vo.request.SuperRequest;
-import com.makeryan.modules.vo.response.SuperResponse;
-
-import java.io.File;
 import java.util.List;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.Path;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -26,33 +27,38 @@ import rx.Observable;
 
 public interface ApiService {
 
-	@POST(API.BASE_NEWURL + "{api}")
-	Observable<Response<SuperResponse>> postApi(@Path("api") String api, @Body SuperRequest request);
+	@POST()
+	Observable<Response<SuperResponse>> postApi(@Url() String api, @Body SuperRequest request);
 
-	@POST(API.BASE_NEWURL + "{api}")
-	Observable<Response<List<SuperResponse>>> postListApi(@Path("api") String api, @Body SuperRequest request);
+	@POST()
+	Observable<Response<List<SuperResponse>>> postListApi(@Url() String api, @Body SuperRequest request);
 
-	@POST(API.BASE_NEWURL + "{api}")
-	Observable<Response<SuperResponse>> postApi(@Path("api") String api);
+	@POST()
+	Observable<Response<SuperResponse>> postApi(@Url() String api);
 
-	@POST(API.BASE_NEWURL + "{api}")
-	Observable<Response<List<SuperResponse>>> postListApi(@Path("api") String api);
+	@POST()
+	Observable<Response<List<SuperResponse>>> postListApi(@Url() String api);
 
-	@POST(API.BASE_NEWURL + "{api}")
-	Observable<Response<SuperResponse>> postApi(@Path("api") String api, @Body SuperResponse request);
+	@POST()
+	Observable<Response<SuperResponse>> postApi(@Url() String api, @Body SuperResponse request);
 
-	@POST(API.BASE_NEWURL + "{api}")
-	Observable<Response<List<SuperResponse>>> postListApi(@Path("api") String api, @Body SuperResponse request);
-
-	@Multipart
-	@POST(API.BASE_NEWURL + "{api}")
-	Observable<Response<SuperResponse>> uploadFile(@Path("api") String api, @Part("filename") File file);
+	@POST()
+	Observable<Response<List<SuperResponse>>> postListApi(@Url() String api, @Body SuperResponse request);
 
 	@Multipart
-	@POST(API.BASE_NEWURL + "{api}")
-	Observable<Response<SuperResponse>> uploadFile(@Path("api") String api, @Part("description") RequestBody description, @Part MultipartBody.Part file);
+	@POST()
+	Observable<Response<SuperResponse>> uploadListFile(@Url() String api, @Part List<MultipartBody.Part> partList);
+
+	@Streaming
+	@GET
+	Call<ResponseBody> downloadFile(@Url String api);
 
 	@Multipart
-	@POST(API.BASE_NEWURL + "{api}")
-	Observable<Response<SuperResponse>> uploadFile(@Path("api") String api, @Part("description") RequestBody description, @Part("filename") File file);
+	@POST()
+	Call<Response<SuperResponse>> uploadFileWithProgress(@Url() String api, @Part List<MultipartBody.Part> partList);
+
+
+	@Streaming
+	@GET
+	Call<ResponseBody> downloadGetFileWithProgress(@Url String api);
 }

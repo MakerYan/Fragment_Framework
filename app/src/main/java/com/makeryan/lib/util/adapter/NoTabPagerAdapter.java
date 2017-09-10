@@ -1,5 +1,6 @@
 package com.makeryan.lib.util.adapter;
 
+import android.databinding.ViewDataBinding;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import java.util.List;
  * package name : com.kongrongqi.kongrongqi.pub.adapters
  */
 
-public class NoTabPagerAdapter<V extends View>
+public class NoTabPagerAdapter<V>
 		extends PagerAdapter {
 
 	private List<V> mViewList = new ArrayList<V>();
@@ -52,16 +53,26 @@ public class NoTabPagerAdapter<V extends View>
 	//销毁一个页卡(即ViewPager的一个item)
 	public void destroyItem(ViewGroup container, int position, Object object) {
 
-		V view = mViewList.get(position);
-		container.removeView(view);
+		V view = getItem(position);
+		if (view instanceof ViewDataBinding) {
+			((ViewDataBinding) view).getRoot();
+			container.removeView(((ViewDataBinding) view).getRoot());
+		} else {
+			container.removeView((View) view);
+		}
 	}
 
 
 	//对应页卡添加上数据
 	public Object instantiateItem(ViewGroup container, int position) {
 
-		V child = mViewList.get(position);
-		container.addView(child);//千万别忘记添加到container
+		V child = getItem(position);
+		if (child instanceof ViewDataBinding) {
+			View root = ((ViewDataBinding) child).getRoot();
+			container.addView(root);//千万别忘记添加到container
+			return root;
+		}
+		container.addView((View) child);//千万别忘记添加到container
 		return child;
 	}
 
@@ -102,5 +113,10 @@ public class NoTabPagerAdapter<V extends View>
 	public int getItemPosition(Object object) {
 
 		return POSITION_NONE;
+	}
+
+	public V getItem(int position) {
+
+		return mViewList.get(position);
 	}
 }

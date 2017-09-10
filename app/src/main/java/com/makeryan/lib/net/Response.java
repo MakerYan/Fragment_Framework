@@ -25,33 +25,33 @@ public class Response<T>
 	 * msg : string
 	 */
 
-	@SerializedName("status")
-	public int status;
+	@SerializedName("code")
+	public int code;
 
 	@SerializedName("result")
 	public T result;
 
-	@SerializedName("message")
-	public String message;
+	@SerializedName("msg")
+	public String msg;
 
 	private transient PropertyChangeRegistry propertyChangeRegistry = new PropertyChangeRegistry();
 
 	@Override
 	public String toString() {
 
-		return "Response{" + "status=" + status + ", result=" + result + ", message='" + message + '\'' + "} " + super.toString();
+		return "Response{" + "code=" + code + ", result=" + result + ", msg='" + msg + '\'' + "} " + super.toString();
 	}
 
 	@Bindable
-	public int getStatus() {
+	public int getCode() {
 
-		return status;
+		return code;
 	}
 
-	public void setStatus(int status) {
+	public void setCode(int code) {
 
-		this.status = status;
-		notifyChange(BR.status);
+		this.code = code;
+		notifyChange(BR.code);
 	}
 
 	@Bindable
@@ -67,15 +67,15 @@ public class Response<T>
 	}
 
 	@Bindable
-	public String getMessage() {
+	public String getMsg() {
 
-		return message;
+		return msg;
 	}
 
-	public void setMessage(String message) {
+	public void setMsg(String msg) {
 
-		this.message = message;
-		notifyChange(BR.message);
+		this.msg = msg;
+		notifyChange(BR.msg);
 	}
 
 	private void notifyChange(int propertyId) {

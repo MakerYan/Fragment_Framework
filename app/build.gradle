@@ -118,4 +118,7 @@ dependencies {
     compile 'com.contrarywind:Android-PickerView:3.2.3'
     // https://github.com/MakerYan/DialogUtil
     compile 'com.github.hss01248:DialogUtil:1.0.4'
+    // 权限申请
+    apt 'com.zhy:mpermission-compiler:1.0.0'
+    compile 'com.zhy:mpermission-api:1.0.0'
 }

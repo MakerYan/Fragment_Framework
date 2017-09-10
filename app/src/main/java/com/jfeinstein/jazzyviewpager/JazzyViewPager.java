@@ -14,8 +14,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.nineoldandroids.view.ViewHelper;
 import com.makeryan.lib.R;
+import com.nineoldandroids.view.ViewHelper;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

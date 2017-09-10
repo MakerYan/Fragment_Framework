@@ -14,8 +14,9 @@ import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 
-import com.makeryan.lib.R;
 import com.zhy.autolayout.utils.AutoUtils;
+
+import com.makeryan.lib.R;
 
 
 public class ClearEditText
@@ -95,8 +96,8 @@ public class ClearEditText
 		mClearDrawable.setBounds(
 				0,
 				0,
-				AutoUtils.getPercentWidthSize(48),
-				AutoUtils.getPercentWidthSize(48)
+				AutoUtils.getPercentWidthSize(24),
+				AutoUtils.getPercentWidthSize(24)
 								);
 		//默认设置隐藏图标
 		setClearIconVisible(false);

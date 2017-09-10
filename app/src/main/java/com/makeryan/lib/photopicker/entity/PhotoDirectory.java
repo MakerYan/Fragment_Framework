@@ -4,9 +4,9 @@ import android.databinding.Bindable;
 import android.databinding.PropertyChangeRegistry;
 import android.text.TextUtils;
 
-import com.makeryan.lib.photopicker.utils.FileUtils;
-import com.makeryan.lib.pojo.BaseBean;
 import com.makeryan.lib.BR;
+import com.makeryan.lib.pojo.BaseBean;
+import com.makeryan.lib.util.FileUtils;
 
 import java.util.ArrayList;
 import java.util.List;

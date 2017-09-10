@@ -8,8 +8,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.makeryan.lib.R;
 import com.zhy.autolayout.utils.AutoUtils;
+
+import com.makeryan.lib.R;
 
 
 /**
