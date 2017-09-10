@@ -14,12 +14,29 @@ import retrofit2.Retrofit;
  * Email : light.yan@qq.com
  * Personal e-mail : light.yan@qq.com
  */
-public class FileRequestBodyConverterFactory
+public class FileConverterFactory
 		extends Converter.Factory {
+
+	private FileConverterFactory() {
+
+	}
+
+	public static FileConverterFactory create() {
+
+		return new FileConverterFactory();
+	}
 
 	@Override
 	public Converter<File, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
 
 		return new FileRequestBodyConverter();
 	}
+
+	/*
+	@Override
+	public Converter<ResponseBody, File> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
+
+		return new FileResponseBodyConverter();
+	}
+	*/
 }
